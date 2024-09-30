@@ -1,5 +1,4 @@
-import { Navigate, Outlet, useRoutes } from 'react-router-dom'
-import path from 'path'
+import { useRoutes } from 'react-router-dom'
 import { Home } from './pages/Home'
 
 const useRouteElements = () => {

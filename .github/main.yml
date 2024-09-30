@@ -1,0 +1,19 @@
+name: TicketResell
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+jobs:
+  docker-compose: 
+    runs-on: self-hosted
+    steps:
+      - name: Checkout # pull code mới về 
+        uses: actions/checkout@v2 
+      - name: docker compose down
+        uses: docker compose down
+      - name: Build and run
+        run: docker compose up --build -d
+      
