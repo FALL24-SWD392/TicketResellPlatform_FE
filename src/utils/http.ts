@@ -12,7 +12,7 @@ import { ErrorResponse, SuccessResponse } from 'src/@types/utils.type'
 import { isAxiosErrorJWTExpired, isUnAuthorized } from './utils'
 
 //
-//https://showbiz-booking-event-be.onrender.com
+//https://ticketresellplatform-nodered.onrender.com/
 class Http {
   instance: AxiosInstance
   private accessToken: string
@@ -23,7 +23,7 @@ class Http {
     this.refreshTokenRequest = null
     this.refreshToken = getRefreshTokenFromLS()
     ;(this.instance = axios.create({
-      baseURL: 'http://localhost:4000',
+      baseURL: 'https://ticketresellplatform-nodered.onrender.com/',
       timeout: 10000,
       headers: {
         'Content-Type': 'application/json'
