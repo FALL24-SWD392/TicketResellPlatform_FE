@@ -81,8 +81,8 @@ module.exports = {
       }
     },
     fontFamily: {
-      sans: ['Graphik', 'sans-serif'],
-      serif: ['Merriweather', 'serif']
+      sans: ['Archivo SemiExpanded', 'sans-serif'],
+      serif: ['Archivo SemiExpanded', 'serif']
     },
     extend: {
       spacing: {

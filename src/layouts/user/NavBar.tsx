@@ -1,26 +1,113 @@
-import { NavLink, useNavigate } from 'react-router-dom'
-import { User } from 'src/@types/users.type'
-import Logo from 'src/Components/Logo'
-// import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button } from '@nextui-org/react'
-const NavBar = ({ user, logout }: { user?: User | null; logout?: () => void }) => {
-  const nav = useNavigate()
+// import React from 'react'
+import {
+  Navbar,
+  NavbarBrand,
+  NavbarContent,
+  NavbarItem,
+  Link,
+  // DropdownItem,
+  // DropdownTrigger,
+  // Dropdown,
+  // DropdownMenu,
+  // Avatar,
+  NavbarMenuToggle,
+  NavbarMenu,
+  NavbarMenuItem,
+  Button
+} from '@nextui-org/react'
+import { Logo } from 'src/Components'
+import { CiMenuBurger } from 'react-icons/ci'
+
+const NavBar = () => {
+  const menuItems = [
+    'Profile',
+    'Dashboard',
+    'Activity',
+    'Analytics',
+    'System',
+    'Deployments',
+    'My Settings',
+    'Team Settings',
+    'Help & Feedback',
+    'Log Out'
+  ]
+
   return (
-    <>
-      <div className="nav-bar sticky">
-        <div className="w-full flex items-center justify-between h-16 px-40 bg-none">
+    <div className='nav-bar'>
+      <Navbar isBordered isBlurred={false} className='bg-transparent ' maxWidth='2xl'>
+        <NavbarContent className='sm:hidden' justify='start'>
+          <NavbarMenuToggle icon={<CiMenuBurger className='text-white-light text-[30px]' />} />
+        </NavbarContent>
+
+        <NavbarContent className='sm:hidden pr-3' justify='center'>
+          <NavbarBrand>
             <Logo />
-            <div className="flex justify-between w-3/6">
-                <NavLink to="/" className="flex items-center cursor-pointer text-white-light hover:text-white-lightHover text-xl">Home</NavLink>
-                <NavLink to="/" className="flex items-center cursor-pointer text-white-light hover:text-white-lightHover text-xl">Your Ticket</NavLink>
-                <NavLink to="/" className="flex items-center cursor-pointer text-white-light hover:text-white-lightHover text-xl">Your Order</NavLink>
-                <NavLink to="/" className="flex items-center cursor-pointer text-white-light hover:text-white-lightHover text-xl">Chat</NavLink>
-                <button className='flex items-center cursor-pointer text-white-light hover:text-white-lightHover text-xl' onClick={() => nav(`/${user ? "cart": "login"}`)}>Log In</button>
-                <button className='flex item-center cursor-pointer bg-green-normal text-white-light rounded-md px-4 py-2 text-xl' onClick={logout}>Sell Ticket</button>
-            </div>
-        </div>
+          </NavbarBrand>
+        </NavbarContent>
+
+        <NavbarContent className='hidden sm:flex '>
+          <NavbarBrand>
+            <Logo />
+          </NavbarBrand>
+        </NavbarContent>
+        
+        <NavbarContent className='hidden sm:flex ' justify='center'>
+          <NavbarItem >
+            <Link className='text-white-light' aria-current='page' href='#'>
+              Home
+            </Link>
+          </NavbarItem>
+          <NavbarItem>
+            <Link href='#' aria-current='page' className='text-white-light'>
+              Your Order
+            </Link>
+          </NavbarItem>
+          <NavbarItem>
+            <Link className='text-white-light text' href='#'>
+              Your Tickets
+            </Link>
+          </NavbarItem>
+          <NavbarItem>
+            <Link className='text-white-light' href='#'>
+              Report
+            </Link>
+          </NavbarItem>
+          <NavbarItem>
+            <Link className='text-white-light' href='#'>
+              Overview
+            </Link>
+          </NavbarItem>
+        </NavbarContent>
+
+        <NavbarContent justify='end'>
+          <NavbarItem className='hidden lg:flex'>
+            <Link href='#' className='text-white-light'>
+              Login
+            </Link>
+          </NavbarItem>
+          <NavbarItem className='hidden lg:flex'>
+            <Button as={Link} color='warning' href='#' variant='flat'>
+              Signup
+            </Button>
+          </NavbarItem>
+          <NavbarItem>
+            <Button as={Link} color='success' href='#' variant='flat'>
+              Sell Tickets
+            </Button>
+          </NavbarItem>
+        </NavbarContent>
+
+        <NavbarMenu className='bg-yellow-light'>
+          {menuItems.map((item, index) => (
+            <NavbarMenuItem key={`${item}-${index}`}>
+              <Link className='w-full' color={index === 2 ? 'warning' : index === menuItems.length - 1 ? 'danger' : 'foreground'} href='#' size='lg'>
+                {item}
+              </Link>
+            </NavbarMenuItem>
+          ))}
+        </NavbarMenu>
+      </Navbar>
     </div>
-    </>
   )
 }
-
 export default NavBar
