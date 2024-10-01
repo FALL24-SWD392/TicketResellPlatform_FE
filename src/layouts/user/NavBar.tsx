@@ -1,7 +1,7 @@
 import { NavLink, useNavigate } from 'react-router-dom'
 import { User } from 'src/@types/users.type'
 import Logo from 'src/Components/Logo'
-import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button } from '@nextui-org/react'
+// import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button } from '@nextui-org/react'
 const NavBar = ({ user, logout }: { user?: User | null; logout?: () => void }) => {
   const nav = useNavigate()
   return (

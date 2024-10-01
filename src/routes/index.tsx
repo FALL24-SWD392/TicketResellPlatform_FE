@@ -2,7 +2,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import { Home } from "../pages";
 import { useContext } from "react";
 import { AppContext } from "src/context/app.context";
-import path from "path";
+// import path from "path";
 
 
 type RouteType = {

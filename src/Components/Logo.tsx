@@ -4,7 +4,7 @@ import logo from 'src/assets/images/logo.svg'
 
 const Logo = ({
     imgClass,
-    textClass
+    // textClass
 }: {
     imgClass?: string,
     textClass?: string

@@ -2,15 +2,15 @@ import { NextUIProvider } from '@nextui-org/react'
 import { AppProvider } from './context/app.context'
 import { ToastContainer } from 'react-toastify'
 import useLayout from './hooks/useLayout'
-import { useNavigate } from 'react-router-dom'
-import NavBar from './layouts/user/NavBar'
+// import { useNavigate } from 'react-router-dom'
+// import NavBar from './layouts/user/NavBar'
 import Router from './routes'
 import Footer from './layouts/user/Footer'
 import { Test } from './pages'
 
 function App() {
   const layout = useLayout()
-  const nav = useNavigate()
+  // const nav = useNavigate()
 
   return (
     <NextUIProvider>

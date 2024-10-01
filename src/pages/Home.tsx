@@ -1,5 +1,5 @@
-import { Image } from '@nextui-org/react'
-import Banner from '../assets/images/banner.svg'
+// import { Image } from '@nextui-org/react'
+// import Banner from '../assets/images/banner.svg'
 import { SearchBar } from 'src/Components'
 
 const Home = () => {
