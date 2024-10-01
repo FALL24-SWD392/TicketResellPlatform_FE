@@ -1,8 +1,7 @@
 export enum UserRole {
-  Visitor = 'Visitor', //0
-  CheckingStaff = 'Checking staff', //1
-  EventOperator = 'Event operator', //2
-  Admin = 'Admin' //3
+  Member = 'Member', //0
+  CheckingStaff = 'Staff', //1
+  Admin = 'Admin' //2
 }
 export enum UserVerifyStatus {
   UNVERIFIED = 'Unverified',
@@ -10,7 +9,7 @@ export enum UserVerifyStatus {
   BANNED = 'Banned',
   DELETE = 'Delete'
 }
-export enum EventStatus {
+export enum TicketStatus {
   PENDING = 'Pending', //0
   APPROVED = 'Approved', //1
   REJECTED = 'Rejected', //2,
