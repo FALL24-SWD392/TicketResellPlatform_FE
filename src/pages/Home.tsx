@@ -9,8 +9,8 @@ const Home = () => {
       <div className='h-full w-full'>
         <div className='banner'>
           <div className='container-xl flex justify-center items-center'>
-            <div className='flex-row'>
-              <span className='text-white-light h1'>The safest way to buy and sell ticket</span>
+            <div className='flex-row items-center sm:px-6'>
+              <div className='text-white-light h1 text-center '>The safest way to buy and sell ticket</div>
               <SearchBar />
             </div>
           </div>

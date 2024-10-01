@@ -6,7 +6,7 @@ import useLayout from './hooks/useLayout'
 // import NavBar from './layouts/user/NavBar'
 import Router from './routes'
 import Footer from './layouts/user/Footer'
-import { Test } from './pages'
+import NavBar from './layouts/user/NavBar'
 
 function App() {
   const layout = useLayout()
@@ -16,7 +16,7 @@ function App() {
     <NextUIProvider>
       <AppProvider>
         <ToastContainer autoClose={2000} style={{ padding: '20px' }} />
-        {layout.includes('navbar') && <Test />}
+        {layout.includes('navbar') && <NavBar />}
         <div className=''>
           <div className='main'>
             <Router />
