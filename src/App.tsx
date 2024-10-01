@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import NavBar from './layouts/user/NavBar'
 import Router from './routes'
 import Footer from './layouts/user/Footer'
+import { Test } from './pages'
 
 function App() {
   const layout = useLayout()
@@ -15,14 +16,14 @@ function App() {
     <NextUIProvider>
       <AppProvider>
         <ToastContainer autoClose={2000} style={{ padding: '20px' }} />
-        {layout.includes('navbar') && <NavBar />}
+        {layout.includes('navbar') && <Test />}
         <div className=''>
           <div className='main'>
             <Router />
           </div>
         </div>
         {layout.includes('footer') && <Footer />}
-        {layout.includes('chat') && <div>Chat</div>}
+        {layout.includes('chat') && ''}
       </AppProvider>
     </NextUIProvider>
   )
