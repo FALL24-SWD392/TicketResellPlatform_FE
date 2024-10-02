@@ -1,5 +1,5 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import { Home } from "../pages";
+import { Home, Login } from "../pages";
 import { useContext } from "react";
 import { AppContext } from "src/context/app.context";
 // import path from "path";
@@ -14,7 +14,8 @@ const publicRoutes: RouteType[] = [
   {
     path: "/",
     element: <Home />,
-  }
+  },
+  
 ];
 
 const authenicatedRoutes: RouteType[] = [
@@ -34,7 +35,7 @@ const adminRoutes: RouteType[] = [
 const unAuthenticatedRoute: RouteType[] = [
   {
     path: "/login",
-    element: <></> //Login
+    element: <Login />,
   },
   {
     path: "/register",

@@ -13,12 +13,25 @@ import {
   NavbarMenuToggle,
   NavbarMenu,
   NavbarMenuItem,
-  Button
+  Button,
+  PopoverContent,
+  PopoverTrigger,
+  Popover,
+  Input
 } from '@nextui-org/react'
-import { Logo } from 'src/Components'
+import { Logo, SignInForm } from 'src/Components'
 import { CiMenuBurger } from 'react-icons/ci'
+import { NavLink } from 'react-router-dom'
+import path from 'src/constants/path'
+import { Login } from 'src/pages'
 
-const NavBar = () => {
+interface Props {
+  isBlur?: boolean
+  className?: string
+  _id?: string
+  name?: string
+}
+const NavBar = ({ ...props }: Props) => {
   const menuItems = [
     'Profile',
     'Dashboard',
@@ -32,9 +45,16 @@ const NavBar = () => {
     'Log Out'
   ]
 
+  const content = (
+    <PopoverContent className='w-[400px]'>
+      {() => (
+        <Login/>  
+      )}
+    </PopoverContent>
+  )
   return (
     <div className='nav-bar'>
-      <Navbar isBordered isBlurred={false} className='bg-transparent ' maxWidth='2xl'>
+      <Navbar isBordered isBlurred={props.isBlur || false} className='bg-transparent' maxWidth='2xl'>
         <NavbarContent className='sm:hidden' justify='start'>
           <NavbarMenuToggle icon={<CiMenuBurger className='text-white-light text-[30px]' />} />
         </NavbarContent>
@@ -50,9 +70,9 @@ const NavBar = () => {
             <Logo />
           </NavbarBrand>
         </NavbarContent>
-        
+
         <NavbarContent className='hidden sm:flex ' justify='center'>
-          <NavbarItem >
+          <NavbarItem>
             <Link className='text-white-light' aria-current='page' href='#'>
               Home
             </Link>
@@ -81,10 +101,21 @@ const NavBar = () => {
 
         <NavbarContent justify='end'>
           <NavbarItem className='hidden lg:flex'>
-            <Link href='#' className='text-white-light'>
+            {/* <NavLink to={path.login} className='text-white-light'>
               Login
-            </Link>
+            </NavLink> */}
+            <div className='flex '>
+              <Popover  key='blur' size='lg' offset={10} placement='left-start' backdrop='blur' >
+                <PopoverTrigger>
+                  <Button color='warning' variant='flat' className='text-white-light'>
+                    Login
+                  </Button>
+                </PopoverTrigger>
+                {content}
+              </Popover>
+            </div>
           </NavbarItem>
+
           <NavbarItem className='hidden lg:flex'>
             <Button as={Link} color='warning' href='#' variant='flat'>
               Signup

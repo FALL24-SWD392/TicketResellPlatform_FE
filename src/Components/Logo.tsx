@@ -10,7 +10,7 @@ const Logo = ({
     textClass?: string
 }) => {
     return (
-        <NavLink to="/" className="flex items-center flex">
+        <NavLink to="/" className="flex items-center">
             <span className={`relative w-[150px] ${imgClass || ""}`}>
                 <img src={logo} alt="TicketResel" />
             </span>

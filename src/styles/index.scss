@@ -6,13 +6,12 @@
 @import 'typo';
 @import 'fonts';
 @import 'elements';
-
-@layer components{
-  
-    .container-xs{
-      @apply w-full mx-auto max-w-[820px]
-    }
-    .container-xl{
-      @apply w-full mx-auto max-w-[1024px]
-    }
+@import 'global';
+@layer components {
+  .container-xs {
+    @apply w-full mx-auto max-w-[820px];
   }
+  .container-xl {
+    @apply w-full mx-auto max-w-[1024px];
+  }
+}
