@@ -13,7 +13,7 @@ jobs:
       - name: Checkout # pull code mới về 
         uses: actions/checkout@v2 
       - name: docker compose down
-        run: docker compose down
+        uses: run
       - name: Build and run
         run: docker compose up --build -d
       

@@ -5,11 +5,13 @@ export interface User {
   user_name: string
   email: string
   status: UserVerifyStatus
-  password: string
-  phone_number: string
-  date_of_birth: string
-  point: string
+  avatar: string
+  reputation: number
+  rate: number
+  typoRegister: string
   createdAt: string
+  createBy: string
+  updateBy: string
   updatedAt: string
   role: UserRole
 }

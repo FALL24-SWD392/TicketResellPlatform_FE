@@ -15,8 +15,8 @@ interface AppContextInterface {
   profile: User | null
   // setListEvent: React.Dispatch<React.SetStateAction<Event | null>>
   setProfile: React.Dispatch<React.SetStateAction<User | null>>
-  eventId: string
-  setEventId: React.Dispatch<React.SetStateAction<string>>
+  ticketId: string
+  setTicketId: React.Dispatch<React.SetStateAction<string>>
 }
 
 const initialAppContext: AppContextInterface = {
@@ -27,8 +27,8 @@ const initialAppContext: AppContextInterface = {
   profile: getProfileFormLS(),
   setProfile: () => null,
   setIsStaff: () => null,
-  eventId: '',
-  setEventId: () => null
+  ticketId: '',
+  setTicketId: () => null
 }
 
 export const AppContext = createContext<AppContextInterface>(initialAppContext)
@@ -40,7 +40,7 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
   const [profile, setProfile] = useState<User | null>(initialAppContext.profile)
   // const [listEvent, setListEvent] = useState([])
   const [isStaff, setIsStaff] = useState<boolean>(initialAppContext.isStaff)
-  const [eventId, setEventId] = useState<string>(initialAppContext.eventId)
+  const [ticketId, setTicketId] = useState<string>(initialAppContext.ticketId)
   return (
     <AppContext.Provider
       value={{
@@ -51,8 +51,8 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
         isStaff,
         setIsStaff,
         setProfile,
-        eventId,
-        setEventId
+        ticketId,
+        setTicketId
       }}
     >
       {children}

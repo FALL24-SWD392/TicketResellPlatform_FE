@@ -39,13 +39,13 @@ export const setIsStaffToLS = (isStaff: boolean): void => {
   localStorage.setItem('isStaff', JSON.stringify(isStaff))
 }
 
-export const setEventIdToLS = (ticketId: string): void => {
+export const setTicketIdToLS = (ticketId: string): void => {
   localStorage.setItem('ticketId', ticketId)
 }
 
-export const getEventIdFromLS = (): string =>
+export const getTicketIdFromLS = (): string =>
   localStorage.getItem('ticketId') || ''
 
-export const clearEventIdFromLS = (): void => {
+export const clearTicketIdFromLS = (): void => {
   localStorage.removeItem('ticketId')
 }

@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Ticket Resell</string>
+    <string name="title_activity_main">Ticket Resell</string>
+    <string name="package_name">vn.edu.fpt</string>
+    <string name="custom_url_scheme">vn.edu.fpt</string>
+</resources>
