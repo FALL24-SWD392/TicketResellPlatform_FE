@@ -1,24 +1,16 @@
 import { UserRole, UserVerifyStatus } from './enum'
 
 export interface User {
-  _id: string
-  user_name: string
-  email: string
-  status: UserVerifyStatus
-  avatar: string
-  reputation: number
-  rate: number
-  typoRegister: string
-  createdAt: string
-  createBy: string
-  updateBy: string
-  updatedAt: string
-  role: UserRole
+  sub?: string,
+  scope?: string,
+  email?: string,
+  avatar?: string,
+  rating?: number,
 }
 
 export type UserList = Pick<
   User,
-  '_id' | 'user_name' | 'email' | 'role' | 'status'
+  'sub' | 'email' | 'avatar' | 'rating'
 >
 
 export type ProfileUpdate = {

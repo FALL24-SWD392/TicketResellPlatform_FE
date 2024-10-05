@@ -7,6 +7,7 @@ import {
   getRefreshTokenFromLS
 } from './auth'
 import HttpStatusCode from 'src/constants/httpStatusCode.enum'
+import { jwtDecode } from "jwt-decode";
 import { toast } from 'react-toastify'
 import { ErrorResponse, SuccessResponse } from 'src/@types/utils.type'
 import { isAxiosErrorJWTExpired, isUnAuthorized } from './utils'
@@ -23,7 +24,7 @@ class Http {
     this.refreshTokenRequest = null
     this.refreshToken = getRefreshTokenFromLS()
     ;(this.instance = axios.create({
-      baseURL: "http://localhost:8081/",
+      baseURL: import.meta.env.VITE_URL_BE,
       timeout: 10000,
       headers: {
         'Content-Type': 'application/json'
@@ -47,13 +48,14 @@ class Http {
     this.instance.interceptors.response.use(
       (response) => {
         const endPoint = response.config.url?.split('/').pop()
-        if (endPoint === 'sytem') {
-          this.accessToken = response.data.data.access_token
+        if (endPoint === 'system') {
+          this.accessToken = response.data.data.accessToken
+          this.refreshToken = response.data.data.refreshToken
           setTokenToLS(
             this.accessToken,
-            response.data.data.data.access_token
+            this.refreshToken
           )
-          setProfileToLS(response.data.data.user)
+          setProfileToLS(jwtDecode(this.accessToken))
         } else if (endPoint === 'logout') {
           this.accessToken = ''
           clearLocalStorage()

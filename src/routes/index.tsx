@@ -46,12 +46,13 @@ const unAuthenticatedRoute: RouteType[] = [
 
 const Router = () => {
   const {isAuthenticated} = useContext(AppContext);
-  const user = JSON.parse(localStorage.getItem("user") || "{}");
+  const user = JSON.parse(localStorage.getItem("profile") || "{}");
   const router =[
     ...publicRoutes,
     ...adminRoutes, 
     ...(isAuthenticated ? authenicatedRoutes : unAuthenticatedRoute),
-    // ...(["ADMIN", "STAFF"].includes(user.role) ? adminRoutes : []),
+    ...(["admin", "staff"].includes(user.sub) ? adminRoutes : []),
+
     {
       path: "*",
       element: <Navigate to="/" />,
