@@ -55,8 +55,7 @@ class Http {
             this.accessToken,
             this.refreshToken
           )
-          const decode = jwtDecode(this.accessToken)
-          setProfileToLS(decode)
+          setProfileToLS(jwtDecode(this.accessToken))
         } else if (endPoint === 'logout') {
           this.accessToken = ''
           clearLocalStorage()
