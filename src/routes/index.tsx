@@ -2,6 +2,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import { Home, Login } from "../pages";
 import { useContext } from "react";
 import { AppContext } from "src/context/app.context";
+import AdminPage from "src/pages/admin/AdminPage";
 // import path from "path";
 
 
@@ -28,7 +29,7 @@ const authenicatedRoutes: RouteType[] = [
 const adminRoutes: RouteType[] = [
   {
     path: "/admin",
-    element: <></>, // AdminDashboard
+    element: <AdminPage />, // AdminDashboard
   }
 ];
 
@@ -48,8 +49,10 @@ const Router = () => {
   const user = JSON.parse(localStorage.getItem("profile") || "{}");
   const router =[
     ...publicRoutes,
+    ...adminRoutes, 
     ...(isAuthenticated ? authenicatedRoutes : unAuthenticatedRoute),
     ...(["admin", "staff"].includes(user.sub) ? adminRoutes : []),
+
     {
       path: "*",
       element: <Navigate to="/" />,
