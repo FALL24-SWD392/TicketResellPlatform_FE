@@ -117,7 +117,7 @@ const NavBar = ({ ...props }: Props) => {
           </NavbarItem>
 
           <NavbarItem className='hidden lg:flex'>
-            <Button as={Link} color='warning' href='#' variant='flat'>
+            <Button as={Link} color='warning' href='/login' variant='flat'>
               Signup
             </Button>
           </NavbarItem>

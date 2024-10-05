@@ -13,30 +13,31 @@ import { ErrorResponse } from 'src/@types/utils.type'
 export type FormData = LoginSchema
 
 const Login = () => {
-    const navigate = useNavigate()
-    const { setIsAuthenticated, setProfile, setIsStaff, ticketId, setTicketId } =
-      useContext(AppContext)
-    const {
-      register,
-      handleSubmit,
-      // setError,
-      trigger,
-      formState: { errors }
-    } = useForm<FormData>({
-      resolver: yupResolver(LoginSchemaYup)
-    })
-  
-    const [loginError, setLoginError] = useState<string>('')
-  
-    const loginMutation = useMutation({
-      mutationFn: (body: FormData) => authAPI.login(body)
-    })
+  const navigate = useNavigate()
+  const { setIsAuthenticated, setProfile, setIsStaff, ticketId, setTicketId } = useContext(AppContext)
+  const {
+    register,
+    handleSubmit,
+    // setError,
+    trigger,
+    formState: { errors }
+  } = useForm<FormData>({
+    resolver: yupResolver(LoginSchemaYup)
+  })
 
-    const onSubmit = handleSubmit((data) => {
-      loginMutation.mutate(data, {
-        onSuccess: (data) => {
-            console.log(data)
-          setIsAuthenticated(true)
+  const [loginError, setLoginError] = useState<string>('')
+
+const loginMutation = useMutation({
+  mutationFn: (body: FormData) => {
+    console.log(body);
+    return authAPI.login(body);
+  },
+})
+  const onSubmit = handleSubmit((data) => {
+    loginMutation.mutate(data, {
+      onSuccess: (data) => {
+        console.log(data)
+        setIsAuthenticated(true)
         //   setProfile(data.data.data.user)
         //   if (data.data.data.user.role == UserRole.Admin) {
         //     navigate('/admin/list-all-event')
@@ -61,16 +62,16 @@ const Login = () => {
         //       navigate('/event-list/users')
         //     }
         //   }
-        },
-        onError: (error) => {
-          if (isAxiosUnprocessableEntityError<ErrorResponse<FormData>>(error)) {
-            // trigger()
-            const errors = error.response?.data.errors
-            setLoginError(errors?.email as string)
-          }
+      },
+      onError: (error) => {
+        if (isAxiosUnprocessableEntityError<ErrorResponse<FormData>>(error)) {
+          // trigger()
+          const errors = error.response?.data.errors
+          setLoginError(errors?.username as string)
         }
-      })
+      }
     })
+  })
 
   return (
     <div className='p-2 flex-col items-start'>
@@ -80,9 +81,9 @@ const Login = () => {
       </div>
       <form noValidate onSubmit={onSubmit} className='mt-5 flex items-start flex-col'>
         <div className='w-full flex flex-col gap-5'>
-          <Input isRequired type='email' label='Email' className='max-w-xs' {...register('email', {required:true})}  />
-          <Input isRequired type='password' label='Password' className='max-w-xs' {...register('password', {required:true})}/>
-          <Button type='submit'>SignIn</Button>
+          <Input isRequired type='username' label='username' className='max-w-xs' {...register('username', { required: true })} />
+          <Input isRequired type='password' label='Password' className='max-w-xs' {...register('password', { required: true })} />
+          <button type='submit'>SignIn</button>
         </div>
       </form>
     </div>

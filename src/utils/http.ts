@@ -23,7 +23,7 @@ class Http {
     this.refreshTokenRequest = null
     this.refreshToken = getRefreshTokenFromLS()
     ;(this.instance = axios.create({
-      baseURL: 'https://ticketresellplatform-nodered.onrender.com',
+      baseURL: "http://localhost:8081/",
       timeout: 10000,
       headers: {
         'Content-Type': 'application/json'
@@ -47,12 +47,11 @@ class Http {
     this.instance.interceptors.response.use(
       (response) => {
         const endPoint = response.config.url?.split('/').pop()
-        if (endPoint === 'login') {
-          this.accessToken = response.data.data.result.access_token
-
+        if (endPoint === 'sytem') {
+          this.accessToken = response.data.data.access_token
           setTokenToLS(
             this.accessToken,
-            response.data.data.result.refresh_token
+            response.data.data.data.access_token
           )
           setProfileToLS(response.data.data.user)
         } else if (endPoint === 'logout') {
@@ -130,5 +129,21 @@ class Http {
   }
 }
 
-const http = new Http().instance
+// class Http {
+//   instance: AxiosInstance;
+//   constructor() {
+//     this.instance = axios.create({
+//       baseURL: import.meta.env.VITE_URL_BE,
+//       // baseURL: "http://localhost:8000/",
+//       timeout: 10000,
+//       headers: {
+//         "Content-Type": "application/json"
+//       }
+//     });
+//   }
+// }
+
+const http = new Http().instance;
+
+// const http = new Http().instance
 export default http
