@@ -6,11 +6,11 @@ const authAPI = {
   login: (body: FormData) =>
     http.post<
       SuccessResponse<{
-        result: { access_token: string; refresh_token: string }
+        data: { access_token: string; refresh_token: string }
         // user: User
         // listEvent: Array<{ _id: string; ticketId: string; user_id: string }>
       }>
-    >('/api/auth/login', body),
-  logout: (body: { refresh_token: string }) => http.post('/users/logout', body)
+    >('/auth/login/system', body),
+  // logout: (body: { refresh_token: string }) => http.post('/users/logout', body)
 }
 export default authAPI
