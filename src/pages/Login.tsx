@@ -9,6 +9,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import authAPI from 'src/apis/auth.api'
 import { isAxiosUnprocessableEntityError } from 'src/utils/utils'
 import { ErrorResponse } from 'src/@types/utils.type'
+import { getProfileFormLS } from 'src/utils/auth'
 
 export type FormData = LoginSchema
 
@@ -38,30 +39,10 @@ const loginMutation = useMutation({
       onSuccess: (data) => {
         console.log(data)
         setIsAuthenticated(true)
-        //   setProfile(data.data.data.user)
-        //   if (data.data.data.user.role == UserRole.Admin) {
-        //     navigate('/admin/list-all-event')
-        //   } else if (data.data.data.user.role == UserRole.EventOperator) {
-        //     navigate('/event-operator')
-        //   } else if (data.data.data.listEvent.length != 0) {
-        //     setIsStaff(true)
-        //     setIsStaffToLS(true)
-        //     if (eventId) {
-        //       setEventId('')
-        //       clearEventIdFromLS()
-        //       navigate(`/events/${eventId}`)
-        //     } else {
-        //       navigate('/event-list/users')
-        //     }
-        //   } else {
-        //     if (eventId) {
-        //       setEventId('')
-        //       clearEventIdFromLS()
-        //       navigate(`/events/${eventId}`)
-        //     } else {
-        //       navigate('/event-list/users')
-        //     }
-        //   }
+        if(getProfileFormLS()?.sub === 'admin'){
+          navigate('/admin')
+        }
+            
       },
       onError: (error) => {
         if (isAxiosUnprocessableEntityError<ErrorResponse<FormData>>(error)) {
