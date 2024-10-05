@@ -23,7 +23,7 @@ class Http {
     this.refreshTokenRequest = null
     this.refreshToken = getRefreshTokenFromLS()
     ;(this.instance = axios.create({
-      baseURL: 'https://ticketresellplatform-nodered.onrender.com/',
+      baseURL: 'https://ticketresellplatform-nodered.onrender.com',
       timeout: 10000,
       headers: {
         'Content-Type': 'application/json'
