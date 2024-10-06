@@ -5,7 +5,6 @@ import { jwtDecode } from 'jwt-decode'
 import { toast } from 'react-toastify'
 import { ErrorResponse, SuccessResponse } from 'src/@types/utils.type'
 import { isAxiosErrorJWTExpired, isUnAuthorized } from './utils'
-
 //
 //https://ticketresellplatform-nodered.onrender.com/
 class Http {
@@ -18,7 +17,7 @@ class Http {
     this.refreshTokenRequest = null
     this.refreshToken = getRefreshTokenFromLS()
     ;(this.instance = axios.create({
-      baseURL: import.meta.env.API_URL,
+      baseURL: import.meta.env.VITE_API_URL,
       timeout: 10000,
       headers: {
         'Content-Type': 'application/json'
