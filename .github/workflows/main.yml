@@ -1,19 +1,25 @@
-name: TicketResell
-on:
+name: Deploy on VPS
+
+on: 
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
+
 jobs:
-  docker-compose: 
+  docker-compose:
     runs-on: self-hosted
+    environment: docker
     steps:
-      - name: Checkout # pull code mới về 
-        uses: actions/checkout@v2 
-      - name: docker compose down
-        run: docker compose down
-      - name: Build and run
-        run: docker compose up --build -d
-      
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Use github secrets
+        run: |
+          echo "API_URL=${{ secrets.API_URL }}" >> .env
+          echo "MOCK_API_URL=${{ secrets.MOCK_API_URL }}" >> .env
+        shell: bash
+
+      - name: Run `docker compose`
+        run: |
+          docker-compose up -d
+        shell: bash 
