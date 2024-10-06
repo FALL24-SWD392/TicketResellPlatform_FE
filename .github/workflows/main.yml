@@ -19,6 +19,11 @@ jobs:
           echo "MOCK_API_URL=${{ secrets.MOCK_API_URL }}" >> .env
         shell: bash
 
+      - name: Compose down
+        run: |
+          docker compose down
+        shell: bash
+
       - name: Run `docker compose`
         run: |
           docker compose up --build -d
