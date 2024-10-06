@@ -7,6 +7,7 @@ import {
   getRefreshTokenFromLS
 } from './auth'
 import HttpStatusCode from 'src/constants/httpStatusCode.enum'
+import { jwtDecode } from "jwt-decode";
 import { toast } from 'react-toastify'
 import { ErrorResponse, SuccessResponse } from 'src/@types/utils.type'
 import { isAxiosErrorJWTExpired, isUnAuthorized } from './utils'
@@ -23,7 +24,7 @@ class Http {
     this.refreshTokenRequest = null
     this.refreshToken = getRefreshTokenFromLS()
     ;(this.instance = axios.create({
-      baseURL: 'https://ticketresellplatform-nodered.onrender.com',
+      baseURL: import.meta.env.VITE_URL_BE,
       timeout: 10000,
       headers: {
         'Content-Type': 'application/json'
@@ -47,14 +48,14 @@ class Http {
     this.instance.interceptors.response.use(
       (response) => {
         const endPoint = response.config.url?.split('/').pop()
-        if (endPoint === 'login') {
-          this.accessToken = response.data.data.result.access_token
-
+        if (endPoint === 'system') {
+          this.accessToken = response.data.data.accessToken
+          this.refreshToken = response.data.data.refreshToken
           setTokenToLS(
             this.accessToken,
-            response.data.data.result.refresh_token
+            this.refreshToken
           )
-          setProfileToLS(response.data.data.user)
+          setProfileToLS(jwtDecode(this.accessToken))
         } else if (endPoint === 'logout') {
           this.accessToken = ''
           clearLocalStorage()
@@ -130,5 +131,21 @@ class Http {
   }
 }
 
-const http = new Http().instance
+// class Http {
+//   instance: AxiosInstance;
+//   constructor() {
+//     this.instance = axios.create({
+//       baseURL: import.meta.env.VITE_URL_BE,
+//       // baseURL: "http://localhost:8000/",
+//       timeout: 10000,
+//       headers: {
+//         "Content-Type": "application/json"
+//       }
+//     });
+//   }
+// }
+
+const http = new Http().instance;
+
+// const http = new Http().instance
 export default http

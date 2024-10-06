@@ -63,7 +63,7 @@ export const getRulesLogin = (getValues?: UseFormGetValues<any>): Rules => {
 }
 
 export const LoginSchemaYup = yup.object().shape({
-    email: yup.string().email("Invalid email").required("Email is required!!"),
+    username: yup.string().required("UserName is required!!"),
     password: yup.string().required("Password is required!!")
 })
 

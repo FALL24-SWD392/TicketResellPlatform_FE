@@ -1,11 +1,11 @@
 import { User } from 'src/@types/users.type'
 
 export const setTokenToLS = (
-  access_token: string,
-  refresh_token: string
+  accessToken: string,
+  refreshToken: string
 ): void => {
-  localStorage.setItem('access_token', access_token)
-  localStorage.setItem('refresh_token', refresh_token)
+  localStorage.setItem('access_token', accessToken)
+  localStorage.setItem('refresh_token', refreshToken)
 }
 
 export const clearLocalStorage = (): void => {
