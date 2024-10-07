@@ -15,8 +15,8 @@ jobs:
 
       - name: Use github secrets
         run: |
-          echo "API_URL=${{ secrets.API_URL }}" >> .env
-          echo "MOCK_API_URL=${{ secrets.MOCK_API_URL }}" >> .env
+          echo "VITE_API_URL=${{ secrets.VITE_API_URL }}" >> .env
+          echo "VITE_MOCK_API_URL=${{ secrets.VITE_MOCK_API_URL }}" >> .env
         shell: bash
 
       - name: Compose down
