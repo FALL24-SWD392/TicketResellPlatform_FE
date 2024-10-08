@@ -1,36 +1,32 @@
+import { Button, Input } from '@nextui-org/react'
 import React from 'react'
-const SignUpForm: React.FC<{ toggleForm: () => void }> = ({ toggleForm }) => {
+import { UseFormRegister } from 'react-hook-form'
+
+const SignInForm = ({
+  onSubmit,
+  register,
+  loginError
+}: {
+  onSubmit?: (event: React.FormEvent<HTMLFormElement>) => void
+  register: UseFormRegister<any>
+  loginError?: string
+}) => {
   return (
-    <div className='bg-white p-6 rounded-lg shadow-lg scale-100'>
-      <div className='mb-4'>
-        <div className='relative'>
-          <input type='text' placeholder='Username' className='w-full px-4 py-2 border rounded-md' />
-        </div>
+    <div className='p-2 flex-col items-start'>
+      <div className=' flex flex-col items-start mt-2'>
+        <h5 className='!font-bold'>Welcome to Ticket Resell</h5>
+        <h6 className='mt-5'>Please sign in or sign up below</h6>
       </div>
-      <div className='mb-4'>
-        <div className='relative'>
-          <input type='email' placeholder='Email' className='w-full px-4 py-2 border rounded-md' />
+      <form noValidate onSubmit={onSubmit} className='mt-5 flex items-start flex-col'>
+        <div className='w-full flex flex-col gap-5'>
+          <Input isRequired type='username' label='username' className='max-w-xs' {...register('username', { required: true })} />
+          <Input isRequired type='email' label='email' className='max-w-xs' {...register('email', { required: true })} />
+          <Input isRequired type='password' label='Password' className='max-w-xs' {...register('password', { required: true })} />
+          <Input isRequired type='password' label='Confirm Password' className='max-w-xs' {...register('cf_password', { required: true })} />
+          <Button type='submit'>SignIn</Button>
         </div>
-      </div>
-      <div className='mb-4'>
-        <div className='relative'>
-          <input type='password' placeholder='Password' className='w-full px-4 py-2 border rounded-md' />
-        </div>
-      </div>
-      <div className='mb-4'>
-        <div className='relative'>
-          <input type='password' placeholder='Confirm password' className='w-full px-4 py-2 border rounded-md' />
-        </div>
-      </div>
-      <button className='w-full py-2 bg-green-500 text-white rounded-md mb-4'>Sign up</button>
-      <p>
-        <span>Already have an account?</span>{' '}
-        <b className='cursor-pointer' onClick={toggleForm}>
-          Sign in here
-        </b>
-      </p>
+      </form>
     </div>
   )
 }
-
-export default SignUpForm
+export default SignInForm

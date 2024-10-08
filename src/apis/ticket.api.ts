@@ -5,10 +5,9 @@ import { SuccessResponse } from 'src/@types/utils.type'
 import http from 'src/utils/http'
 
 const ticketAPI = {
-  getAllTicket: (params: Pick<UserList, 'sub'> & { page: number; limit: number }) =>
-    http.get<SuccessResponse<{ tickets: TicketList[]; paginate: { size?: string; totalSize?: string; page?: string; totalPage?: string } }>>(
-      '/ticket/view-all-ticket',
-      { params }
+  getAllTicket: () =>
+    http.get<SuccessResponse<{data: TicketList, message: string}>>(
+      '/tickets/view-all-ticket'
     )
 }
 
