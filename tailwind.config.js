@@ -7,6 +7,7 @@ module.exports = {
   },
   theme: {
     colors: {
+      transparent: 'transparent',
       white: {
         light: '#fefffe', // Light
         lightHover: '#fefffe', // Light :hover

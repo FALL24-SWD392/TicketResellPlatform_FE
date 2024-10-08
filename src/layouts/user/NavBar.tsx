@@ -67,7 +67,7 @@ const NavBar = ({ ...props }: Props) => {
     navigate('/')
   }
   return (
-    <div className='nav-bar'>
+    <div className='nav-bar bg-transparent backdrop-blur-sm'>
       <Navbar isBordered isBlurred={props.isBlur || false} className='bg-transparent' maxWidth='2xl'>
         <NavbarContent className='sm:hidden' justify='start'>
           <NavbarMenuToggle icon={<CiMenuBurger className='text-white-light text-[30px]' />} />
