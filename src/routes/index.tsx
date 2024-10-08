@@ -49,7 +49,6 @@ const Router = () => {
   const user = JSON.parse(localStorage.getItem("profile") || "{}");
   const router =[
     ...publicRoutes,
-    ...adminRoutes, 
     ...(isAuthenticated ? authenicatedRoutes : unAuthenticatedRoute),
     ...(["admin", "staff"].includes(user.sub) ? adminRoutes : []),
 
