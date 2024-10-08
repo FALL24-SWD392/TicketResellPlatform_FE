@@ -7,7 +7,7 @@ const authAPI = {
       SuccessResponse<{
         data: { access_token: string; refresh_token: string }
       }>
-    >('/auth/login/system', body),
-  logout: () => http.get('/auth/logout')
+    >('/auth/login', body),
+  logout: (body: string) => http.post('/auth/logout', body)
 }
 export default authAPI

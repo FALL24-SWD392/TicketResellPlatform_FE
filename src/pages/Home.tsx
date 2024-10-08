@@ -15,17 +15,6 @@ export type QueryConfig = {
 }
 
 const Home = () => {
-  const [query, setQuery] = useQueryParams({})
-  const queryConfig: QueryConfig = {
-    sub: query.sub || '',
-    page: query.page || 1,
-    limit: query.limit || 10
-  }
-  const { data } = useQuery({
-    queryKey: ['tickets', queryConfig],
-    queryFn: () => ticketAPI.getAllTicket(queryConfig)
-    // placeholderData: keepPreviousData
-  })
   return (
     <>
       {/* Banner */}
