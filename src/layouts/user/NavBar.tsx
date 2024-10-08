@@ -8,8 +8,6 @@ import {
   DropdownItem,
   DropdownTrigger,
   Dropdown,
-  // DropdownMenu,
-  // Avatar,
   NavbarMenuToggle,
   NavbarMenu,
   NavbarMenuItem,
@@ -17,14 +15,12 @@ import {
   PopoverContent,
   PopoverTrigger,
   Popover,
-  Input,
   DropdownMenu,
   Avatar
 } from '@nextui-org/react'
-import { Logo, SignInForm } from 'src/Components'
+import { Logo } from 'src/Components'
 import { CiMenuBurger } from 'react-icons/ci'
-import { NavLink, useNavigate } from 'react-router-dom'
-import path from 'src/constants/path'
+import {  useNavigate } from 'react-router-dom'
 import { Login } from 'src/pages'
 import { getRefreshTokenFromLS } from 'src/utils/auth'
 import { useMutation } from '@tanstack/react-query'
@@ -53,14 +49,13 @@ const NavBar = ({ ...props }: Props) => {
   ]
 
   const content = <PopoverContent className='w-[400px]'>{() => <Login />}</PopoverContent>
-  const { setIsAuthenticated, isAuthenticated, setProfile, profile, setIsStaff } = useContext(AppContext)
+  const { setIsAuthenticated, isAuthenticated, setProfile, profile } = useContext(AppContext)
   const navigate = useNavigate()
   const logoutMutation = useMutation({
-    mutationFn: (refresh_token: string) => authAPI.logout(),
+    mutationFn: (refresh_token: string) => authAPI.logout(refresh_token),
     onSuccess: () => {
       setIsAuthenticated(false)
       setProfile(null)
-      setIsStaff(false)
     },
     onError: () => {
       // console.log(error)

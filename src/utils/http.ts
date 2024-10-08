@@ -39,7 +39,7 @@ class Http {
     this.instance.interceptors.response.use(
       (response) => {
         const endPoint = response.config.url?.split('/').pop()
-        if (endPoint === 'system') {
+        if (endPoint === 'login') {
           this.accessToken = response.data.data.accessToken
           this.refreshToken = response.data.data.refreshToken
           setTokenToLS(this.accessToken, this.refreshToken)
