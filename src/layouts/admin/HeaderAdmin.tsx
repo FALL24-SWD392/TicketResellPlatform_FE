@@ -17,7 +17,7 @@ const HeaderAdmin: React.FC = () => {
           <Dropdown>
             <DropdownTrigger>
               <Button className='bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg' radius='full'>
-                Profile
+                Profiles
               </Button>
             </DropdownTrigger>
             <DropdownMenu aria-label='Profile Actions' items={items}>
