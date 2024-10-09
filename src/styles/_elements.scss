@@ -1,7 +1,7 @@
 .nav-bar {
     width: 100vw;
-    position: absolute;
-    top: 20px;
+    position: fixed;
+    top: 0px;
     display: flex;
     z-index: 1;    
 }
@@ -10,6 +10,7 @@
     width: 100vw;
     height: 500px;
     display: flex;
-    background: url('../assets/images/banner.svg')
+    background: url('../assets/images/banner.svg');
+    background-size: cover;
 }
 
