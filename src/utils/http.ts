@@ -1,17 +1,10 @@
 import axios, { AxiosError, AxiosInstance } from 'axios'
-import {
-  clearLocalStorage,
-  getAccessTokenFromLS,
-  setTokenToLS,
-  setProfileToLS,
-  getRefreshTokenFromLS
-} from './auth'
+import { clearLocalStorage, getAccessTokenFromLS, setTokenToLS, setProfileToLS, getRefreshTokenFromLS } from './auth'
 import HttpStatusCode from 'src/constants/httpStatusCode.enum'
-import { jwtDecode } from "jwt-decode";
+import { jwtDecode } from 'jwt-decode'
 import { toast } from 'react-toastify'
 import { ErrorResponse, SuccessResponse } from 'src/@types/utils.type'
 import { isAxiosErrorJWTExpired, isUnAuthorized } from './utils'
-
 //
 //https://ticketresellplatform-nodered.onrender.com/
 class Http {
@@ -24,7 +17,7 @@ class Http {
     this.refreshTokenRequest = null
     this.refreshToken = getRefreshTokenFromLS()
     ;(this.instance = axios.create({
-      baseURL: import.meta.env.VITE_URL_BE,
+      baseURL: import.meta.env.VITE_MOCK_API_URL,
       timeout: 10000,
       headers: {
         'Content-Type': 'application/json'
@@ -32,9 +25,7 @@ class Http {
     })),
       this.instance.interceptors.request.use(
         (config) => {
-          this.accessToken = this.accessToken
-            ? this.accessToken
-            : getAccessTokenFromLS()
+          this.accessToken = this.accessToken ? this.accessToken : getAccessTokenFromLS()
           if (this.accessToken) {
             config.headers.Authorization = `Bearer ${this.accessToken}`
             return config
@@ -48,13 +39,10 @@ class Http {
     this.instance.interceptors.response.use(
       (response) => {
         const endPoint = response.config.url?.split('/').pop()
-        if (endPoint === 'system') {
+        if (endPoint === 'login') {
           this.accessToken = response.data.data.accessToken
           this.refreshToken = response.data.data.refreshToken
-          setTokenToLS(
-            this.accessToken,
-            this.refreshToken
-          )
+          setTokenToLS(this.accessToken, this.refreshToken)
           setProfileToLS(jwtDecode(this.accessToken))
         } else if (endPoint === 'logout') {
           this.accessToken = ''
@@ -64,12 +52,7 @@ class Http {
       },
       (error: AxiosError) => {
         //nếu là lỗi unprocessable entity hoặc unauthorized thì không hiện toast
-        if (
-          ![
-            HttpStatusCode.UnprocessableEntity,
-            HttpStatusCode.Unauthorized
-          ].includes(error.response?.status as number)
-        ) {
+        if (![HttpStatusCode.UnprocessableEntity, HttpStatusCode.Unauthorized].includes(error.response?.status as number)) {
           const data: any | undefined = error.response?.data
           const message = data.message || error.message
           toast.error(message)
@@ -77,10 +60,7 @@ class Http {
 
         if (isUnAuthorized<ErrorResponse<{}>>(error)) {
           const config = error.response?.config || { headers: {}, url: '' }
-          if (
-            isAxiosErrorJWTExpired(error) &&
-            config.url != '/users/refresh-token'
-          ) {
+          if (isAxiosErrorJWTExpired(error) && config.url != '/users/refresh-token') {
             this.refreshTokenRequest = this.refreshTokenRequest
               ? this.refreshTokenRequest
               : this.handleRefreshToken().finally(() => {
@@ -110,12 +90,9 @@ class Http {
 
   private handleRefreshToken() {
     return this.instance
-      .post<SuccessResponse<{ access_token: string; refresh_token: string }>>(
-        '/users/refresh-token',
-        {
-          refresh_token: this.refreshToken
-        }
-      )
+      .post<SuccessResponse<{ access_token: string; refresh_token: string }>>('/users/refresh-token', {
+        refresh_token: this.refreshToken
+      })
       .then((res) => {
         const { access_token, refresh_token } = res.data.data
         setTokenToLS(access_token, refresh_token)
@@ -130,22 +107,6 @@ class Http {
       })
   }
 }
-
-// class Http {
-//   instance: AxiosInstance;
-//   constructor() {
-//     this.instance = axios.create({
-//       baseURL: import.meta.env.VITE_URL_BE,
-//       // baseURL: "http://localhost:8000/",
-//       timeout: 10000,
-//       headers: {
-//         "Content-Type": "application/json"
-//       }
-//     });
-//   }
-// }
-
 const http = new Http().instance;
 
-// const http = new Http().instance
 export default http

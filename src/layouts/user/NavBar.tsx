@@ -5,11 +5,9 @@ import {
   NavbarContent,
   NavbarItem,
   Link,
-  // DropdownItem,
-  // DropdownTrigger,
-  // Dropdown,
-  // DropdownMenu,
-  // Avatar,
+  DropdownItem,
+  DropdownTrigger,
+  Dropdown,
   NavbarMenuToggle,
   NavbarMenu,
   NavbarMenuItem,
@@ -17,13 +15,18 @@ import {
   PopoverContent,
   PopoverTrigger,
   Popover,
-  Input
+  DropdownMenu,
+  Avatar
 } from '@nextui-org/react'
-import { Logo, SignInForm } from 'src/Components'
+import { Logo } from 'src/Components'
 import { CiMenuBurger } from 'react-icons/ci'
-import { NavLink } from 'react-router-dom'
-import path from 'src/constants/path'
+import {  useNavigate } from 'react-router-dom'
 import { Login } from 'src/pages'
+import { getRefreshTokenFromLS } from 'src/utils/auth'
+import { useMutation } from '@tanstack/react-query'
+import authAPI from 'src/apis/auth.api'
+import { useContext } from 'react'
+import { AppContext } from 'src/context/app.context'
 
 interface Props {
   isBlur?: boolean
@@ -45,15 +48,26 @@ const NavBar = ({ ...props }: Props) => {
     'Log Out'
   ]
 
-  const content = (
-    <PopoverContent className='w-[400px]'>
-      {() => (
-        <Login/>  
-      )}
-    </PopoverContent>
-  )
+  const content = <PopoverContent className='w-[400px]'>{() => <Login />}</PopoverContent>
+  const { setIsAuthenticated, isAuthenticated, setProfile, profile } = useContext(AppContext)
+  const navigate = useNavigate()
+  const logoutMutation = useMutation({
+    mutationFn: (refresh_token: string) => authAPI.logout(refresh_token),
+    onSuccess: () => {
+      setIsAuthenticated(false)
+      setProfile(null)
+    },
+    onError: () => {
+      // console.log(error)
+    }
+  })
+  const handleLogout = () => {
+    const refresh_token = getRefreshTokenFromLS()
+    logoutMutation.mutate(refresh_token)
+    navigate('/')
+  }
   return (
-    <div className='nav-bar'>
+    <div className='nav-bar bg-transparent backdrop-blur-sm'>
       <Navbar isBordered isBlurred={props.isBlur || false} className='bg-transparent' maxWidth='2xl'>
         <NavbarContent className='sm:hidden' justify='start'>
           <NavbarMenuToggle icon={<CiMenuBurger className='text-white-light text-[30px]' />} />
@@ -104,8 +118,10 @@ const NavBar = ({ ...props }: Props) => {
             {/* <NavLink to={path.login} className='text-white-light'>
               Login
             </NavLink> */}
+          </NavbarItem>
+          {!isAuthenticated ? (
             <div className='flex '>
-              <Popover  key='blur' size='lg' offset={10} placement='left-start' backdrop='blur' >
+              <Popover key='blur' size='lg' offset={10} placement='left-start' backdrop='blur'>
                 <PopoverTrigger>
                   <Button color='warning' variant='flat' className='text-white-light'>
                     Login
@@ -114,13 +130,35 @@ const NavBar = ({ ...props }: Props) => {
                 {content}
               </Popover>
             </div>
-          </NavbarItem>
-
-          <NavbarItem className='hidden lg:flex'>
-            <Button as={Link} color='warning' href='/login' variant='flat'>
-              Signup
-            </Button>
-          </NavbarItem>
+          ) : (
+            <NavbarContent as='div' justify='end'>
+              <Dropdown placement='bottom-end'>
+                <DropdownTrigger>
+                  <Avatar
+                    isBordered
+                    as='button'
+                    className='transition-transform'
+                    color='secondary'
+                    name='Jason Hughes'
+                    size='sm'
+                    src={profile?.avatar}
+                  />
+                </DropdownTrigger>
+                <DropdownMenu aria-label='Profile Actions' variant='flat'>
+                  <DropdownItem key='profile' className='h-14 gap-2'>
+                    <p className='font-semibold'>Signed in as</p>
+                    <p className='font-semibold'>{profile?.email}</p>
+                  </DropdownItem>
+                  <DropdownItem key='settings'>My Settings</DropdownItem>
+                  <DropdownItem key='configurations'>Configurations</DropdownItem>
+                  <DropdownItem key='help_and_feedback'>Help & Feedback</DropdownItem>
+                  <DropdownItem key='logout' color='danger'>
+                    <button onClick={handleLogout}>Logout</button>
+                  </DropdownItem>
+                </DropdownMenu>
+              </Dropdown>
+            </NavbarContent>
+          )}
           <NavbarItem>
             <Button as={Link} color='success' href='#' variant='flat'>
               Sell Tickets

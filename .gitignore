@@ -25,3 +25,7 @@ dist-ssr
 *.sw?
 .env.production
 .env
+.yarn.lock
+### mobile build
+android
+ios
