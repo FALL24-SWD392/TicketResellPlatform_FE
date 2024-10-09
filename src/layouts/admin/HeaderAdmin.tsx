@@ -9,11 +9,11 @@ const HeaderAdmin: React.FC = () => {
 
   return (
     <>
-      <header className='flex justify-between items-center p-4 shadow' style={{ backgroundColor: '#F4F4F5' }}>
+      <header className='flex justify-between items-center p-4 shadow ' style={{ backgroundColor: '#F4F4F5' }}>
         <h1 className='flex-grow text-center font-bold' style={{ color: '#481878' }}>
           Admin Dashboard
         </h1>
-        <div className='flex items-center space-x-4'>
+        <div className='flex items-center space-x-4 px-10'>
           <Dropdown>
             <DropdownTrigger>
               <Button className='bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg' radius='full'>
@@ -33,7 +33,7 @@ const HeaderAdmin: React.FC = () => {
             </DropdownMenu>
           </Dropdown>
 
-          <Button className='bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg border border-white'>
+          <Button className='bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg'>
             Notifications
           </Button>
         </div>
