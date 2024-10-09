@@ -5,6 +5,7 @@ interface TicketCardProps {
 }
 
 const TicketCard: React.FC<TicketCardProps> = ({ ticket }) => {
+    console.log(ticket);
     return (
         <div>
         </div>
