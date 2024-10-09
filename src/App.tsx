@@ -7,25 +7,28 @@ import useLayout from './hooks/useLayout'
 import Router from './routes'
 import Footer from './layouts/user/Footer'
 import NavBar from './layouts/user/NavBar'
+import { StrictMode } from 'react'
 
 function App() {
   const layout = useLayout()
   // const nav = useNavigate()
 
   return (
-    <NextUIProvider>
-      <AppProvider>
-        <ToastContainer autoClose={2000} style={{ padding: '20px' }} />
-        {layout.includes('navbar') && <NavBar />}
-        <div className=''>
-          <div className='main'>
-            <Router />
+    <StrictMode>
+      <NextUIProvider>
+        <AppProvider>
+          <ToastContainer autoClose={2000} style={{ padding: '20px' }} />
+          {layout.includes('navbar') && <NavBar />}
+          <div className=''>
+            <div className='main'>
+              <Router />
+            </div>
           </div>
-        </div>
-        {layout.includes('footer') && <Footer />}
-        {layout.includes('chat') && ''}
-      </AppProvider>
-    </NextUIProvider>
+          {layout.includes('footer') && <Footer />}
+          {layout.includes('chat') && ''}
+        </AppProvider>
+      </NextUIProvider>
+    </StrictMode>
   )
 }
 
