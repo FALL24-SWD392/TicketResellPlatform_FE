@@ -18,7 +18,7 @@
     "@capacitor/core": "6.1.2",
     "@capacitor/ios": "6.1.2",
     "@hookform/resolvers": "3.4.2",
-    "@nextui-org/react": "2.4.8",
+    "@nextui-org/react": "^2.4.8",
     "@nextui-org/system": "2.2.6",
     "@nextui-org/theme": "2.2.11",
     "@react-icons/all-files": "4.1.0",
