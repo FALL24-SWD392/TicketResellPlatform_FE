@@ -1,5 +1,5 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import { Home, Login } from "../pages";
+import { Home, Login, ProfilePage } from "../pages";
 import { useContext } from "react";
 import { AppContext } from "src/context/app.context";
 import AdminPage from "src/pages/admin/AdminPage";
@@ -15,6 +15,10 @@ const publicRoutes: RouteType[] = [
   {
     path: "/",
     element: <Home />,
+  },
+  {
+    path: "/profile",
+    element: <ProfilePage />,
   },
   
 ];
