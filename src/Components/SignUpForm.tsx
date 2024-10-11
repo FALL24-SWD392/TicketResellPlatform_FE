@@ -2,14 +2,14 @@ import { Button, Input } from '@nextui-org/react'
 import React from 'react'
 import { UseFormRegister } from 'react-hook-form'
 
-const SignInForm = ({
+const SignUpForm = ({
   onSubmit,
   register,
-  loginError
+  signUpError 
 }: {
   onSubmit?: (event: React.FormEvent<HTMLFormElement>) => void
   register: UseFormRegister<any>
-  loginError?: string
+  signUpError?: string
 }) => {
   return (
     <div className='p-2 flex-col items-start'>
@@ -22,11 +22,11 @@ const SignInForm = ({
           <Input isRequired type='username' label='username' className='max-w-xs' {...register('username', { required: true })} />
           <Input isRequired type='email' label='email' className='max-w-xs' {...register('email', { required: true })} />
           <Input isRequired type='password' label='Password' className='max-w-xs' {...register('password', { required: true })} />
-          <Input isRequired type='password' label='Confirm Password' className='max-w-xs' {...register('cf_password', { required: true })} />
-          <Button type='submit'>SignIn</Button>
+          <Input isRequired type='password' label='Confirm Password' className='max-w-xs' {...register('confirmPassword', { required: true })} />
+          <Button type='submit'>SignUp</Button>
         </div>
       </form>
     </div>
   )
 }
-export default SignInForm
+export default SignUpForm

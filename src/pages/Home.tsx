@@ -1,13 +1,11 @@
-// import { Image } from '@nextui-org/react'
-// import Banner from '../assets/images/banner.svg'
+
 import { SearchBar } from 'src/Components'
 import { HiCalendarDays, HiCheck, HiChevronDown, HiMapPin } from 'react-icons/hi2'
-// import { keepPreviousData, useQuery } from '@tanstack/react-query'
-// import { TicketListConfig } from 'src/@types/ticket.type'
-// import useQueryParams from 'src/hooks/useQueryParams'
-// import ticketAPI from 'src/apis/ticket.api'
 import { UserList } from 'src/@types/users.type'
+<<<<<<< HEAD
 // import TicketContainer from 'src/Components/ticket/TicketContainer'
+=======
+>>>>>>> feat/register-account
 export type QueryConfig = {
   [key in keyof UserList]: string
 } & {

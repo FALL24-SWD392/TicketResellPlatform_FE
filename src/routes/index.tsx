@@ -1,5 +1,9 @@
 import { Navigate, Route, Routes } from "react-router-dom";
+<<<<<<< HEAD
 import { Home, Login, ProfilePage } from "../pages";
+=======
+import { Home, LoginPage, Register } from "../pages";
+>>>>>>> feat/register-account
 import { useContext } from "react";
 import { AppContext } from "src/context/app.context";
 import AdminPage from "src/pages/admin/AdminPage";
@@ -16,10 +20,14 @@ const publicRoutes: RouteType[] = [
     path: "/",
     element: <Home />,
   },
+<<<<<<< HEAD
   {
     path: "/profile",
     element: <ProfilePage />,
   },
+=======
+ 
+>>>>>>> feat/register-account
   
 ];
 
@@ -39,12 +47,12 @@ const adminRoutes: RouteType[] = [
 
 const unAuthenticatedRoute: RouteType[] = [
   {
-    path: "/login",
-    element: <Login />,
+    path: "/login-page",
+    element: <LoginPage />,
   },
   {
-    path: "/register",
-    element: <></> //Register
+    path: "/register-page",
+    element: <Register />,
   }
 ];
 
