@@ -20,7 +20,7 @@ import {
 } from '@nextui-org/react'
 import { Logo } from 'src/Components'
 import { CiMenuBurger } from 'react-icons/ci'
-import {  useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { Login } from 'src/pages'
 import { getRefreshTokenFromLS } from 'src/utils/auth'
 import { useMutation } from '@tanstack/react-query'
@@ -157,13 +157,13 @@ const NavBar = ({ ...props }: Props) => {
                   </DropdownItem>
                 </DropdownMenu>
               </Dropdown>
+              <NavbarItem>
+                <Button as={Link} color='success' href='#' variant='flat'>
+                  Sell Tickets
+                </Button>
+              </NavbarItem>
             </NavbarContent>
           )}
-          <NavbarItem>
-            <Button as={Link} color='success' href='#' variant='flat'>
-              Sell Tickets
-            </Button>
-          </NavbarItem>
         </NavbarContent>
 
         <NavbarMenu className='bg-yellow-light'>

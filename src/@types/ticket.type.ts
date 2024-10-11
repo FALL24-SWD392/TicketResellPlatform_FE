@@ -4,7 +4,7 @@ export interface Ticket {
   id: string
   sellerId: Pick<UserList, 'sub' | 'email' | 'avatar' | 'rating'>
   title?: string
-  expData?: string
+  expDate?: string
   type?: Pick<UserList, 'sub'>
   unitPrice?: number
   quantity?: number
@@ -16,7 +16,7 @@ export interface Ticket {
   updatedAt?: string
 }
 
-export type TicketList = Pick<Ticket, "id" | "sellerId" | "title"|"expData"|"type"|"description"|"createdAt" | "image" | "quantity" | "status" | "unitPrice"> 
+export type TicketList = Pick<Ticket, "id" | "sellerId" | "title"|"expDate"|"type"|"description"|"createdAt" | "image" | "quantity" | "status" | "unitPrice"> 
 
 export interface TicketListConfig {
   size?: number | string

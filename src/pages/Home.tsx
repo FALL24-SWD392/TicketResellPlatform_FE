@@ -7,6 +7,7 @@ import { HiCalendarDays, HiCheck, HiChevronDown, HiMapPin } from 'react-icons/hi
 // import useQueryParams from 'src/hooks/useQueryParams'
 // import ticketAPI from 'src/apis/ticket.api'
 import { UserList } from 'src/@types/users.type'
+import TicketContainer from 'src/Components/ticket/TicketContainer'
 // import TicketContainer from 'src/Components/ticket/TicketContainer'
 export type QueryConfig = {
   [key in keyof UserList]: string
@@ -85,7 +86,7 @@ const Home = () => {
             </li>
           </ul>
         </div>
-        {/* <TicketContainer/> */}
+        <TicketContainer/>
       </div>
     </>
   )

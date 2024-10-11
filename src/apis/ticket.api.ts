@@ -7,9 +7,9 @@ import http from 'src/utils/http'
 import { ListBaseResponse } from 'src/@types/response'
 
 const ticketAPI = {
-  getAllTicket: () =>
+  getAllTicket: ({page, size} : {page: number, size: number}) =>
     http.get<ListBaseResponse<Ticket>>(
-      '/tickets'
+      `/tickets?page=${page}&size=${size}`
     )
 }
 

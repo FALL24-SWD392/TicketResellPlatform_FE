@@ -47,7 +47,6 @@ const loginMutation = useMutation({
       },
       onError: (error) => {
         if (isAxiosUnprocessableEntityError<ErrorResponse<FormData>>(error)) {
-          // trigger()
           const errors = error.response?.data.errors
           setLoginError(errors?.username as string)
         }
