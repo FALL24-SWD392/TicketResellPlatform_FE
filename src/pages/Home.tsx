@@ -2,10 +2,6 @@
 import { SearchBar } from 'src/Components'
 import { HiCalendarDays, HiCheck, HiChevronDown, HiMapPin } from 'react-icons/hi2'
 import { UserList } from 'src/@types/users.type'
-<<<<<<< HEAD
-// import TicketContainer from 'src/Components/ticket/TicketContainer'
-=======
->>>>>>> feat/register-account
 export type QueryConfig = {
   [key in keyof UserList]: string
 } & {

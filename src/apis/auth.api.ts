@@ -1,6 +1,6 @@
 import { SuccessResponse } from './../@types/utils.type'
 import http from '../utils/http'
-import { FormData } from 'src/pages/Login'
+import { FormData } from 'src/pages/LoginPage'
 import { ListBaseResponse } from 'src/@types/response'
 import { RegisterSchema } from 'src/utils/rules';
 const authAPI = {
