@@ -63,8 +63,19 @@ export const getRulesLogin = (getValues?: UseFormGetValues<any>): Rules => {
 }
 
 export const LoginSchemaYup = yup.object().shape({
-    username: yup.string().required("UserName is required!!"),
-    password: yup.string().required("Password is required!!")
+  username: yup.string().required('UserName is required!!'),
+  password: yup.string().required('Password is required!!')
 })
-
 export type LoginSchema = yup.InferType<typeof LoginSchemaYup>
+
+
+export const RegisterSchemaYup = yup.object().shape({
+  username: yup.string().required('User name is required!'),
+  email: yup.string().required('Email is required!').email('Invalid email!'),
+  password: yup.string().required('Password is required!').min(8, 'Password must be at least 8 characters'),
+  confirmPassword: yup
+    .string()
+    .required('Confirm password is required!')
+    .oneOf([yup.ref('password')], 'Confirm password must be same password!')  
+})
+export type RegisterSchema = yup.InferType<typeof RegisterSchemaYup>

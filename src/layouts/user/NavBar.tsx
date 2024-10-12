@@ -1,32 +1,15 @@
 // import React from 'react'
-import {
-  Navbar,
-  NavbarBrand,
-  NavbarContent,
-  NavbarItem,
-  Link,
-  DropdownItem,
-  DropdownTrigger,
-  Dropdown,
-  NavbarMenuToggle,
-  NavbarMenu,
-  NavbarMenuItem,
-  Button,
-  PopoverContent,
-  PopoverTrigger,
-  Popover,
-  DropdownMenu,
-  Avatar
-} from '@nextui-org/react'
-import { Logo } from 'src/Components'
+import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, NavbarMenuToggle, NavbarMenu, NavbarMenuItem, Button } from '@nextui-org/react'
+import { AvatarButton, Logo } from 'src/Components'
 import { CiMenuBurger } from 'react-icons/ci'
-import {  useNavigate } from 'react-router-dom'
-import { Login } from 'src/pages'
+import { useNavigate } from 'react-router-dom'
 import { getRefreshTokenFromLS } from 'src/utils/auth'
-import { useMutation } from '@tanstack/react-query'
 import authAPI from 'src/apis/auth.api'
 import { useContext } from 'react'
 import { AppContext } from 'src/context/app.context'
+import path from 'src/constants/path'
+import { useMutation } from '@tanstack/react-query'
+import { toast } from 'react-toastify'
 
 interface Props {
   isBlur?: boolean
@@ -48,17 +31,17 @@ const NavBar = ({ ...props }: Props) => {
     'Log Out'
   ]
 
-  const content = <PopoverContent className='w-[400px]'>{() => <Login />}</PopoverContent>
   const { setIsAuthenticated, isAuthenticated, setProfile, profile } = useContext(AppContext)
   const navigate = useNavigate()
   const logoutMutation = useMutation({
     mutationFn: (refresh_token: string) => authAPI.logout(refresh_token),
-    onSuccess: () => {
+    onSuccess: (data) => {
       setIsAuthenticated(false)
       setProfile(null)
+      toast.success(data.data.message)
     },
     onError: () => {
-      // console.log(error)
+      toast.error('Logout failed')
     }
   })
   const handleLogout = () => {
@@ -114,56 +97,17 @@ const NavBar = ({ ...props }: Props) => {
         </NavbarContent>
 
         <NavbarContent justify='end'>
-          <NavbarItem className='hidden lg:flex'>
-            {/* <NavLink to={path.login} className='text-white-light'>
-              Login
-            </NavLink> */}
-          </NavbarItem>
           {!isAuthenticated ? (
-            <div className='flex '>
-              <Popover key='blur' size='lg' offset={10} placement='left-start' backdrop='blur'>
-                <PopoverTrigger>
-                  <Button color='warning' variant='flat' className='text-white-light'>
-                    Login
-                  </Button>
-                </PopoverTrigger>
-                {content}
-              </Popover>
-            </div>
+            <NavbarItem className='hidden lg:flex'>
+              <Link className='text-white-light' aria-current='page' href={path.login}>
+                Login
+              </Link>
+            </NavbarItem>
           ) : (
             <NavbarContent as='div' justify='end'>
-              <Dropdown placement='bottom-end'>
-                <DropdownTrigger>
-                  <Avatar
-                    isBordered
-                    as='button'
-                    className='transition-transform'
-                    color='secondary'
-                    name='Jason Hughes'
-                    size='sm'
-                    src={profile?.avatar}
-                  />
-                </DropdownTrigger>
-                <DropdownMenu aria-label='Profile Actions' variant='flat'>
-                  <DropdownItem key='profile' className='h-14 gap-2'>
-                    <p className='font-semibold'>Signed in as</p>
-                    <p className='font-semibold'>{profile?.email}</p>
-                  </DropdownItem>
-                  <DropdownItem key='settings'>My Settings</DropdownItem>
-                  <DropdownItem key='configurations'>Configurations</DropdownItem>
-                  <DropdownItem key='help_and_feedback'>Help & Feedback</DropdownItem>
-                  <DropdownItem key='logout' color='danger'>
-                    <button onClick={handleLogout}>Logout</button>
-                  </DropdownItem>
-                </DropdownMenu>
-              </Dropdown>
+              <AvatarButton profile={profile} handleLogout={handleLogout} />
             </NavbarContent>
           )}
-          <NavbarItem>
-            <Button as={Link} color='success' href='#' variant='flat'>
-              Sell Tickets
-            </Button>
-          </NavbarItem>
         </NavbarContent>
 
         <NavbarMenu className='bg-yellow-light'>

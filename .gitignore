@@ -26,6 +26,7 @@ dist-ssr
 .env.production
 .env
 
-### mobile build folder
+### mobile build
 android
 ios
+yarn.lock

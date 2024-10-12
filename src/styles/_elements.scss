@@ -1,16 +1,19 @@
 .nav-bar {
-    width: 100vw;
-    position: fixed;
-    top: 0px;
-    display: flex;
-    z-index: 1;    
+  width: 100vw;
+  position: fixed;
+  top: 0px;
+  display: flex;
+  z-index: 1;
 }
 
-.banner{
-    width: 100vw;
-    height: 500px;
-    display: flex;
-    background: url('../assets/images/banner.svg');
-    background-size: cover;
+.banner {
+  width: 100vw;
+  height: 500px;
+  display: flex;
+  background: url('../assets/images/banner.svg');
+  background-size: cover;
 }
 
+.card-shadow {
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
+}

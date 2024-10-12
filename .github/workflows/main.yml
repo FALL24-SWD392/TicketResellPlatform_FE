@@ -27,11 +27,13 @@ jobs:
         shell: bash
 
       - name: Compose down
-        run: |
-          docker compose down
+        run: docker compose down
         shell: bash
 
       - name: Run `docker compose`
-        run: |
-          docker compose up --build -d
+        run: docker compose up --build -d
         shell: bash 
+
+      - name: Remove unused images
+        run: docker system prune -a -f
+        shell: bash

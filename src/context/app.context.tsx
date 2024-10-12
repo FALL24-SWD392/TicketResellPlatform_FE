@@ -38,7 +38,6 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
     initialAppContext.isAuthenticated
   )
   const [profile, setProfile] = useState<User | null>(initialAppContext.profile)
-  // const [listEvent, setListEvent] = useState([])
   const [isStaff, setIsStaff] = useState<boolean>(initialAppContext.isStaff)
   const [ticketId, setTicketId] = useState<string>(initialAppContext.ticketId)
   return (
@@ -47,7 +46,6 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
         isAuthenticated,
         setIsAuthenticated,
         profile,
-        // setListEvent,
         isStaff,
         setIsStaff,
         setProfile,

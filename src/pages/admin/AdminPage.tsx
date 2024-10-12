@@ -19,7 +19,7 @@ const AdminPage: React.FC = () => {
 
   return (
     <LayoutAdmin>
-      <div className='grid grid-cols-4 gap-4 w-full'>
+      <div className='grid grid-cols-4 gap-4 w-[1700px]'>
         <div className='bg-[#E4E4E7] h-[200px] flex items-center justify-between px-6'>
           <div>
             <p className='text-black text-[21px] mb-1'>Spent this month</p>
@@ -65,7 +65,7 @@ const AdminPage: React.FC = () => {
           <Chart1 />
         </Card>
 
-        <Card className='p-4 bg-[#E4E4E7] shadow-lg flex flex-col items-center justify-center' style={{ width: '500px', marginLeft: '350px' }}>
+        <Card className='p-4 bg-[#E4E4E7] shadow-lg flex flex-col items-center justify-center' style={{ width: '450px', marginLeft: '370px' }}>
           <div className='w-32 h-32 rounded-full overflow-hidden border-4 border-blue-500 cursor-pointer' onClick={handleAvatarClick}>
             <img
               src=' https://yt3.ggpht.com/-qfdylQER4GU/AAAAAAAAAAI/AAAAAAAAAAA/QQTnVEWuEU4/s900-c-k-no/photo.jpg'
@@ -115,7 +115,7 @@ const AdminPage: React.FC = () => {
           <Chart2 />
         </Card>
 
-        <Card className='p-4 bg-[#E4E4E7] shadow-lg flex flex-col items-center text-center' style={{ width: '500px', marginLeft: '350px' }}>
+        <Card className='p-4 bg-[#E4E4E7] shadow-lg flex flex-col items-center text-center' style={{ width: '450px', marginLeft: '370px' }}>
         <p className='text-lg font-semibold mb-2'>Ticket Sales Over Years</p>
         <p className='text-4xl font-bold text-purple-700 mb-2'>Sales Growth</p>
           <Chart3 />
@@ -124,5 +124,6 @@ const AdminPage: React.FC = () => {
     </LayoutAdmin>
   )
 }
+
 
 export default AdminPage
