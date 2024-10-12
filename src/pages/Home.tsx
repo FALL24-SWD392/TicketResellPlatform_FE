@@ -79,7 +79,7 @@ const Home = () => {
             </li>
           </ul>
         </div>
-        {/* <TicketContainer/> */}
+        <TicketContainer/>
       </div>
     </>
   )

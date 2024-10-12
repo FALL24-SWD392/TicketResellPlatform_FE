@@ -108,11 +108,6 @@ const NavBar = ({ ...props }: Props) => {
               <AvatarButton profile={profile} handleLogout={handleLogout} />
             </NavbarContent>
           )}
-          <NavbarItem>
-            <Button as={Link} color='success' href='#' variant='flat'>
-              Sell Tickets
-            </Button>
-          </NavbarItem>
         </NavbarContent>
 
         <NavbarMenu className='bg-yellow-light'>
