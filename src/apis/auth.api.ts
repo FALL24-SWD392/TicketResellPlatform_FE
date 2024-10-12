@@ -10,8 +10,8 @@ const authAPI = {
         data: { access_token: string; refresh_token: string }
         message: string
       }>
-    >('/auth/login', body),
-  register: (body: Omit<RegisterSchema, 'confirmPassword'>) => http.post<ListBaseResponse<{}>>('/auth/register', body),
-  logout: (body: string) => http.post<ListBaseResponse<{message: string}>>('/auth/logout', body)
+    >('api/auth/login', body),
+  register: (body: Omit<RegisterSchema, 'confirmPassword'>) => http.post<ListBaseResponse<{}>>('api/auth/register', body),
+  logout: (body: string) => http.post<ListBaseResponse<{message: string}>>('api/auth/logout', body)
 }
 export default authAPI
