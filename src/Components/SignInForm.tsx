@@ -1,6 +1,7 @@
 import { Button, Input, Link } from '@nextui-org/react'
 import React from 'react'
 import { UseFormRegister } from 'react-hook-form'
+import { NavLink } from 'react-router-dom'
 import path from 'src/constants/path'
 
 const SignInForm = ({
@@ -24,6 +25,7 @@ const SignInForm = ({
           <Input isRequired type='password' label='Password' className='max-w-xs' {...register('password', { required: true })} />
           <Button type='submit'>SignIn</Button>
           <Link href={path.register}>Regiter</Link>
+          <NavLink to={path.forgotPassword}>Forgot Password</NavLink>
         </div>
       </form>
     </div>

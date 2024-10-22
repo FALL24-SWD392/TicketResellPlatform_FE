@@ -3,6 +3,7 @@ const path = {
   profile: '/profile/*',
   login: '/login-page',
   register: '/register-page',
+  forgotPassword: '/forgot-password',
   logout: '/logout',
   eventDetail: '/events/:id',
   loginOauthGoogle: '/login/oauth',

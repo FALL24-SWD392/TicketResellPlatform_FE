@@ -31,7 +31,7 @@ const TicketContainer: React.FC = () => {
   })
 
   useEffect(() => {
-    getAllTicketMutation.mutate({ page: 1, size })
+    getAllTicketMutation.mutate({ page: 1, size:10 })
   }, [size, page])
   console.log(ticketData)
   return ( 

@@ -63,7 +63,7 @@ const unAuthenticatedRoute: RouteType[] = [
   {
     path: '/register-page',
     element: <Register />
-  }
+  },
 ]
 
 const Router = () => {
