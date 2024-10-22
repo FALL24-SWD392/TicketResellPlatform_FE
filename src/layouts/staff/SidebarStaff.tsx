@@ -30,7 +30,7 @@ const SidebarStaff = () => {
             </Link>
           </li>
           <li>
-            <Link to="/staff/teams">
+            <Link to="/ticketApproval">
               <Button className="w-full flex items-center gap-3 text-left text-lg text-gray-400 hover:text-white">
               📊 Ticket Approval
               </Button>
