@@ -3,7 +3,7 @@ import { Navigate, Route, Routes } from 'react-router-dom'
 import { useContext } from 'react'
 import { AppContext } from 'src/context/app.context'
 import AdminPage from 'src/pages/admin/AdminPage'
-import { Home, LoginPage, ProfilePage, Register, StaffPage, Userlist } from 'src/pages'
+import { Home, LoginPage, ProfilePage, Register, StaffPage, TicketApproval, Userlist } from 'src/pages'
 // import path from "path";
 import Report from 'src/pages/staff/Report'
 type RouteType = {
@@ -31,6 +31,10 @@ const publicRoutes: RouteType[] = [
   {
     path: '/user-list',
     element: <Userlist/>
+  },
+  {
+    path: '/ticketApproval',
+    element: <TicketApproval/>
   }
   
 ]
