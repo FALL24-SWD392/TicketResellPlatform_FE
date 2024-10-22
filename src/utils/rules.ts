@@ -79,3 +79,14 @@ export const RegisterSchemaYup = yup.object().shape({
     .oneOf([yup.ref('password')], 'Confirm password must be same password!')  
 })
 export type RegisterSchema = yup.InferType<typeof RegisterSchemaYup>
+
+
+export const ChangePasswordSchemaYup = yup.object().shape({
+  oldPassword: yup.string().required('Old password is required!').min(8, 'Password must be at least 8 characters'),
+  newPassword: yup.string().required('New password is required!').min(8, 'Password must be at least 8 characters'),
+  confirmPassword: yup
+    .string()
+    .required('Confirm password is required!')
+    .oneOf([yup.ref('newPassword')], 'Confirm password must be same new password!')
+})
+export type ChangePasswordSchema = yup.InferType<typeof ChangePasswordSchemaYup>

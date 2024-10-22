@@ -1,5 +1,6 @@
 import { Avatar, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@nextui-org/react'
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { User } from 'src/@types/users.type'
 
 type Props = {
@@ -18,7 +19,9 @@ const AvatarButton = ({...props}: Props) => {
           <p className='font-semibold'>{props.profile?.email}</p>
         </DropdownItem>
         <DropdownItem key='settings'>My Settings</DropdownItem>
-        <DropdownItem key='configurations'>Configurations</DropdownItem>
+        <DropdownItem key='changepassword'>
+          <Link to="/change-password">Change Password</Link>
+        </DropdownItem>
         <DropdownItem key='help_and_feedback'>Help & Feedback</DropdownItem>
         <DropdownItem key='logout' color='danger'>
           <button onClick={props.handleLogout}>Logout</button>

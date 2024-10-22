@@ -1,6 +1,7 @@
 import { SuccessResponse } from './../@types/utils.type'
 import http from '../utils/http'
 import { FormData } from 'src/pages/LoginPage'
+import {FormDataChange} from "src/pages/ChangePassword"
 import { ListBaseResponse } from 'src/@types/response'
 import { RegisterSchema } from 'src/utils/rules';
 const authAPI = {
@@ -12,6 +13,9 @@ const authAPI = {
       }>
     >('api/auth/login', body),
   register: (body: Omit<RegisterSchema, 'confirmPassword'>) => http.post<ListBaseResponse<{}>>('api/auth/register', body),
-  logout: (body: string) => http.post<ListBaseResponse<{message: string}>>('api/auth/logout', body)
+  logout: (body: string) => http.post<ListBaseResponse<{message: string}>>('api/auth/logout', body),
+  
+  changePassword: (body: FormDataChange) => http.put<ListBaseResponse<{}>>("api/auth/password/change", body)
+
 }
 export default authAPI
