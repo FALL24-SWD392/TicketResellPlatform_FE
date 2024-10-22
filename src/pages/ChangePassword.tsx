@@ -18,8 +18,7 @@ const ChangePassword = () => {
     register,
     handleSubmit,
     // setError,
-    trigger,
-    formState: { errors }
+    formState: {}
   } = useForm<FormDataChange>({
     resolver: yupResolver(ChangePasswordSchemaYup)
   })

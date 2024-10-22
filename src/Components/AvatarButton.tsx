@@ -1,5 +1,4 @@
 import { Avatar, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@nextui-org/react'
-import React from 'react'
 import { Link } from 'react-router-dom'
 import { User } from 'src/@types/users.type'
 
@@ -21,6 +20,9 @@ const AvatarButton = ({...props}: Props) => {
         <DropdownItem key='settings'>My Settings</DropdownItem>
         <DropdownItem key='changepassword'>
           <Link to="/change-password">Change Password</Link>
+        </DropdownItem>
+        <DropdownItem key='resetpassword'>
+          <Link to="/reset-password">Reset Password</Link>
         </DropdownItem>
         <DropdownItem key='help_and_feedback'>Help & Feedback</DropdownItem>
         <DropdownItem key='logout' color='danger'>
