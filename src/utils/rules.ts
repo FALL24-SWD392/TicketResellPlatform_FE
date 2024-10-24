@@ -68,7 +68,6 @@ export const LoginSchemaYup = yup.object().shape({
 })
 export type LoginSchema = yup.InferType<typeof LoginSchemaYup>
 
-
 export const RegisterSchemaYup = yup.object().shape({
   username: yup.string().required('User name is required!'),
   email: yup.string().required('Email is required!').email('Invalid email!'),
@@ -90,3 +89,9 @@ export const ChangePasswordSchemaYup = yup.object().shape({
     .oneOf([yup.ref('newPassword')], 'Confirm password must be same new password!')
 })
 export type ChangePasswordSchema = yup.InferType<typeof ChangePasswordSchemaYup>
+
+
+export const ForgotSchemaYup = yup.object().shape({
+  email: yup.string().required('Email is required!').email('Invalid email!'),
+})
+export type ForgotSchema = yup.InferType<typeof ForgotSchemaYup>

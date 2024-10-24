@@ -4,6 +4,7 @@ import { FormData } from 'src/pages/LoginPage'
 import {FormDataChange} from "src/pages/ChangePassword"
 import { ListBaseResponse } from 'src/@types/response'
 import { RegisterSchema } from 'src/utils/rules';
+import { FormDataForgot } from 'src/pages/ForgotPasswordPage'
 const authAPI = {
   login: (body: FormData) =>
     http.post<
@@ -16,7 +17,7 @@ const authAPI = {
   logout: (body: string) => http.post<ListBaseResponse<{message: string}>>('api/auth/logout', body),
   
   changePassword: (body: FormDataChange) => http.put<ListBaseResponse<{}>>("api/auth/password/change", body),
-  ResetPassword: (body: FormDataChange) => http.put<ListBaseResponse<{}>>("/api/auth/password/reset", body)
-
-}
+  ResetPassword: (body: FormDataChange) => http.put<ListBaseResponse<{}>>("/api/auth/password/reset", body),
+  ForgotPassword: (body: FormDataForgot) =>http.put<ListBaseResponse<{}>>('/api/auth/password/forgot', body),
+  }
 export default authAPI
