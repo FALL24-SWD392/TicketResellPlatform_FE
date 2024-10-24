@@ -6,6 +6,8 @@ import AdminPage from 'src/pages/admin/AdminPage'
 import { ChangePassword, Home, LoginPage, ProfilePage, Register, ResetPassword, StaffPage, TicketApproval, Userlist } from 'src/pages'
 // import path from "path";
 import Report from 'src/pages/staff/Report'
+import ForgotPasswordPage from 'src/pages/ForgotPasswordPage'
+
 type RouteType = {
   path: string
   element: JSX.Element
@@ -72,6 +74,10 @@ const unAuthenticatedRoute: RouteType[] = [
     path: '/register-page',
     element: <Register />
   },
+  {
+    path: '/forgot-page',
+    element: <ForgotPasswordPage />
+  }
 ]
 
 const Router = () => {
