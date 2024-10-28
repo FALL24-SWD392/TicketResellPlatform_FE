@@ -67,11 +67,11 @@ const adminRoutes: RouteType[] = [
 
 const unAuthenticatedRoute: RouteType[] = [
   {
-    path: '/login-page',
+    path: '/login',
     element: <LoginPage />
   },
   {
-    path: '/register-page',
+    path: '/register',
     element: <Register />
   },
   {
