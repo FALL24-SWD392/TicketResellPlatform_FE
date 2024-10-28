@@ -34,7 +34,7 @@ const NavBar = ({ ...props }: Props) => {
   const { setIsAuthenticated, isAuthenticated, setProfile, profile } = useContext(AppContext)
   const navigate = useNavigate()
   const logoutMutation = useMutation({
-    mutationFn: (refresh_token: string) => authAPI.logout(refresh_token),
+    mutationFn: (token: string) => authAPI.logout({token}),
     onSuccess: (data) => {
       setIsAuthenticated(false)
       setProfile(null)

@@ -14,7 +14,7 @@ const authAPI = {
       }>
     >('api/auth/login', body),
   register: (body: Omit<RegisterSchema, 'confirmPassword'>) => http.post<ListBaseResponse<{}>>('api/auth/register', body),
-  logout: (body: string) => http.post<ListBaseResponse<{message: string}>>('api/auth/logout', body),
+  logout: (body: {token: string}) => http.post<ListBaseResponse<{message: string}>>('api/auth/logout', body),
   
   changePassword: (body: FormDataChange) => http.put<ListBaseResponse<{}>>("api/auth/password/change", body),
   ResetPassword: (body: FormDataChange) => http.put<ListBaseResponse<{}>>("/api/auth/password/reset", body),
