@@ -1,28 +1,30 @@
 import { Button, Input, Link } from '@nextui-org/react'
 import React from 'react'
 import { UseFormRegister } from 'react-hook-form'
+import { NavLink } from 'react-router-dom'
 import path from 'src/constants/path'
 import banner from 'src/assets/images/banner.svg'
 import facebookIcon from 'src/assets/images/facebook.svg'
 import googleIcon from 'src/assets/images/google.svg'
+import { FaDivide } from 'react-icons/fa'
 
 const SignInForm = ({
   onSubmit,
   register,
+  loginError
 }: {
   onSubmit?: (event: React.FormEvent<HTMLFormElement>) => void
   register: UseFormRegister<any>
   loginError?: string
 }) => {
   return (
-    <div className='fixed inset-0 flex items-center justify-center bg-cover bg-center' style={{ backgroundImage: `url(${banner})`}}>
+    <div className='fixed inset-0 flex items-center justify-center bg-cover bg-center' style={{ backgroundImage: `url(${banner})`, width: '2000px', height: '700px'}}>
       <div
         className='p-10 shadow-lg flex-col items-center justify-center max-w-md w-full'
         style={{
           backgroundColor: 'rgba(255, 255, 255, 0.15)',
           borderRadius: '20px',
-          backdropFilter: 'blur(15px)',
-
+          backdropFilter: 'blur(15px)'
         }}
       >
         <div className='flex flex-col items-center mt-5'>
@@ -46,7 +48,7 @@ const SignInForm = ({
               type='email'
               className='max-w-xs'
               placeholder='Email của bạn'
-              {...register('email', { required: true })}
+              {...register('username', { required: true })}
               style={{
                 backgroundColor: 'rgba(255, 255, 255, 0.15)',
                 borderRadius: '10px',
@@ -82,9 +84,9 @@ const SignInForm = ({
                 <input type='checkbox' className='mr-2' />
                 Ghi nhớ mật khẩu
               </label>
-              <Link href={path.forgotPassword} className='font-bold' style={{ color: '#FFFFFF' }}>
-            Quên mật khẩu
-          </Link>
+              <NavLink to={path.forgotPassword} className='text-sm' style={{ color: '#FFFFFF' }}>
+                Quên mật khẩu?
+              </NavLink>
             </div>
             <div className='flex items-center w-full my-4'>
               <hr className='flex-1' style={{ borderColor: '#FFFFFF', borderWidth: '1px' }} />
@@ -95,12 +97,12 @@ const SignInForm = ({
             </div>
 
             <div className='flex gap-5'>
-              <button className='w-12 h-12 rounded-full border-2 border-white flex items-center justify-center'>
+              <div className='w-12 h-12 rounded-full border-2 border-white flex items-center justify-center'>
                 <img src={facebookIcon} alt='Facebook' className='w-8 h-8' />
-              </button>
-              <button className='w-12 h-12 rounded-full border-2 border-white flex items-center justify-center'>
+              </div>
+              <div className='w-12 h-12 rounded-full border-2 border-white flex items-center justify-center'>
                 <img src={googleIcon} alt='Google' className='w-8 h-8' />
-              </button>
+              </div>
             </div>
           </div>
         </form>
