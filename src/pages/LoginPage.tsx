@@ -19,9 +19,7 @@ const LoginPage = () => {
   const {
     register,
     handleSubmit,
-    // setError,
-    trigger,
-    formState: { errors }
+    formState: { }
   } = useForm<FormData>({
     resolver: yupResolver(LoginSchemaYup)
   })

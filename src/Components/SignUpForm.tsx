@@ -5,7 +5,7 @@ import { UseFormRegister } from 'react-hook-form'
 const SignUpForm = ({
   onSubmit,
   register,
-  signUpError 
+
 }: {
   onSubmit?: (event: React.FormEvent<HTMLFormElement>) => void
   register: UseFormRegister<any>

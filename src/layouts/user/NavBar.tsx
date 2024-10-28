@@ -1,5 +1,5 @@
 // import React from 'react'
-import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, NavbarMenuToggle, NavbarMenu, NavbarMenuItem, Button } from '@nextui-org/react'
+import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, NavbarMenuToggle, NavbarMenu, NavbarMenuItem } from '@nextui-org/react'
 import { AvatarButton, Logo } from 'src/Components'
 import { CiMenuBurger } from 'react-icons/ci'
 import { useNavigate } from 'react-router-dom'

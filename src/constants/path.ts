@@ -1,9 +1,9 @@
 const path = {
   home: '/',
   profile: '/profile/*',
-  login: '/login-page',
-  register: '/register-page',
-  forgotPassword: '/forgot-password',
+  login: '/login',
+  register: '/register',
+  forgotPassword: 'forgot-page',
   logout: '/logout',
   eventDetail: '/events/:id',
   loginOauthGoogle: '/login/oauth',

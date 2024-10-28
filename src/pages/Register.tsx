@@ -2,13 +2,13 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { Button, Input } from '@nextui-org/react'
 import { useMutation } from '@tanstack/react-query'
 import { omit } from 'lodash'
-import React, { useContext, useState } from 'react'
+import  { useContext } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { ErrorResponse } from 'src/@types/utils.type'
 import authAPI from 'src/apis/auth.api'
-import { SignUpForm } from 'src/Components'
+
 import { AppContext } from 'src/context/app.context'
 import { RegisterSchema, RegisterSchemaYup } from 'src/utils/rules'
 import { isAxiosUnprocessableEntityError } from 'src/utils/utils'
@@ -16,12 +16,12 @@ import { isAxiosUnprocessableEntityError } from 'src/utils/utils'
 export type FormData = RegisterSchema
 const Register = () => {
   const navigate = useNavigate()
-  const { isAuthenticated } = useContext(AppContext)
+  const {} = useContext(AppContext)
   const {
     register,
     handleSubmit,
     setError,
-    formState: { errors }
+    formState: {}
   } = useForm<FormData>({
     resolver: yupResolver(RegisterSchemaYup)
   })
