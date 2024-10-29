@@ -1,13 +1,17 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import { Button, Input } from '@nextui-org/react'
+import { Button, Input, Link } from '@nextui-org/react'
 import { useMutation } from '@tanstack/react-query'
 import { omit } from 'lodash'
-import  { useContext } from 'react'
+import { useContext } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { ErrorResponse } from 'src/@types/utils.type'
+import path from 'src/constants/path'
 import authAPI from 'src/apis/auth.api'
+import banner from 'src/assets/images/banner.svg'
+import facebookIcon from 'src/assets/images/facebook.svg'
+import googleIcon from 'src/assets/images/google.svg'
 
 import { AppContext } from 'src/context/app.context'
 import { RegisterSchema, RegisterSchemaYup } from 'src/utils/rules'
@@ -44,7 +48,7 @@ const Register = () => {
             Object.keys(formError).forEach((key) => {
               setError(key as keyof Omit<FormData, 'confirmPassword'>, {
                 message: formError[key as keyof Omit<FormData, 'confirmPassword'>],
-                type: 'Server'  
+                type: 'Server'
               })
             })
           }
@@ -53,21 +57,124 @@ const Register = () => {
     })
   })
   return (
-    <div className='mt-[100px] container-xs flex justify-center'>
-      <div className='p-2 flex-col items-start'>
-        <div className=' flex flex-col items-start mt-2'>
-          <h5 className='!font-bold'>Welcome to Ticket Resell</h5>
-          <h6 className='mt-5'>Please sign in or sign up below</h6>
+    <div
+      className='fixed inset-0 flex items-center justify-center bg-cover bg-center'
+      style={{
+        backgroundImage: `url(${banner})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center'
+      }}
+    >
+      <div
+        className='p-10 shadow-lg flex flex-col items-center justify-center max-w-lg w-full'
+        style={{
+          backgroundColor: 'rgba(255, 255, 255, 0.15)',
+          borderRadius: '20px',
+          backdropFilter: 'blur(5px)'
+        }}
+      >
+        <div className='flex flex-col items-center mt-5'>
+          <h1 className='text-4xl font-bold mb-5' style={{ color: '#FFFFFF' }}>
+            ĐĂNG KÝ
+          </h1>
+          <div className='flex gap-5'>
+            <span className='text-lg font-medium' style={{ color: '#FFFFFF' }}>
+              Số điện thoại
+            </span>
+            <span className='text-lg font-bold' style={{ color: '#FFFFFF' }}>
+              Email
+            </span>
+          </div>
         </div>
-        <form noValidate onSubmit={onSubmit} className='mt-5 flex items-start flex-col'>
-          <div className='w-full flex flex-col gap-5'>
-            <Input isRequired type='text' label='username' className='max-w-xs' {...register('username', { required: true })} />
-            <Input isRequired type='email' label='email' className='max-w-xs' {...register('email', { required: true })} />
-            <Input isRequired type='password' label='Password' className='max-w-xs' {...register('password', { required: true })} />
-            <Input isRequired type='password' label='Confirm Password' className='max-w-xs' {...register('confirmPassword', { required: true })} />
-            <Button type='submit'>SignUp</Button>
+
+        <form noValidate onSubmit={onSubmit} className='mt-5'>
+          <div className='w-full flex flex-col items-center gap-0'>
+            <Input
+              isRequired
+              type='text'
+              placeholder='User Name'
+              className='w-80 text-lg py-3 px-4 text-white'
+              {...register('username', { required: true })}
+              style={{
+                backgroundColor: 'rgba(255, 255, 255, 0.15)',
+                borderRadius: '10px',
+                backdropFilter: 'blur(15px)'
+              }}
+            />
+            <Input
+              isRequired
+              type='email'
+              className='w-80 text-lg py-3 px-4 text-white'
+              placeholder='Email của bạn'
+              {...register('email', { required: true })}
+              style={{
+                backgroundColor: 'rgba(255, 255, 255, 0.15)',
+                borderRadius: '10px',
+                backdropFilter: 'blur(15px)'
+              }}
+            />
+            <Input
+              isRequired
+              type='password'
+              className='w-80 text-lg py-3 px-4 text-white'
+              placeholder='Mật khẩu'
+              {...register('password', { required: true })}
+              style={{
+                backgroundColor: 'rgba(255, 255, 255, 0.15)',
+                borderRadius: '10px',
+                backdropFilter: 'blur(15px)'
+              }}
+            />
+            <Input
+              isRequired
+              type='password'
+              placeholder='Xác nhận mật khẩu'
+              className='w-80 text-lg py-3 px-4 text-white'
+              {...register('confirmPassword', { required: true })}
+              style={{
+                backgroundColor: 'rgba(255, 255, 255, 0.15)',
+                borderRadius: '10px',
+                backdropFilter: 'blur(15px)'
+              }}
+            />
+
+            <Button
+              type='submit'
+              style={{
+                backgroundColor: '#000000',
+                color: '#FFFFFF',
+                borderRadius: '9999px'
+              }}
+              className='px-10 py-3 font-semibold mt-5'
+            >
+              ĐĂNG KÝ
+            </Button>
+
+            <div className='flex items-center w-full my-4'>
+              <hr className='flex-1' style={{ borderColor: '#FFFFFF', borderWidth: '1px' }} />
+              <span className='mx-3' style={{ color: '#FFFFFF' }}>
+                HOẶC
+              </span>
+              <hr className='flex-1' style={{ borderColor: '#FFFFFF', borderWidth: '1px' }} />
+            </div>
+
+            <div className='flex gap-5'>
+              <div className='w-12 h-12 rounded-full border-2 border-white flex items-center justify-center'>
+                <img src={facebookIcon} alt='Facebook' className='w-8 h-8' />
+              </div>
+              <div className='w-12 h-12 rounded-full border-2 border-white flex items-center justify-center'>
+                <img src={googleIcon} alt='Google' className='w-8 h-8' />
+              </div>
+            </div>
           </div>
         </form>
+
+        <div className='text-white mt-8' style={{ color: '#FFFFFF' }}>
+          Bạn đã có tài khoản?{' '}
+          <Link href={path.login} className='font-bold' style={{ color: '#FFFFFF' }}>
+            Đăng nhập
+          </Link>
+        </div>
       </div>
     </div>
   )
