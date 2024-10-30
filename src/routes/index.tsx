@@ -3,7 +3,7 @@ import { Navigate, Route, Routes } from 'react-router-dom'
 import { useContext } from 'react'
 import { AppContext } from 'src/context/app.context'
 import AdminPage from 'src/pages/admin/AdminPage'
-import { ChangePassword, Home, LoginPage, ProfilePage, Register, ResetPassword, StaffPage, TicketApproval, Userlist } from 'src/pages'
+import { ChangePassword, Home, LoginPage, ProfilePage, Register, ResetPassword, StaffPage, TicketApproval, TicketDetailPage, Userlist } from 'src/pages'
 // import path from "path";
 import Report from 'src/pages/staff/Report'
 import ForgotPasswordPage from 'src/pages/ForgotPasswordPage'
@@ -46,6 +46,10 @@ const publicRoutes: RouteType[] = [
     path: '/reset-password',
     element: <ResetPassword />
   },
+  {
+    path: '/ticket-detail',
+    element: <TicketDetailPage />
+  }
 ]
 
 const authenicatedRoutes: RouteType[] = [
