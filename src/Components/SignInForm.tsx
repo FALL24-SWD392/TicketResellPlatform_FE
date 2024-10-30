@@ -18,13 +18,19 @@ const SignInForm = ({
   loginError?: string
 }) => {
   return (
-    <div className='fixed inset-0 flex items-center justify-center bg-cover bg-center' style={{ backgroundImage: `url(${banner})`, width: '2000px', height: '700px'}}>
+    <div className='fixed inset-0 flex items-center justify-center bg-cover bg-center'
+    style={{
+      backgroundImage: `url(${banner})`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center'
+    }}
+  >
       <div
         className='p-10 shadow-lg flex-col items-center justify-center max-w-md w-full'
         style={{
           backgroundColor: 'rgba(255, 255, 255, 0.15)',
           borderRadius: '20px',
-          backdropFilter: 'blur(15px)'
+          backdropFilter: 'blur(5px)'
         }}
       >
         <div className='flex flex-col items-center mt-5'>

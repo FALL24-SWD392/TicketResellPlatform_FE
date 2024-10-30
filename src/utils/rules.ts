@@ -75,7 +75,7 @@ export const RegisterSchemaYup = yup.object().shape({
   confirmPassword: yup
     .string()
     .required('Confirm password is required!')
-    .oneOf([yup.ref('password')], 'Confirm password must be same password!')  
+    .oneOf([yup.ref('password')], 'Confirm password must be same password!'),
 })
 export type RegisterSchema = yup.InferType<typeof RegisterSchemaYup>
 
