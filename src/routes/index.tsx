@@ -47,7 +47,7 @@ const publicRoutes: RouteType[] = [
     element: <ResetPassword />
   },
   {
-    path: '/ticket-detail',
+    path: `/ticket-detail/:id`,
     element: <TicketDetailPage />
   }
 ]
