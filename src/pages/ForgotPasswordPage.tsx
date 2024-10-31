@@ -34,7 +34,7 @@ const ForgotPasswordPage = () => {
     forgotPasswordMutation.mutate(data, {
       onSuccess: (response) => {
         toast.success('Password reset link sent successfully!')
-        // navigate('/login')
+        //navigate('/forgot-page')
       },
       onError: (error) => {
         if (isAxiosUnprocessableEntityError<ErrorResponse<FormDataForgot>>(error)) {

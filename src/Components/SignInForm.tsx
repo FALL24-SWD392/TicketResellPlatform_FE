@@ -90,9 +90,9 @@ const SignInForm = ({
                 <input type='checkbox' className='mr-2' />
                 Ghi nhớ mật khẩu
               </label>
-              <NavLink to={path.forgotPassword} className='text-sm' style={{ color: '#FFFFFF' }}>
+              <Link href={path.forgotPassword} className='text-sm' style={{ color: '#FFFFFF' }}>
                 Quên mật khẩu?
-              </NavLink>
+              </Link>
             </div>
             <div className='flex items-center w-full my-4'>
               <hr className='flex-1' style={{ borderColor: '#FFFFFF', borderWidth: '1px' }} />
