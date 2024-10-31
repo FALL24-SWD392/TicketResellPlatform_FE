@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { Ticket } from 'src/@types/ticket.type'
 
 interface TicketCardProps {
@@ -7,6 +8,7 @@ interface TicketCardProps {
 const TicketCard: React.FC<TicketCardProps> = ({ ticket }) => {
   console.log(ticket)
   return (
+    <Link to={`/ticket-detail/${ticket.id}`} key={ticket.id}>
     <div className='bg-white-normal p-3 rounded-md w-full flex justify-between card-shadow' onClick={() => {}}>
       <img className='w-1/2 rounded-md' src={ticket.image || 'https://placehold.co/220'} alt={ticket.title} />
       <div className='w-1/2 pl-2 pr-1 flex flex-col justify-between'>
@@ -22,6 +24,7 @@ const TicketCard: React.FC<TicketCardProps> = ({ ticket }) => {
         </div>
       </div>
     </div>
+    </Link>
   )
 }
 

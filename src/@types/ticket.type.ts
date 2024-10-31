@@ -17,6 +17,7 @@ export interface Ticket {
 }
 
 export type TicketList = Pick<Ticket, "id" | "sellerId" | "title"|"expDate"|"type"|"description"|"createdAt" | "image" | "quantity" | "status" | "unitPrice"> 
+export type CreateTicket = Pick<Ticket, "title" | "expDate" | "type" | "unitPrice" | "quantity" | "description" | "image" | "status">
 
 export interface TicketListConfig {
   size?: number | string
