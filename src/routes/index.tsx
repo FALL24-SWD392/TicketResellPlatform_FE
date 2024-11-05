@@ -7,6 +7,7 @@ import { ChangePassword, Home, LoginPage, ProfilePage, Register, ResetPassword, 
 // import path from "path";
 import Report from 'src/pages/staff/Report'
 import ForgotPasswordPage from 'src/pages/ForgotPasswordPage'
+import BlogPage from 'src/pages/BlogPage'
 
 type RouteType = {
   path: string
@@ -50,6 +51,10 @@ const publicRoutes: RouteType[] = [
     path: `/ticket-detail/:id`,
     element: <TicketDetailPage />
   }
+  {
+    path: '/blog-page',
+    element: <BlogPage />
+  },
 ]
 
 const authenicatedRoutes: RouteType[] = [

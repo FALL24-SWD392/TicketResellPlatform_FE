@@ -94,7 +94,13 @@ const NavBar = ({ ...props }: Props) => {
               Overview
             </Link>
           </NavbarItem>
+          <NavbarItem>
+            <Link className='text-white-light' href={path.blog}>
+              Blog
+            </Link>
+          </NavbarItem>
         </NavbarContent>
+        
 
         <NavbarContent justify='end'>
           {!isAuthenticated ? (
