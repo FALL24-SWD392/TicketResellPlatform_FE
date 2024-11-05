@@ -90,7 +90,7 @@ class Http {
 
   private handleRefreshToken() {
     return this.instance
-      .post<SuccessResponse<{ access_token: string; refresh_token: string }>>('/users/refresh-token', {
+      .post<SuccessResponse<{ access_token: string; refresh_token: string }>>('/auth/access-token', {
         refresh_token: this.refreshToken
       })
       .then((res) => {

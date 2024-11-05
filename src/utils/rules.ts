@@ -95,3 +95,15 @@ export const ForgotSchemaYup = yup.object().shape({
   email: yup.string().required('Email is required!').email('Invalid email!'),
 })
 export type ForgotSchema = yup.InferType<typeof ForgotSchemaYup>
+export const CreateStaffSchemaYup = yup.object().shape({
+  username: yup.string().required("Username is required!!!"),
+  email: yup.string().required('Email is required!').email('Invalid email!'),
+  password: yup.string().required('Password is required!').min(8, 'Password must be at least 8 characters'),
+  role: yup.string(),
+  status: yup.string(),
+  typeRegister: yup.string(),
+  avatar: yup.string(),
+  rating: yup.string(),
+  reputation: yup.string(),
+})
+export type CreateStaffSchema = yup.InferType<typeof CreateStaffSchemaYup>

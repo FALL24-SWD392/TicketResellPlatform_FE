@@ -15,3 +15,18 @@
     @apply w-full mx-auto max-w-[1024px];
   }
 }
+.status-verified {
+  background-color: #d1fae5 !important; /* bg-green-100 */
+  color: #10b981 !important;           /* text-green-500 */
+  font-weight: 600 !important;         /* font-semibold */
+  border-radius: 9999px !important;    /* rounded-full */
+  padding: 0.25rem 0.75rem !important; /* px-3 py-1 */
+}
+
+.status-removed {
+  background-color: #fee2e2 !important; /* bg-red-100 */
+  color: #ef4444 !important;           /* text-red-500 */
+  font-weight: 600 !important;         /* font-semibold */
+  border-radius: 9999px !important;    /* rounded-full */
+  padding: 0.25rem 0.75rem !important; /* px-3 py-1 */
+}

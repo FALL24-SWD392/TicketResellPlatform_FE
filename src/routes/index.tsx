@@ -7,6 +7,7 @@ import { ChangePassword, Home, LoginPage, ProfilePage, Register, ResetPassword, 
 // import path from "path";
 import Report from 'src/pages/staff/Report'
 import ForgotPasswordPage from 'src/pages/ForgotPasswordPage'
+import ManagerUsers from 'src/pages/admin/ManagerUser'
 
 type RouteType = {
   path: string
@@ -65,7 +66,11 @@ const adminRoutes: RouteType[] = [
   {
     path: '/admin',
     element: <AdminPage /> // AdminDashboard
-  }
+  },
+  {
+    path: '/manager-users',
+    element: <ManagerUsers />
+  },
 
 ]
 
