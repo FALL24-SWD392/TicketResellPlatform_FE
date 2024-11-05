@@ -9,7 +9,7 @@ const ticketAPI = {
       `api/tickets?category=ALL&page=${page}&size=${size}&name`
     ),
   getTicketById: (id: string) => http.get<ItemBaseResponse<Ticket>>(`api/tickets/${id}`),
-  createTicket: (data: CreateTicket) => http.post<ItemBaseResponse<Ticket>>(`api/tickets`, data)
+  createTicket: (body: CreateTicket) => http.post<ItemBaseResponse<Ticket>>(`api/tickets`, body)
 }
 
 export default ticketAPI

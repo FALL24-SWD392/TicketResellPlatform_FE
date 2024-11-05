@@ -60,7 +60,7 @@ class Http {
 
         if (isUnAuthorized<ErrorResponse<{}>>(error)) {
           const config = error.response?.config || { headers: {}, url: '' }
-          if (isAxiosErrorJWTExpired(error) && config.url != '/users/refresh-token') {
+          if (isAxiosErrorJWTExpired(error) && config.url != '/auth/access-token') {
             this.refreshTokenRequest = this.refreshTokenRequest
               ? this.refreshTokenRequest
               : this.handleRefreshToken().finally(() => {
@@ -90,7 +90,7 @@ class Http {
 
   private handleRefreshToken() {
     return this.instance
-      .post<SuccessResponse<{ access_token: string; refresh_token: string }>>('/users/refresh-token', {
+      .post<SuccessResponse<{ access_token: string; refresh_token: string }>>('/auth/access-token', {
         refresh_token: this.refreshToken
       })
       .then((res) => {

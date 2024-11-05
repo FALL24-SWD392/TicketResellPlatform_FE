@@ -19,5 +19,6 @@ const authAPI = {
   changePassword: (body: FormDataChange) => http.put<ListBaseResponse<{}>>("api/auth/password/change", body),
   ResetPassword: (body: FormDataChange) => http.put<ListBaseResponse<{}>>("/api/auth/password/reset", body),
   ForgotPassword: (body: FormDataForgot) =>http.put<ListBaseResponse<{}>>('/api/auth/password/forgot', body),
+  DeleteUser: (body: {username: string}) => http.delete<ListBaseResponse<{}>>(`api/users/`, { data: body }),
   }
 export default authAPI

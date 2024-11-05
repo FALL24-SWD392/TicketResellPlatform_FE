@@ -3,7 +3,7 @@ import { Navigate, Route, Routes } from 'react-router-dom'
 import { useContext } from 'react'
 import { AppContext } from 'src/context/app.context'
 import AdminPage from 'src/pages/admin/AdminPage'
-import { ChangePassword, Home, LoginPage, ProfilePage, Register, ResetPassword, StaffPage, TicketApproval, TicketDetailPage, Userlist } from 'src/pages'
+import { ChangePassword, CreateTicketPage, Home, LoginPage, ProfilePage, Register, ResetPassword, StaffPage, TicketApproval, TicketDetailPage, Userlist } from 'src/pages'
 // import path from "path";
 import Report from 'src/pages/staff/Report'
 import ForgotPasswordPage from 'src/pages/ForgotPasswordPage'
@@ -57,6 +57,10 @@ const authenicatedRoutes: RouteType[] = [
     path: '/me',
     element: <></> //Profile
   },
+  {
+    path: '/create-ticket',
+    element: <CreateTicketPage/>
+  }
   
   
 ]
@@ -87,10 +91,11 @@ const unAuthenticatedRoute: RouteType[] = [
 const Router = () => {
   const { isAuthenticated } = useContext(AppContext)
   const user = JSON.parse(localStorage.getItem('profile') || '{}')
+  console.log(user)
   const router = [
     ...publicRoutes,
     ...(isAuthenticated ? authenicatedRoutes : unAuthenticatedRoute),
-    ...(['admin', 'staff'].includes(user.sub) ? adminRoutes : []),
+    ...(['ADMIN', 'STAFF'].includes(user.scope) ? adminRoutes : []),
 
     {
       path: '*',

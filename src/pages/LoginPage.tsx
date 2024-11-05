@@ -37,14 +37,21 @@ const LoginPage = () => {
         console.log(data)
         setIsAuthenticated(true)
         if (getProfileFormLS()?.sub === 'admin') {
+          toast.success(data.data.message)
+
           navigate('/admin')
+        }else{
+          toast.success(data.data.message)
+
         }
-        toast.success('Login success')
+        toast.success(data.data.message)
       },
       onError: (error) => {
         if (isAxiosUnprocessableEntityError<ErrorResponse<FormData>>(error)) {
           const errors = error.response?.data.errors
           setLoginError(errors?.username as string)
+          toast.success(error.message)
+
         }
       }
     })
