@@ -6,12 +6,16 @@ export interface User {
   email?: string,
   avatar?: string,
   rating?: number,
+  username?: string,
+  role?: string,
+  status: "VERIFIED" | "REMOVED";
 }
 
 export type UserList = Pick<
   User,
-  'sub' | 'email' | 'avatar' | 'rating'
+  'sub' | 'email' | 'avatar' | 'rating' |'username' | "role" | "rating" | "status"
 >
+
 
 export type ProfileUpdate = {
   user_name: string

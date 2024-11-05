@@ -3,8 +3,9 @@ import http from '../utils/http'
 import { FormData } from 'src/pages/LoginPage'
 import {FormDataChange} from "src/pages/ChangePassword"
 import { ListBaseResponse } from 'src/@types/response'
-import { RegisterSchema } from 'src/utils/rules';
+import { CreateStaffSchema, RegisterSchema } from 'src/utils/rules';
 import { FormDataForgot } from 'src/pages/ForgotPasswordPage'
+import { UserList } from 'src/@types/users.type'
 const authAPI = {
   login: (body: FormData) =>
     http.post<
@@ -19,6 +20,10 @@ const authAPI = {
   changePassword: (body: FormDataChange) => http.put<ListBaseResponse<{}>>("api/auth/password/change", body),
   ResetPassword: (body: FormDataChange) => http.put<ListBaseResponse<{}>>("/api/auth/password/reset", body),
   ForgotPassword: (body: FormDataForgot) =>http.put<ListBaseResponse<{}>>('/api/auth/password/forgot', body),
-  DeleteUser: (body: {username: string}) => http.delete<ListBaseResponse<{}>>(`api/users/`, { data: body }),
+
+  GetAllUser: () => http.get<ListBaseResponse<UserList>>("api/users"),
+  DeleteUser: (body: {username?: string}) => http.delete<ListBaseResponse<{}>>(`api/users`, { data: body }),
+  GetUserByName: (username: string) => http.get<ListBaseResponse<UserList>>(`api/users?search=${username}`),
+  CreateUser: (body: CreateStaffSchema) => http.post<ListBaseResponse<{}>>(`api/users`, body),
   }
 export default authAPI
