@@ -1,3 +1,5 @@
+import { Card, CardHeader, CardBody, Image } from '@nextui-org/react'
+import dayjs from 'dayjs'
 import { Link } from 'react-router-dom'
 import { Ticket } from 'src/@types/ticket.type'
 
@@ -6,24 +8,31 @@ interface TicketCardProps {
 }
 
 const TicketCard: React.FC<TicketCardProps> = ({ ticket }) => {
-  console.log(ticket)
+  const date = dayjs(ticket.expDate).format('DD MMM YYYY')
+  const time = dayjs(ticket.expDate).format('h:mm A')
+  console.log(date)
+  console.log(time)
+  
   return (
     <Link to={`/ticket-detail/${ticket.id}`} key={ticket.id}>
-    <div className='bg-white-normal p-3 rounded-md w-full flex justify-between card-shadow' onClick={() => {}}>
-      <img className='w-1/2 rounded-md' src={ticket.image || 'https://placehold.co/220'} alt={ticket.title} />
-      <div className='w-1/2 pl-2 pr-1 flex flex-col justify-between'>
-        <div className='w-full'>
-          <h1 className='font-bold w-full text-justify text-2xl mb-1'>{ticket.title}</h1>
-          <p className='text-lg w-full leading-none  mb-2'>{ticket.description}</p>
-          <p className='text-md w-full leading-none text-justify'> Valid til: {ticket.expDate}</p>
-        </div>
-        <div className="w-full flex justify-between items-center">
-            <p className='text-md'>Remain: {ticket.quantity}</p>
-            <button className='font-medium text-blue-dark text-md rounded-xl cursor-pointer bg-yellow-normal px-2 py-1 transition-transform-colors-opacity
-            backdrop-opacity-10 hover:bg-yellow-normalHover'>Buy now</button>
-        </div>
-      </div>
-    </div>
+      <Card className='w-[306px] h-[297px]' shadow='md' >
+        <CardHeader className='flex-col items-start justify-center'>
+          <Image
+            alt='Card background'
+            className='object-cover rounded-xl mx-auto '
+            // src= {ticket.image} 
+            src='https://nextui.org/images/hero-card.jpeg'
+            width={306}
+            height={200}
+            
+          />
+        </CardHeader>
+        <CardBody className='overflow-visible py-2'>
+          <p className='text-tiny uppercase font-bold'>{ticket.title}</p>
+          <small className='text-green-darkHover '>{ticket.unit_price} VND</small>
+          <small className=''>{date} - {time}</small>
+        </CardBody>
+      </Card>
     </Link>
   )
 }

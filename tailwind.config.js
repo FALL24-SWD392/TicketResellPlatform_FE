@@ -81,6 +81,7 @@ module.exports = {
         darker: '#090c0e'
       }
     },
+  
     fontFamily: {
       sans: ['Archivo SemiExpanded', 'sans-serif'],
       serif: ['Archivo SemiExpanded', 'serif']

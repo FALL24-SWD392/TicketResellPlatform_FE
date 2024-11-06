@@ -96,7 +96,7 @@ const NavBar = ({ ...props }: Props) => {
             </Link>
           </NavbarItem>
           <NavbarItem>
-            <Link className='text-white-light' href={path.blog}>
+            <Link className='text-black' href={path.blog}>
               Blog
             </Link>
           </NavbarItem>

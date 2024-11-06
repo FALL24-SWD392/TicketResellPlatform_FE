@@ -51,7 +51,7 @@ const publicRoutes: RouteType[] = [
   {
     path: `/ticket-detail/:id`,
     element: <TicketDetailPage />
-  }
+  },
   {
     path: '/blog-page',
     element: <BlogPage />
