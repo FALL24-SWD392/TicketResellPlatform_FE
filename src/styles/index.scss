@@ -30,3 +30,10 @@
   border-radius: 9999px !important;    /* rounded-full */
   padding: 0.25rem 0.75rem !important; /* px-3 py-1 */
 }
+.status-unverified {
+  background-color: #c0b9b9 !important; /* bg-red-100 */
+  color: #666060 !important;           /* text-red-500 */
+  font-weight: 600 !important;         /* font-semibold */
+  border-radius: 9999px !important;    /* rounded-full */
+  padding: 0.25rem 0.75rem !important; /* px-3 py-1 */
+}

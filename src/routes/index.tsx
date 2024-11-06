@@ -9,6 +9,7 @@ import Report from 'src/pages/staff/Report'
 import ForgotPasswordPage from 'src/pages/ForgotPasswordPage'
 import BlogPage from 'src/pages/BlogPage'
 import ManagerUsers from 'src/pages/admin/ManagerUser'
+import Subscriptions from 'src/pages/admin/Subscriptions'
 
 type RouteType = {
   path: string
@@ -51,7 +52,7 @@ const publicRoutes: RouteType[] = [
   {
     path: `/ticket-detail/:id`,
     element: <TicketDetailPage />
-  }
+  },
   {
     path: '/blog-page',
     element: <BlogPage />
@@ -79,6 +80,10 @@ const adminRoutes: RouteType[] = [
   {
     path: '/manager-users',
     element: <ManagerUsers />
+  },
+  {
+    path: '/subscriptions',
+    element: <Subscriptions />
   },
 
 ]

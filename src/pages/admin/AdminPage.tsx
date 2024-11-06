@@ -99,7 +99,7 @@ const AdminPage: React.FC = () => {
             <div className='flex flex-col items-center'>
               <div className='relative w-full h-[80vh] max-w-3xl border-4 border-blue-500'>
                 <img
-                  src='https://scontent.fhan2-3.fna.fbcdn.net/v/t39.30808-6/461658406_1477367663654683_3938138968692131686_n.jpg?stp=cp6_dst-jpg_p526x296&_nc_cat=108&ccb=1-7&_nc_sid=aa7b47&_nc_eui2=AeEZ1bozjw3xC1pJDiANUfS_-6z1YBjLloj7rPVgGMuWiMDvEXRFCgmyiIxQlwWxxdRFXnRLqYf4NMqCq-r_YKkC&_nc_ohc=Df2B6QcPUb8Q7kNvgGU2rf5&_nc_ht=scontent.fhan2-3.fna&_nc_gid=Akhhq3NFq1F7dKqRol8D7PB&oh=00_AYAJQ6WLCqyIe928tijon7m8ons7AcpEVujnjcfKQ0-1mA&oe=6704C286'
+                  src='https://i.pinimg.com/736x/e5/80/4e/e5804eb0e0694db01692f3e19b4aa78b.jpg'
                   alt='User Avatar'
                   className='w-full h-full object-cover'
                 />
