@@ -10,7 +10,7 @@ const authAPI = {
   login: (body: FormData) =>
     http.post<
       ListBaseResponse<{
-        data: { access_token: string; refresh_token: string }
+        data: { accessToken: string; refreshToken: string }
         message: string
       }>
     >('api/auth/login', body),
