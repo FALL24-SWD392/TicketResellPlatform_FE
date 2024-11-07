@@ -1,5 +1,5 @@
 
-import { CreateTicket, Ticket } from './../@types/ticket.type'
+import { CreateTicket, Ticket, TicketList } from './../@types/ticket.type'
 import http from 'src/utils/http'
 import { ItemBaseResponse, ListBaseResponse } from 'src/@types/response'
 
@@ -8,8 +8,9 @@ const ticketAPI = {
     http.get<ListBaseResponse<Ticket>>(
       `api/tickets?category=ALL&page=${page}&size=${size}&name`
     ),
+  getAllTicketAdmin: () => http.get<ListBaseResponse<Ticket>>("api/tickets/admin"),
   getTicketById: (id: string) => http.get<ItemBaseResponse<Ticket>>(`api/tickets/${id}`),
-  createTicket: (body: CreateTicket) => http.post<ItemBaseResponse<Ticket>>(`api/tickets`, body)
+  createTicket: (body: CreateTicket) => http.post<ItemBaseResponse<TicketList>>(`api/tickets`, body)
 }
 
 export default ticketAPI
