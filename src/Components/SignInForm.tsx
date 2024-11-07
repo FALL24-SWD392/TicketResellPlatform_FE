@@ -1,12 +1,11 @@
 import { Button, Input, Link } from '@nextui-org/react'
 import React from 'react'
 import { UseFormRegister } from 'react-hook-form'
-import { NavLink } from 'react-router-dom'
 import path from 'src/constants/path'
 import banner from 'src/assets/images/banner.svg'
 import facebookIcon from 'src/assets/images/facebook.svg'
 import googleIcon from 'src/assets/images/google.svg'
-import { FaDivide } from 'react-icons/fa'
+import IconButton from './IconButton'
 
 const SignInForm = ({
   onSubmit,
@@ -18,13 +17,14 @@ const SignInForm = ({
   loginError?: string
 }) => {
   return (
-    <div className='fixed inset-0 flex items-center justify-center bg-cover bg-center'
-    style={{
-      backgroundImage: `url(${banner})`,
-      backgroundSize: 'cover',
-      backgroundPosition: 'center'
-    }}
-  >
+    <div
+      className='fixed inset-0 flex items-center justify-center bg-cover bg-center'
+      style={{
+        backgroundImage: `url(${banner})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center'
+      }}
+    >
       <div
         className='p-10 shadow-lg flex-col items-center justify-center max-w-md w-full'
         style={{
@@ -37,14 +37,6 @@ const SignInForm = ({
           <h1 className='text-4xl font-bold mb-5' style={{ color: '#FFFFFF' }}>
             ĐĂNG NHẬP
           </h1>
-          <div className='flex gap-5'>
-            <span className='text-lg font-medium' style={{ color: '#FFFFFF' }}>
-              Số điện thoại
-            </span>
-            <span className='text-lg font-bold' style={{ color: '#FFFFFF' }}>
-              Email
-            </span>
-          </div>
           <hr className='border-white flex-1 my-2' />
         </div>
         <form noValidate onSubmit={onSubmit} className='mt-5'>
@@ -103,12 +95,8 @@ const SignInForm = ({
             </div>
 
             <div className='flex gap-5'>
-              <div className='w-12 h-12 rounded-full border-2 border-white flex items-center justify-center'>
-                <img src={facebookIcon} alt='Facebook' className='w-8 h-8' />
-              </div>
-              <div className='w-12 h-12 rounded-full border-2 border-white flex items-center justify-center'>
-                <img src={googleIcon} alt='Google' className='w-8 h-8' />
-              </div>
+              <IconButton width={10} height={10} src={facebookIcon} alt='Facebook'></IconButton>
+              <IconButton width={10} height={10} src={googleIcon} alt='Google'></IconButton>
             </div>
           </div>
         </form>

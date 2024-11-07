@@ -16,6 +16,7 @@ import googleIcon from 'src/assets/images/google.svg'
 import { AppContext } from 'src/context/app.context'
 import { RegisterSchema, RegisterSchemaYup } from 'src/utils/rules'
 import { isAxiosUnprocessableEntityError } from 'src/utils/utils'
+import IconButton from 'src/Components/IconButton'
 
 export type FormData = RegisterSchema
 const Register = () => {
@@ -77,14 +78,6 @@ const Register = () => {
           <h1 className='text-4xl font-bold mb-5' style={{ color: '#FFFFFF' }}>
             ĐĂNG KÝ
           </h1>
-          <div className='flex gap-5'>
-            <span className='text-lg font-medium' style={{ color: '#FFFFFF' }}>
-              Số điện thoại
-            </span>
-            <span className='text-lg font-bold' style={{ color: '#FFFFFF' }}>
-              Email
-            </span>
-          </div>
         </div>
 
         <form noValidate onSubmit={onSubmit} className='mt-5'>
@@ -159,12 +152,8 @@ const Register = () => {
             </div>
 
             <div className='flex gap-5'>
-              <div className='w-12 h-12 rounded-full border-2 border-white flex items-center justify-center'>
-                <img src={facebookIcon} alt='Facebook' className='w-8 h-8' />
-              </div>
-              <div className='w-12 h-12 rounded-full border-2 border-white flex items-center justify-center'>
-                <img src={googleIcon} alt='Google' className='w-8 h-8' />
-              </div>
+              <IconButton width={10} height={10} src={facebookIcon} alt='Facebook'></IconButton>
+              <IconButton width={10} height={10} src={googleIcon} alt='Google'></IconButton>
             </div>
           </div>
         </form>
