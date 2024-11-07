@@ -40,14 +40,14 @@ const TicketContainer: React.FC = () => {
         <h1 className="text-2xl font-bold">New uploaded ticket</h1>
         <div className='flex items-center flex-row'>
           <label className="mr-2">Size</label>
-          <select
+          <Select
             className="border-2 border-black-light rounded-md p-1 focus:border-black-lightActive"
             onChange={(e) => setSize(Number(e.target.value))}
           >
             <option value="10">10</option>
             <option value="20">20</option>
             <option value="30">30</option>
-          </select>
+          </Select>
         </div>
       </div>
       <div className='w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-2'>

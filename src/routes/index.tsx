@@ -27,10 +27,7 @@ const publicRoutes: RouteType[] = [
     path: '/profile',
     element: <ProfilePage />
   },
-  {
-    path: "/staff",
-    element: <StaffPage/>
-  },
+  
   {
     path: '/report',
     element: <Report/>
@@ -93,7 +90,12 @@ const adminRoutes: RouteType[] = [
     element: <ManagerTicket />
   }
 ]
-
+const staffRoutes: RouteType[]=[
+  {
+    path: "/staff",
+    element: <StaffPage/>
+  },
+]
 const unAuthenticatedRoute: RouteType[] = [
   {
     path: '/login',
@@ -116,7 +118,8 @@ const Router = () => {
   const router = [
     ...publicRoutes,
     ...(isAuthenticated ? authenicatedRoutes : unAuthenticatedRoute),
-    ...(['ADMIN', 'STAFF'].includes(user.scope) ? adminRoutes : []),
+    ...(['ADMIN'].includes(user.scope) ? adminRoutes : []),
+    ...(['STAFF'].includes(user.scope) ? staffRoutes: []),
 
     {
       path: '*',

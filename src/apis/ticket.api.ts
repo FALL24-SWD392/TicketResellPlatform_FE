@@ -10,7 +10,11 @@ const ticketAPI = {
     ),
   getAllTicketAdmin: () => http.get<ListBaseResponse<Ticket>>("api/tickets/admin"),
   getTicketById: (id: string) => http.get<ItemBaseResponse<Ticket>>(`api/tickets/${id}`),
-  createTicket: (body: CreateTicket) => http.post<ItemBaseResponse<TicketList>>(`api/tickets`, body)
+  createTicket: (body: CreateTicket) => http.post<ItemBaseResponse<TicketList>>(`api/tickets`, body),
+  getTicketByCateAndName: (name: string , type: string) => http.get<ListBaseResponse<ReportList>>(`api/tickets?title=pied&type=VOUCHER&page=1&size=20&direction=ASC`),
+  deleteTicketById: (id: string) => http.delete<ListBaseResponse<{}>>(`api/tickets?id=${id}`),
+  getCategory: () => http.get<ListBaseResponse<Ticket>>("api/tickets/categories"),
+  
 }
 
 export default ticketAPI

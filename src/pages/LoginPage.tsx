@@ -36,10 +36,13 @@ const LoginPage = () => {
       onSuccess: (data) => {
         console.log(data)
         setIsAuthenticated(true)
-        if (getProfileFormLS()?.sub === 'admin') {
+        if (getProfileFormLS()?.scope === 'ADMIN') {
           toast.success(data.data.message)
 
           navigate('/admin')
+        }else if(getProfileFormLS()?.scope === 'STAFF'){
+          toast.success(data.data.message)
+          navigate('/staff')
         }else{
           toast.success(data.data.message)
 
