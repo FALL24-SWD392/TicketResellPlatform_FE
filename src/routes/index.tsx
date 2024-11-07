@@ -9,6 +9,8 @@ import Report from 'src/pages/staff/Report'
 import ForgotPasswordPage from 'src/pages/ForgotPasswordPage'
 import BlogPage from 'src/pages/BlogPage'
 import ManagerUsers from 'src/pages/admin/ManagerUser'
+import ManagerTicket from 'src/pages/admin/ManagerTicket'
+
 
 type RouteType = {
   path: string
@@ -51,7 +53,7 @@ const publicRoutes: RouteType[] = [
   {
     path: `/ticket-detail/:id`,
     element: <TicketDetailPage />
-  }
+  },
   {
     path: '/blog-page',
     element: <BlogPage />
@@ -81,6 +83,10 @@ const adminRoutes: RouteType[] = [
     element: <ManagerUsers />
   },
 
+  {
+    path: '/manager-tickets',
+    element: <ManagerTicket />
+  }
 ]
 
 const unAuthenticatedRoute: RouteType[] = [

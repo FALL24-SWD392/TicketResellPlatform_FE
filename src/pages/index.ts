@@ -13,4 +13,5 @@ export { default as TicketDetailPage} from "./TicketDetailPage"
 export { default as CreateTicketPage} from "./CreateTicketPage"
 //admin
 export { default as ManagerUsers} from "./admin/ManagerUser"
+export { default as ManagerTicket} from "./admin/ManagerTicket"
 export { default as blog} from "./BlogPage"
