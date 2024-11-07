@@ -9,7 +9,9 @@ import Report from 'src/pages/staff/Report'
 import ForgotPasswordPage from 'src/pages/ForgotPasswordPage'
 import BlogPage from 'src/pages/BlogPage'
 import ManagerUsers from 'src/pages/admin/ManagerUser'
+import ManagerTicket from 'src/pages/admin/ManagerTicket'
 import Subscriptions from 'src/pages/admin/Subscriptions'
+
 
 type RouteType = {
   path: string
@@ -86,6 +88,10 @@ const adminRoutes: RouteType[] = [
     element: <Subscriptions />
   },
 
+  {
+    path: '/manager-tickets',
+    element: <ManagerTicket />
+  }
 ]
 
 const unAuthenticatedRoute: RouteType[] = [

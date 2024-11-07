@@ -5,7 +5,7 @@ import {FormDataChange} from "src/pages/ChangePassword"
 import { ItemBaseResponse, ListBaseResponse } from 'src/@types/response'
 import { CreateStaffSchema, RegisterSchema } from 'src/utils/rules';
 import { FormDataForgot } from 'src/pages/ForgotPasswordPage'
-import { SubList, UserList } from 'src/@types/users.type'
+import {  SubList, UserList } from 'src/@types/users.type'
 const authAPI = {
   login: (body: FormData) =>
     http.post<
@@ -21,11 +21,13 @@ const authAPI = {
   ResetPassword: (body: FormDataChange) => http.put<ListBaseResponse<{}>>("/api/auth/password/reset", body),
   ForgotPassword: (body: FormDataForgot) =>http.put<ListBaseResponse<{}>>('/api/auth/password/forgot', body),
 
-  GetAllUser: () => http.get<ListBaseResponse<UserList>>("api/users"),
+  GetAllUser: () => http.get<ListBaseResponse<UserList>>('api/users?direction=ASC&properties=role&properties=status'),
   DeleteUser: (body: {username?: string}) => http.delete<ListBaseResponse<{}>>(`api/users`, { data: body }),
   GetUserByName: (username: string) => http.get<ListBaseResponse<UserList>>(`api/users?search=${username}`),
   CreateUser: (body: CreateStaffSchema) => http.post<ListBaseResponse<{}>>(`api/users`, body),
   GetAllSubscription: () => http.get<ListBaseResponse<SubList>>("api/subscriptions?page&size"),
-  PaySubscription : ({subscriptionId}:{subscriptionId: string }) => http.get<ItemBaseResponse<{}>>(`api/subscriptions/purchase-subscription?subscriptionId=${subscriptionId}`)
+  PaySubscription : ({subscriptionId}:{subscriptionId: string }) => http.get<ItemBaseResponse<{}>>(`api/subscriptions/purchase-subscription?subscriptionId=${subscriptionId}`),
+  GetAllTicket: () => http.get<ListBaseResponse<SubList>>("api/tickets/admin"),
+  GetAllTicketByStatus: (status: string) => http.get<ListBaseResponse<SubList>>(`api/tickets/admin?status=${status}`),
   }
 export default authAPI

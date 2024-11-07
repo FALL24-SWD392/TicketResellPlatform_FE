@@ -1,0 +1,63 @@
+import { useState, useEffect } from 'react';
+import SidebarAdmin from 'src/layouts/admin/SidebarAdmin';
+import authAPI from 'src/apis/auth.api';
+import { useMutation } from '@tanstack/react-query';
+import { ListBaseResponse } from 'src/@types/response';
+import TicketLists from 'src/Components/users/TicketLists';
+import { Ticket } from 'src/@types/ticket.type';
+
+// interface Ticket {
+//   id: string;
+//   title: string;
+//   type: string;
+//   unitPrice: number;
+//   quantity: number;
+//   status: string;
+//   expDate: string;
+// }
+
+function ManagerTicket() {
+  const [tickets, setTickets] = useState<ListBaseResponse<Ticket>>({
+    status: 100,
+    message: '',
+    size: 10,
+    page: 1,
+    totalSize: 0,
+    totalPage: 0,
+    data: [],
+  });
+
+  const getAllTicketMutation = useMutation({
+    mutationKey: ['getTickets'],
+    mutationFn: () => authAPI.GetAllTicket(),
+    onSuccess: (data) => {
+      setTickets(data.data)
+    },
+    onError: (error) => console.error(error),
+  });
+
+  useEffect(() => {
+    getAllTicketMutation.mutate();
+  }, []);
+
+  const handleDeleteTicket = (id: string) => {
+    console.log('Delete ticket:', id);
+  };
+
+  return (
+    <div className='flex min-h-screen bg-gray-100'>
+      <SidebarAdmin />
+      <div className='flex-1 p-6 ml-64'>
+        <h1 className='text-3xl font-bold mb-6'>Ticket List</h1>
+        <div className='p-4 -ml-20'>
+          <TicketLists 
+            tickets={tickets.data} 
+            onDeleteTicket={handleDeleteTicket}
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default ManagerTicket;
