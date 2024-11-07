@@ -1,18 +1,9 @@
 import { Button, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow, Chip } from "@nextui-org/react";
 import { FaTrashAlt, FaEdit } from "react-icons/fa";
-
-interface Ticket {
-  id: string;
-  title: string;
-  type: string;
-  unitPrice: number;
-  quantity: number;
-  status: string;
-  expDate: string;
-}
+import { TicketList } from "src/@types/ticket.type";
 
 interface TicketListsProps {
-  tickets: Ticket[];
+  tickets: TicketList[];
   onDeleteTicket: (id: string) => void;
 }
 
@@ -30,7 +21,6 @@ const TicketLists: React.FC<TicketListsProps> = ({ tickets, onDeleteTicket }) =>
         return "default";
     }
   };
-
   // Format date to a readable format
   const formatDate = (dateString: string) => new Date(dateString).toLocaleDateString();
 

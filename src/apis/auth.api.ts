@@ -27,7 +27,6 @@ const authAPI = {
   CreateUser: (body: CreateStaffSchema) => http.post<ListBaseResponse<{}>>(`api/users`, body),
   GetAllSubscription: () => http.get<ListBaseResponse<SubList>>("api/subscriptions?page&size"),
   PaySubscription : ({subscriptionId}:{subscriptionId: string }) => http.get<ItemBaseResponse<{}>>(`api/subscriptions/purchase-subscription?subscriptionId=${subscriptionId}`),
-  GetAllTicket: () => http.get<ListBaseResponse<SubList>>("api/tickets/admin"),
   GetAllTicketByStatus: (status: string) => http.get<ListBaseResponse<SubList>>(`api/tickets/admin?status=${status}`),
   }
 export default authAPI

@@ -4,20 +4,12 @@ import authAPI from 'src/apis/auth.api';
 import { useMutation } from '@tanstack/react-query';
 import { ListBaseResponse } from 'src/@types/response';
 import TicketLists from 'src/Components/users/TicketLists';
-import { Ticket } from 'src/@types/ticket.type';
+import { TicketList } from 'src/@types/ticket.type';
+import ticketAPI from 'src/apis/ticket.api';
 
-// interface Ticket {
-//   id: string;
-//   title: string;
-//   type: string;
-//   unitPrice: number;
-//   quantity: number;
-//   status: string;
-//   expDate: string;
-// }
 
 function ManagerTicket() {
-  const [tickets, setTickets] = useState<ListBaseResponse<Ticket>>({
+  const [tickets, setTickets] = useState<ListBaseResponse<TicketList>>({
     status: 100,
     message: '',
     size: 10,
@@ -29,8 +21,9 @@ function ManagerTicket() {
 
   const getAllTicketMutation = useMutation({
     mutationKey: ['getTickets'],
-    mutationFn: () => authAPI.GetAllTicket(),
+    mutationFn: () => ticketAPI.getAllTicketAdmin(),
     onSuccess: (data) => {
+      console.log(data.data)
       setTickets(data.data)
     },
     onError: (error) => console.error(error),

@@ -121,7 +121,7 @@ function Subscriptions() {
                     radius="full"
                     size="md"
                     variant="solid"
-                    onClick={() => handlePaySubcription(subscription.id)}
+                    onClick={() => handlePaySubcription(subscription.id as string)}
                     disabled={purchasedSubscriptions[subscription.name]}
                   >
                     {purchasedSubscriptions[subscription.name] ? "Purchased" : "BUY"}
