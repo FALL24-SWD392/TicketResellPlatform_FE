@@ -71,7 +71,7 @@ const NavBar = ({ ...props }: Props) => {
 
         <NavbarContent className='hidden sm:flex ' justify='center'>
           <NavbarItem>
-            <Link className='text-black-darker' aria-current='page' href='#'>
+            <Link className='text-black-darker' aria-current='page' href='/'>
               Home
             </Link>
           </NavbarItem>
@@ -83,6 +83,11 @@ const NavBar = ({ ...props }: Props) => {
           <NavbarItem>
             <Link className='text-black text' href='#'>
               Your Tickets
+            </Link>
+          </NavbarItem>
+          <NavbarItem>
+            <Link className='text-black text' href='/chat'>
+              Chat
             </Link>
           </NavbarItem>
           <NavbarItem>

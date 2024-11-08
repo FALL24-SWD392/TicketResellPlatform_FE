@@ -71,10 +71,6 @@ const publicRoutes: RouteType[] = [
     path: '/blog-page',
     element: <BlogPage />
   },
-  {
-    path: '/chat',
-    element: <Chat />
-  }
 ]
 
 const authenicatedRoutes: RouteType[] = [
@@ -85,6 +81,14 @@ const authenicatedRoutes: RouteType[] = [
   {
     path: '/create-ticket',
     element: <CreateTicketPage />
+  },
+  {
+    path: '/chat/:id',
+    element: <Chat />
+  },
+  {
+    path: '/chat',
+    element: <Chat />
   }
 ]
 
