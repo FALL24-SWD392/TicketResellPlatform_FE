@@ -1,10 +1,11 @@
 // Existing Report Interface
 export interface Report {
     id: string
-    reporterId: string
-    reportedId: string
-    orderId: string
-    description?: string
+    reporterName: string
+    reportedName: string
+    ticketId: string
+    ticketName: string
+    description: string
     attachment: string
     status: string
     createdBy: string
@@ -14,10 +15,10 @@ export interface Report {
   }
   
   // Simplified view of Report type for lists
-  export type ReportList = Pick<Report, "id" | "reporterId" | "reportedId" | "orderId" | "description" | "attachment" | "status" | "createdAt" | "updatedAt">
+  export type ReportList = Pick<Report, "id" | "reporterName" | "reportedName" | "ticketId" | "ticketName" | "description" | "attachment" | "status" | "createdAt" | "updatedAt">
   
   // Fields required to create a new Report
-  export type CreateReport = Pick<Report, "reporterId" | "reportedId" | "orderId" | "description" | "attachment">
+  export type CreateReport = Pick<Report, "id" | "status">
   
   // Configuration type for pagination and size
   export interface ReportListConfig {

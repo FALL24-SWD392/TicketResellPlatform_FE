@@ -1,12 +1,38 @@
-import { useState, useEffect } from 'react';
-import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, Modal, Button, Spinner } from '@nextui-org/react';
-import { AiOutlineEye } from 'react-icons/ai';
-import SidebarStaff from 'src/layouts/staff/SidebarStaff';
-import reportAPI from 'src/apis/report.api';
-import { useMutation } from '@tanstack/react-query';
-import { ListBaseResponse } from 'src/@types/response';
-import { Report as ReportType } from 'src/@types/report.type';
-import { toast } from 'react-toastify';
+import { useState, useEffect } from 'react'
+import {
+  Table,
+  TableHeader,
+  TableColumn,
+  TableBody,
+  TableRow,
+  TableCell,
+  Modal,
+  Button,
+  Spinner,
+  Link,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  useDisclosure,
+  Chip,
+  ChipProps
+} from '@nextui-org/react'
+import { AiOutlineEye } from 'react-icons/ai'
+import SidebarStaff from 'src/layouts/staff/SidebarStaff'
+import reportAPI from 'src/apis/report.api'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { ListBaseResponse } from 'src/@types/response'
+import { Report as ReportType, CreateReport } from 'src/@types/report.type'
+import { toast } from 'react-toastify'
+import dayjs from 'dayjs'
+
+// Define the status color map for Chip component
+const statusColorMap: Record<string, ChipProps["color"]> = {
+  APPROVED: "success",
+  REJECTED: "danger",
+  PENDING: "warning",
+}
 
 const Report = () => {
   const [reports, setReports] = useState<ListBaseResponse<ReportType>>({
@@ -16,115 +42,183 @@ const Report = () => {
     page: 1,
     totalSize: 0,
     totalPage: 0,
-    data: [],
-  });
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+    data: []
+  })
+  const { isOpen, onOpen, onOpenChange } = useDisclosure()
+  const [isLoading, setIsLoading] = useState(true)
+  const [selectedReport, setSelectedReport] = useState<ReportType | null>(null)
+  const queryClient = useQueryClient()
 
-  // Mutation để fetch reports
+  // Mutation for getting all reports
   const getAllReportMutation = useMutation({
-    mutationKey: ['getReports'],
-    mutationFn: () => reportAPI.getAllReport({ page: 1, size: 10 }), // Cung cấp page và size
+    mutationFn: () => reportAPI.getAllReport({ page: 1, size: 10 }),
     onSuccess: (data) => {
-      setReports(data.data); // Cập nhật dữ liệu
-      setIsLoading(false);
+      setReports(data.data)
+      setIsLoading(false)
     },
-    onError: (error) => {
-      console.error('Failed to fetch reports:', error);
-      toast.error('Failed to load reports. Please try again later.');
-      setIsLoading(false);
+    onError: () => {
+      toast.error('Failed to load reports')
+      setIsLoading(false)
+    }
+  })
+  // Mutation for updating report status
+  const updateReportMutation = useMutation({
+    mutationFn: (data: CreateReport) => reportAPI.updateReport(data),
+    onSuccess: () => {
+      toast.success('Status updated successfully')
+      getAllReportMutation.mutate()
     },
-  });
+    onError: () => {
+      toast.error('Failed to update status')
+    }
+  })
 
   useEffect(() => {
-    // Đảm bảo mutate chỉ gọi một lần khi component mount
-    if (isLoading) {
-      getAllReportMutation.mutate();
-    }
-  }, [isLoading]); // Chỉ gọi lại khi trạng thái isLoading là true
+    getAllReportMutation.mutate()
+  }, [])
 
-  const openReportDetails = () => {
-    console.log('Opening modal...');
-    setIsModalOpen(true);
-  };
+  // Handle report status update
+  const handleUpdateReport = (status: string) => {
+    if (!selectedReport) return
+    updateReportMutation.mutate({
+      id: selectedReport.id,
+      status: status
+    })
+  }
 
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
+  // Render the status with corresponding color
+  const renderStatus = (status: string) => {
+    const statusColor = statusColorMap[status as keyof typeof statusColorMap]
+
+    return (
+      <Chip color={statusColor} className='text-sm font-semibold'>
+        {status}
+      </Chip>
+    )
+  }
 
   if (isLoading) {
     return (
-      <div className="flex min-h-screen bg-gray-100">
+      <div className='flex min-h-screen bg-gray-100'>
         <SidebarStaff />
-        <div className="flex flex-col w-full items-center justify-center">
-          <Spinner size="lg" />
-          <p className="mt-2">Loading reports...</p>
+        <div className='flex flex-col w-full items-center justify-center'>
+          <Spinner size='lg' />
         </div>
       </div>
-    );
+    )
   }
 
   return (
-    <div className="flex min-h-screen bg-gray-100">
+    <div className='flex min-h-screen bg-gray-100'>
       <SidebarStaff />
-      <div className="flex-1 p-6 ml-64">
-        <h1 className="text-3xl font-bold mb-6">User Reports</h1>
+      <div className='flex-1 p-8 ml-64'>
+        <div className='bg-white rounded-lg shadow p-6'>
+          <h1 className='text-2xl font-bold mb-6'>Reports Management</h1>
 
-        {/* Filter Section */}
-        <div className="mb-6">
-          <input
-            type="text"
-            placeholder="Search by reporter or reported user"
-            className="border border-gray-300 rounded p-2 mr-4"
-          />
-        </div>
-
-        {/* Reports Table */}
-        <div className="p-4">
-          <Table aria-label="User Reports Table">
+          <Table aria-label='Reports table'>
             <TableHeader>
-              <TableColumn>Reporter</TableColumn>
-              <TableColumn>Reported User</TableColumn>
-              <TableColumn>Content</TableColumn>
-              <TableColumn>Date</TableColumn>
-              <TableColumn>Status</TableColumn>
-              <TableColumn>Actions</TableColumn>
+              <TableColumn>REPORTER</TableColumn>
+              <TableColumn>REPORTED</TableColumn>
+              <TableColumn>TICKET NAME</TableColumn>
+              <TableColumn>DESCRIPTION</TableColumn>
+              <TableColumn>STATUS</TableColumn>
+              <TableColumn>DATE</TableColumn>
+              <TableColumn>ACTIONS</TableColumn>
             </TableHeader>
             <TableBody>
               {reports.data.map((report) => (
                 <TableRow key={report.id}>
-                  <TableCell>{report.reporterId}</TableCell>
-                  <TableCell>{report.reportedId}</TableCell>
-                  <TableCell>{report.description}</TableCell>
-                  <TableCell>{new Date(report.createdAt).toLocaleDateString()}</TableCell>
+                  <TableCell>{report.reporterName}</TableCell>
+                  <TableCell>{report.reportedName}</TableCell>
                   <TableCell>
-                    <span className={`px-2 py-1 rounded ${report.status === 'PENDING' ? 'bg-yellow-500' : 'bg-green-500'} text-white`}>
-                      {report.status}
-                    </span>
+                    <Link href={`/ticket-detail/${report.ticketId}`}>
+                      <a className='text-blue-500 hover:underline'>{report.ticketName}</a>
+                    </Link>
                   </TableCell>
+                  <TableCell>{report.description}</TableCell>
+
+                  <TableCell>{renderStatus(report.status)}</TableCell>
+                  <TableCell>{dayjs(report.createdAt).format('DD/MM/YYYY HH:mm')}</TableCell>
                   <TableCell>
-                    <button className="text-blue-500 flex items-center" onClick={openReportDetails}>
-                      <AiOutlineEye className="mr-2" /> View
-                    </button>
+                    {report.status === 'PENDING' && (
+                      <Button
+                        onClick={() => {
+                          setSelectedReport(report)
+                        }}
+                        onPress={onOpen}
+                        className='text-blue-500 flex items-center hover:text-blue-700'
+                      >
+                        <AiOutlineEye className='mr-2' /> View
+                      </Button>
+                    )}
                   </TableCell>
                 </TableRow>
               ))}
             </TableBody>
           </Table>
         </div>
+
+        {/* Modal for updating report status */}
+        <Modal
+          backdrop='opaque'
+          isOpen={isOpen}
+          onOpenChange={onOpenChange}
+          motionProps={{
+            variants: {
+              enter: {
+                y: 0,
+                opacity: 1,
+                transition: {
+                  duration: 0.3,
+                  ease: 'easeOut'
+                }
+              },
+              exit: {
+                y: -20,
+                opacity: 0,
+                transition: {
+                  duration: 0.2,
+                  ease: 'easeIn'
+                }
+              }
+            }
+          }}
+        >
+          <ModalContent>
+            {(onClose) => (
+              <>
+                <ModalHeader className='flex flex-col gap-1'>
+                  <h2 className='text-xl font-bold'>Update Report Status</h2>
+                </ModalHeader>
+                <ModalBody>
+                  {selectedReport && (
+                    <div className='space-y-4'>
+                      <div>
+                        <p className='text-gray-600'>Report ID:</p>
+                        <p className='font-medium'>{selectedReport.id}</p>
+                      </div>
+                      <div>
+                        <p className='text-gray-600'>Current Status:</p>
+                        <div className='mt-1'>{renderStatus(selectedReport.status)}</div>
+                      </div>
+                    </div>
+                  )}
+                </ModalBody>
+                <ModalFooter>
+                  <Button color='danger' variant='flat' onPress={() => handleUpdateReport('REJECTED')} isLoading={updateReportMutation.isPending}>
+                    Reject
+                  </Button>
+                  <Button color='success' onPress={() => handleUpdateReport('APPROVED')} isLoading={updateReportMutation.isPending}>
+                    Approve
+                  </Button>
+                </ModalFooter>
+              </>
+            )}
+          </ModalContent>
+        </Modal>
       </div>
-
-      {/* Modal for Report Details */}
-      <Modal isOpen={isModalOpen} onClose={closeModal} closeButton className="p-6">
-        <h2 className="text-xl font-bold mb-4">Report Details</h2>
-        {/* Render selected report details here */}
-        <div className="mt-6 flex justify-end">
-          <Button color="danger" onClick={closeModal} className="mr-4">Reject</Button>
-          <Button color="success" onClick={closeModal}>Approve</Button>
-        </div>
-      </Modal>
     </div>
-  );
-};
+  )
+}
 
-export default Report;
+export default Report
