@@ -11,6 +11,8 @@ import BlogPage from 'src/pages/BlogPage'
 import ManagerUsers from 'src/pages/admin/ManagerUser'
 import ManagerTicket from 'src/pages/admin/ManagerTicket'
 import Subscriptions from 'src/pages/admin/Subscriptions'
+import Transactions from 'src/pages/admin/Transactions'
+
 
 
 type RouteType = {
@@ -88,6 +90,10 @@ const adminRoutes: RouteType[] = [
   {
     path: '/manager-tickets',
     element: <ManagerTicket />
+  },
+  {
+    path: '/transactions',
+    element: <Transactions />
   }
 ]
 const staffRoutes: RouteType[]=[
