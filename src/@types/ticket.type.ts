@@ -2,7 +2,7 @@ import { User, UserList } from './users.type'
 
 export interface Ticket {
   id: string
-  sellerId: Pick<UserList, 'sub' | 'email' | 'avatar' | 'rating'> 
+  sellerId: string
   title?: string
   expDate: string
   type: string

@@ -11,7 +11,7 @@ export { default as ChangePassword} from "./ChangePassword"
 export { default as ResetPassword} from "./ResetPassword"
 export { default as TicketDetailPage} from "./TicketDetailPage"
 export { default as CreateTicketPage} from "./CreateTicketPage"
-
+export { default as Chat} from "./Chat"
 //admin
 export { default as ManagerUsers} from "./admin/ManagerUser"
 export { default as ManagerTicket} from "./admin/ManagerTicket"
