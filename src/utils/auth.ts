@@ -4,21 +4,21 @@ export const setTokenToLS = (
   accessToken: string,
   refreshToken: string
 ): void => {
-  localStorage.setItem('access_token', accessToken)
-  localStorage.setItem('refresh_token', refreshToken)
+  localStorage.setItem('accessToken', accessToken)
+  localStorage.setItem('refreshToken', refreshToken)
 }
 
 export const clearLocalStorage = (): void => {
-  localStorage.removeItem('access_token')
+  localStorage.removeItem('accessToken')
   localStorage.removeItem('profile')
-  localStorage.removeItem('refresh_token')
+  localStorage.removeItem('refreshToken')
 }
 
 export const getAccessTokenFromLS = (): string =>
-  localStorage.getItem('access_token') || ''
+  localStorage.getItem('accessToken') || ''
 
 export const getRefreshTokenFromLS = (): string =>
-  localStorage.getItem('refresh_token') || ''
+  localStorage.getItem('refreshToken') || ''
 
 export const getProfileFormLS = (): User | null => {
   const profile = localStorage.getItem('profile')

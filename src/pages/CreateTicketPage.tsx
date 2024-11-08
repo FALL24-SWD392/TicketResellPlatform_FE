@@ -14,10 +14,9 @@ import { imageDB } from 'src/firebase'
 const initForm = {
   title: '',
   exp_date: dayjs(new Date(), 'DD/MM/YYYY'),
-  time: dayjs('15:00', 'HH:mm'),
   unit_price: '',
-  typeTicket: '',
-  quantity: '',
+  type: 'VOUCHER',
+  quantity: "",
   description: '',
   image: ''
 }
@@ -63,8 +62,8 @@ const CreateTicketPage = () => {
     const bodyCreateTicket = {
       ...form,
       exp_date: form.exp_date.format('DD/MM/YYYY'),
-      type: form.typeTicket,
-      price: form.unit_price ? form.unit_price : 0,
+      type: form.type ? form.type : 'VOUCHER',
+      unit_price: form.unit_price ? form.unit_price : 0,
       image: previewImage
     }
     createTicketMutation.mutate(bodyCreateTicket as any, {
