@@ -1,4 +1,4 @@
-import { Button, DatePicker, DatePickerProps, Input, TimeInputProps } from '@nextui-org/react'
+import { Button, DateInputField, DatePicker, DatePickerProps, Input, TimeInputProps } from '@nextui-org/react'
 import { useMutation } from '@tanstack/react-query'
 import dayjs from 'dayjs'
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
@@ -6,15 +6,15 @@ import { useContext, useState } from 'react'
 import { toast } from 'react-toastify'
 import { CreateTicket } from 'src/@types/ticket.type'
 import ticketAPI from 'src/apis/ticket.api'
-
+import {now, getLocalTimeZone, parseAbsoluteToLocal,parseZonedDateTime} from "@internationalized/date";
 import { AppContext } from 'src/context/app.context'
 import { v4 } from 'uuid'
 import demo from 'src/assets/images/demoImage.jpg'
 import { imageDB } from 'src/firebase'
 const initForm = {
-  seller_id: '',
+  sellerId: '',
   title: '',
-  exp_date: dayjs(new Date()),
+  expDate: '',
   type: 'VOUCHER',
   unitPrice: "",
   quantity: "",
@@ -26,11 +26,10 @@ const CreateTicketPage = () => {
   const { profile } = useContext(AppContext)
   const [previewImage, setPreviewImage] = useState<string | null>(null)
   const [form, setForm] = useState<typeof initForm>(initForm)
-
+  const [selectedDate, setSelectedDate] = useState(parseZonedDateTime("2024-11-07T00:45[Asia/Saigon]"))
   const createTicketMutation = useMutation({
     mutationFn: (body: CreateTicket) => ticketAPI.createTicket(body)
   })
-
   const handleChangeImage = async (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
       const imgRef = ref(imageDB, `images/${v4()}`)
@@ -39,24 +38,6 @@ const CreateTicketPage = () => {
       })
     }
   }
-  //handlechange time
-  const handleChangeTime: (name: 'timeExp') => TimeInputProps['onChange'] = (name: 'timeExp') => {
-    return (timeString) => {
-      if (name === 'timeExp') {
-        setForm((prevForm) => ({
-          ...prevForm,
-          timeExpire: timeString as unknown as dayjs.Dayjs
-        }))
-      }
-    }
-  }
-  const onChangeDate: DatePickerProps['onChange'] = (date) => {
-    setForm((prevForm) => ({
-      ...prevForm,
-      exp_date: dayjs(new Date())
-    }))
-    console.log(date)
-  }
   const handleDescriptionChange = (content: string) => {
     setForm((prevForm) => ({ ...prevForm, description: content }))
   }
@@ -64,9 +45,11 @@ const CreateTicketPage = () => {
     event.preventDefault()
     const bodyCreateTicket = {
       ...form,
-      seller_id: profile?.id,
+      sellerId: profile?.id,
       type: form.type ? form.type : 'VOUCHER',
-      image: previewImage
+      image: previewImage,
+      expDate: selectedDate.toString().split('[')[0]
+
     }
     createTicketMutation.mutate(bodyCreateTicket as any, {
       onSuccess: (data) => {
@@ -87,6 +70,7 @@ const CreateTicketPage = () => {
       //   }
     })
   }
+
   return (
     <div className='flex justify-center mt-[100px]'>
       <h1>Create Ticket</h1>
@@ -144,7 +128,14 @@ const CreateTicketPage = () => {
             }))
           }}
         />
-        <DatePicker label={'Birth date'} className='max-w-[284px]' labelPlacement='outside' onChange={onChangeDate} />
+        <DatePicker
+        label="Ticket Date"
+        variant="bordered"
+        showMonthAndYearPickers
+        value={selectedDate}
+        onChange={setSelectedDate}
+        
+      />
 
         <Button type='submit' > Create Ticket</Button>
       </form>

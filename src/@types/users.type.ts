@@ -14,7 +14,7 @@ export interface User {
 }
 
 export type UserList = Pick<User, 'id' | 'sub' | 'email' | 'avatar' | 'rating' | 'username' | 'role' | 'rating' | 'status'>
-export type UserProfile = Pick<User, 'email' | 'username' | 'avatar' | 'status' | 'role' | 'rating' | 'reputation'>
+export type UserProfile = Pick<User, 'id'| 'email' | 'username' | 'avatar' | 'status' | 'role' | 'rating' | 'reputation'>
 
 export type ProfileUpdate = {
   username: string

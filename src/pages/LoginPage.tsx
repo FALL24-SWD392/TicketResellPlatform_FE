@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { ErrorResponse } from 'src/@types/utils.type'
 import authAPI from 'src/apis/auth.api'
+import userAPI from 'src/apis/user.api'
 import { SignInForm } from 'src/Components'
 import { AppContext } from 'src/context/app.context'
 import { getProfileFormLS } from 'src/utils/auth'
@@ -19,7 +20,7 @@ const LoginPage = () => {
   const {
     register,
     handleSubmit,
-    formState: { }
+    formState: {}
   } = useForm<FormData>({
     resolver: yupResolver(LoginSchemaYup)
   })
@@ -31,6 +32,12 @@ const LoginPage = () => {
       return authAPI.login(body)
     }
   })
+  const getUser = useMutation({
+    mutationFn: () => {
+      return authAPI.GetAllUser()
+    }
+  })
+
   const onSubmit = handleSubmit((data) => {
     loginMutation.mutate(data, {
       onSuccess: (data) => {
@@ -38,14 +45,12 @@ const LoginPage = () => {
         setIsAuthenticated(true)
         if (getProfileFormLS()?.scope === 'ADMIN') {
           toast.success(data.data.message)
-
           navigate('/admin')
-        }else if(getProfileFormLS()?.scope === 'STAFF'){
+        } else if (getProfileFormLS()?.scope === 'STAFF') {
           toast.success(data.data.message)
           navigate('/staff')
-        }else{
-        toast.success(data.data.message)
-
+        } else {
+          toast.success(data.data.message)
         }
         toast.success(data.data.message)
       },
@@ -54,7 +59,6 @@ const LoginPage = () => {
           const errors = error.response?.data.errors
           setLoginError(errors?.username as string)
           toast.success(error.message)
-
         }
       }
     })

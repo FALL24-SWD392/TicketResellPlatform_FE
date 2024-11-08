@@ -15,6 +15,7 @@ const TicketDetail = ({ticket}: Props) => {
   const dateSplit = date.split('/')
   const [dayStr, monthStr, yearStr] = dateSplit.map((item) => item.trim())
   const dateObj = new Date(`${yearStr}-${monthStr}-${dayStr}`)
+  console.log(ticket.avatar)
     return (
       
         <div className="max-w-3xl mx-auto bg-white shadow-2xl rounded-lg p-6">
@@ -39,7 +40,7 @@ const TicketDetail = ({ticket}: Props) => {
           <p></p>
           <p className="text-gray-500 mt-1">{date}</p>
           <p className="text-gray-500 mt-1">{time}</p>
-          <p className="text-red-600 text-xl font-semibold mt-2">{ticket.unit_price}</p>
+          <p className="text-red-600 text-xl font-semibold mt-2">{ticket.unitPrice}</p>
           <p className="text-sm text-gray-500 mt-1">{ticket.updatedAt}</p>
           <button className="mt-4 px-6 py-2 bg-green-600 text-white rounded-lg shadow-md hover:bg-green-700">
             Lien he
@@ -50,7 +51,7 @@ const TicketDetail = ({ticket}: Props) => {
           <div className="mt-4 flex items-center gap-1">
             <span className="font-semibold">Banafoods</span>
             <span className="text-yellow-500">&#9733; 5</span>
-            <span className="text-gray-500">(1 đánh giá)</span>
+            <span className="text-gray-500">({ticket.rating})</span>
           </div>
         </div>
       </div>

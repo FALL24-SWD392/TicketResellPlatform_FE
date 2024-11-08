@@ -5,6 +5,7 @@ import { jwtDecode } from 'jwt-decode'
 import { toast } from 'react-toastify'
 import { ErrorResponse, SuccessResponse } from 'src/@types/utils.type'
 import { isAxiosErrorJWTExpired, isUnAuthorized } from './utils'
+import { User } from 'src/@types/users.type'
 //
 //https://ticketresellplatform-nodered.onrender.com/
 class Http {
@@ -43,7 +44,12 @@ class Http {
           this.accessToken = response.data.data.accessToken
           this.refreshToken = response.data.data.refreshToken
           setTokenToLS(this.accessToken, this.refreshToken)
-          setProfileToLS(jwtDecode(this.accessToken))
+          const user: User = jwtDecode(this.accessToken)
+          if (user && user.id && user.email) { // Check if User has necessary data
+            setProfileToLS(user)
+          } else {
+            console.error('Invalid user data:', user)
+          }
         } else if (endPoint === 'logout') {
           this.accessToken = ''
           clearLocalStorage()
