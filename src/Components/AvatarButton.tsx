@@ -17,7 +17,9 @@ const AvatarButton = ({...props}: Props) => {
           <p className='font-semibold'>Signed in as</p>
           <p className='font-semibold'>{props.profile?.email}</p>
         </DropdownItem>
-        <DropdownItem key='settings'>My Settings</DropdownItem>
+        <DropdownItem key='settings'>
+          <Link to="/me">My Profile</Link>
+        </DropdownItem>
         <DropdownItem key='changepassword'>
           <Link to="/change-password">Change Password</Link>
         </DropdownItem>
