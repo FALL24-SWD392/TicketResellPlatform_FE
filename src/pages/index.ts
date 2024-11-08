@@ -21,3 +21,6 @@ export { default as transactions} from "./admin/Transactions"
 
 //user
 export { default as MembershipPage } from './MembershipPage'
+export { default as allTickets} from "./ViewAllTicketPage"
+export { default as success} from "./error/SuccessPage"
+export { default as fail} from "./error/FailPage"

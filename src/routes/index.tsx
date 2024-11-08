@@ -25,6 +25,7 @@ import ManagerUsers from 'src/pages/admin/ManagerUser'
 import ManagerTicket from 'src/pages/admin/ManagerTicket'
 import Subscriptions from 'src/pages/admin/Subscriptions'
 import Transactions from 'src/pages/admin/Transactions'
+import ViewAllTicketPage from 'src/pages/ViewAllTicketPage'
 
 type RouteType = {
   path: string
@@ -73,6 +74,10 @@ const publicRoutes: RouteType[] = [
   {
     path: '/blog-page',
     element: <BlogPage />
+  },
+  {
+    path: '/view-all-ticket',
+    element: <ViewAllTicketPage />
   },
 ]
 

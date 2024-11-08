@@ -13,16 +13,17 @@ const TicketCard: React.FC<TicketCardProps> = ({ ticket }) => {
   
   return (
     <Link to={`/ticket-detail/${ticket.id}`} key={ticket.id}>
-      <Card className='w-[306px] h-[297px]' shadow='md' >
+      <Card 
+        className='w-[306px] h-[297px] transition-all duration-300 hover:scale-105 hover:shadow-xl cursor-pointer' 
+        shadow='md'
+      >
         <CardHeader className='flex-col items-start justify-center'>
           <Image
             alt='Card background'
-            className='object-cover rounded-xl mx-auto '
-            // src= {ticket.image} 
-            src='https://nextui.org/images/hero-card.jpeg'
+            className='object-cover rounded-xl mx-auto'
+            src= {ticket.image}
             width={306}
             height={200}
-            
           />
         </CardHeader>
         <CardBody className='overflow-visible py-2'>

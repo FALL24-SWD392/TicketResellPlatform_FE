@@ -1,5 +1,5 @@
 
-import { Image } from '@nextui-org/react'
+import { Button, Image, Link } from '@nextui-org/react'
 import { HiCalendarDays, HiCheck, HiChevronDown, HiMapPin } from 'react-icons/hi2'
 import { UserList } from 'src/@types/users.type'
 import TicketContainer from 'src/Components/ticket/TicketContainer'
@@ -63,6 +63,16 @@ const Home = () => {
           </ul>
         </div>
         <TicketContainer/>
+        <div className="flex justify-center w-full my-10">
+        <Link href="/view-all-ticket" className="flex justify-center w-full my-10">
+  <Button 
+    className="w-[80%] h-[50px] bg-secondary text-white font-semibold 
+    hover:bg-green-darkHover transition-all duration-300 rounded-xl text-lg"
+  >
+    SEE MORE
+  </Button>
+</Link>
+  </div>
       </div>
     </>
   )
