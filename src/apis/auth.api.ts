@@ -28,5 +28,6 @@ const authAPI = {
   GetAllSubscription: () => http.get<ListBaseResponse<SubList>>("api/subscriptions?page&size"),
   PaySubscription : ({subscriptionId}:{subscriptionId: string }) => http.get<ItemBaseResponse<{}>>(`api/subscriptions/purchase-subscription?subscriptionId=${subscriptionId}`),
   GetAllTicketByStatus: (status: string) => http.get<ListBaseResponse<SubList>>(`api/tickets/admin?status=${status}`),
+  //Gettransaction: () => http.get<ListBaseResponse<{}>>(`api/transactions`),
   }
 export default authAPI

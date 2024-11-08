@@ -20,7 +20,10 @@ const SidebarAdmin: React.FC = () => {
           <Button className='w-full text-left text-lg text-gray-500 mb-4'>Subscriptions</Button>
         </Link>
         <Link to='/manager-tickets'>
-          <Button className='w-full text-left text-lg text-gray-500'>Manager Tickets</Button>
+          <Button className='w-full text-left text-lg text-gray-500 mb-4'>Manager Tickets</Button>
+        </Link>
+        <Link to='/transactions'>
+          <Button className='w-full text-left text-lg text-gray-500 mb-4'>Transactions</Button>
         </Link>
       </div>
 
