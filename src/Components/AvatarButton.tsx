@@ -1,6 +1,7 @@
 import { Avatar, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@nextui-org/react'
 import { Link } from 'react-router-dom'
 import { User } from 'src/@types/users.type'
+import { getProfileFormLS } from 'src/utils/auth'
 
 type Props = {
     profile: User | null
@@ -10,7 +11,7 @@ const AvatarButton = ({...props}: Props) => {
   return (
     <Dropdown placement='bottom-end'>
       <DropdownTrigger>
-        <Avatar isBordered as='button' className='transition-transform' color='secondary' name='Jason Hughes' size='sm' src={props.profile?.avatar} />
+        <Avatar isBordered as='button' className='transition-transform' color='secondary' name='Jason Hughes' size='sm' src={localStorage.getItem("avatar")} />
       </DropdownTrigger>
       <DropdownMenu aria-label='Profile Actions' variant='flat'>
         <DropdownItem key='profile' className='h-14 gap-2'>

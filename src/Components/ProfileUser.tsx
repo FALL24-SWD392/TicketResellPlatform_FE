@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react'
 import { Button } from '@nextui-org/react'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import userAPI from 'src/apis/user.api'
-import { imageDB } from 'src/firebase'
+import chatapp from 'src/utils/chatapp.config'
 import { v4 } from 'uuid'
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
+import { getProfileFormLS } from 'src/utils/auth'
 
 const ProfileUser = () => {
   const { data } = useQuery({
@@ -17,7 +18,7 @@ const ProfileUser = () => {
   })
 
   const [isImageModalOpen, setIsImageModalOpen] = useState(false)
-  const [avatars, setAvatars] = useState(`${data?.data.data.avatar}`)
+  const [avatars, setAvatars] = useState(`${getProfileFormLS()?.avatar}`)
   console.log(avatars)
   useEffect(() => {
     const storedAvatar = localStorage.getItem('avatar')
@@ -28,7 +29,7 @@ const ProfileUser = () => {
 
   const handleChangeImage = async (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
-      const imgRef = ref(imageDB, `images/${v4()}`)
+      const imgRef = ref(chatapp.imageDB, `images/${v4()}`)
       await uploadBytes(imgRef, event.target.files[0]).then((value) => {
         getDownloadURL(value.ref).then((url) => {
           setAvatars(url)

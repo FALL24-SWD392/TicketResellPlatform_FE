@@ -5,6 +5,6 @@ import http from "src/utils/http";
 const userAPI ={
     getMe: () => http.get<ItemBaseResponse<UserProfile>>('api/users/myInfo'),
     updateProfile: (body: {avatar: string}) => http.put<ItemBaseResponse<UserProfile>>('api/users/myInfo', body),
-    getMembership: () => http.get<ItemBaseResponse<MyMembership>>('api/memberships/user')
+    getMembership: () => http.get<ItemBaseResponse<MyMembership>>('api/tickets/user-membership'),
 }
 export default userAPI;
