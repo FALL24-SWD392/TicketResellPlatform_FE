@@ -6,6 +6,7 @@ import { ItemBaseResponse, ListBaseResponse } from 'src/@types/response'
 import { CreateStaffSchema, RegisterSchema } from 'src/utils/rules';
 import { FormDataForgot } from 'src/pages/ForgotPasswordPage'
 import {  SubList, UserList } from 'src/@types/users.type'
+import { FormResetPassword } from 'src/pages/ResetPassword'
 const authAPI = {
   login: (body: FormData) =>
     http.post<
@@ -17,9 +18,9 @@ const authAPI = {
   register: (body: Omit<RegisterSchema, 'confirmPassword'>) => http.post<ListBaseResponse<{}>>('api/auth/register', body),
   logout: (body: {token: string}) => http.post<ListBaseResponse<{message: string}>>('api/auth/logout', body),
   
-  changePassword: (body: FormDataChange) => http.put<ListBaseResponse<{}>>("api/auth/password/change", body),
-  ResetPassword: (body: FormDataChange) => http.put<ListBaseResponse<{}>>("/api/auth/password/reset", body),
-  ForgotPassword: (body: FormDataForgot) =>http.put<ListBaseResponse<{}>>('/api/auth/password/forgot', body),
+  changePassword: (body: FormDataChange) => http.put<ItemBaseResponse<{}>>("api/auth/password/change", body),
+  ResetPassword: (body: FormResetPassword) => http.put<ItemBaseResponse<{}>>("/api/auth/password/reset", body),
+  ForgotPassword: (body: FormDataForgot) =>http.put<ItemBaseResponse<{}>>('/api/auth/password/forgot', body),
 
   GetAllUser: () => http.get<ListBaseResponse<UserList>>('api/users?direction=ASC&properties=role&properties=status'),
   DeleteUser: (body: {username?: string}) => http.delete<ListBaseResponse<{}>>(`api/users`, { data: body }),

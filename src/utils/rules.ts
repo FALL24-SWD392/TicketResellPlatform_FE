@@ -90,6 +90,16 @@ export const ChangePasswordSchemaYup = yup.object().shape({
 })
 export type ChangePasswordSchema = yup.InferType<typeof ChangePasswordSchemaYup>
 
+export const ResetPasswordSchemaYup = yup.object().shape({
+  token: yup.string().required('Token is required!'),
+  newPassword: yup.string().required('New password is required!').min(8, 'Password must be at least 8 characters'),
+  confirmPassword: yup
+    .string()
+    .required('Confirm password is required!')
+    .oneOf([yup.ref('newPassword')], 'Confirm password must be same new password!')
+})
+export type ResetPasswordSchema = yup.InferType<typeof ResetPasswordSchemaYup>
+
 
 export const ForgotSchemaYup = yup.object().shape({
   email: yup.string().required('Email is required!').email('Invalid email!'),

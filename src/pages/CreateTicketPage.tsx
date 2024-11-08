@@ -12,10 +12,11 @@ import { v4 } from 'uuid'
 import demo from 'src/assets/images/demoImage.jpg'
 import { imageDB } from 'src/firebase'
 const initForm = {
+  seller_id: '',
   title: '',
-  exp_date: dayjs(new Date(), 'DD/MM/YYYY'),
-  unit_price: '',
+  exp_date: dayjs(new Date()),
   type: 'VOUCHER',
+  unitPrice: "",
   quantity: "",
   description: '',
   image: ''
@@ -25,10 +26,12 @@ const CreateTicketPage = () => {
   const { profile } = useContext(AppContext)
   const [previewImage, setPreviewImage] = useState<string | null>(null)
   const [form, setForm] = useState<typeof initForm>(initForm)
+
   const createTicketMutation = useMutation({
     mutationFn: (body: CreateTicket) => ticketAPI.createTicket(body)
   })
-  const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+
+  const handleChangeImage = async (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
       const imgRef = ref(imageDB, `images/${v4()}`)
       await uploadBytes(imgRef, event.target.files[0]).then((value) => {
@@ -50,7 +53,7 @@ const CreateTicketPage = () => {
   const onChangeDate: DatePickerProps['onChange'] = (date) => {
     setForm((prevForm) => ({
       ...prevForm,
-      dateExpire: date as any
+      exp_date: dayjs(new Date())
     }))
     console.log(date)
   }
@@ -61,9 +64,8 @@ const CreateTicketPage = () => {
     event.preventDefault()
     const bodyCreateTicket = {
       ...form,
-      exp_date: form.exp_date.format('DD/MM/YYYY'),
+      seller_id: profile?.id,
       type: form.type ? form.type : 'VOUCHER',
-      unit_price: form.unit_price ? form.unit_price : 0,
       image: previewImage
     }
     createTicketMutation.mutate(bodyCreateTicket as any, {
@@ -95,7 +97,7 @@ const CreateTicketPage = () => {
           ) : (
             <img src={demo} alt='thumnal_event' className='h-[286px] w-[375px] rounded-[30px] object-cover mb-[40px]' />
           )}
-          <input type='file' className='absolute opacity-0 top-0 left-0 w-full h-full cursor-pointer' onChange={handleChange} />
+          <input type='file' className='absolute opacity-0 top-0 left-0 w-full h-full cursor-pointer' onChange={handleChangeImage} />
         </div>
         <Input
           size='lg'
@@ -110,11 +112,11 @@ const CreateTicketPage = () => {
           type='text'
           className=' outline-none border-none text-end  [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none'
           placeholder='Free'
-          value={form.unit_price}
+          value={form.unitPrice}
           onChange={(event) => {
             setForm((prev) => ({
               ...prev,
-              unit_price: event.target.value
+              unitPrice: event.target.value
             }))
           }}
         />

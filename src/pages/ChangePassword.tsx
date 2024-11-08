@@ -32,7 +32,7 @@ const ChangePassword = () => {
       onSuccess: (data) => {
         nagivate('/login')
         toast.success(data.data.message)
-        authAPI.logout(getAccessTokenFromLS())
+        authAPI.logout({ token: getAccessTokenFromLS() })
       },
       onError: (error) => {
         if (isAxiosUnprocessableEntityError<ErrorResponse<FormDataChange>>(error)) {
@@ -43,14 +43,13 @@ const ChangePassword = () => {
     })
   })
   return (
-    <div>
-      <h1>Change Password</h1>
+    <div className='mt-10 mb-10'>
+      <h1 className='text-center '>Change Password</h1>
       <form noValidate onSubmit={onSubmit} className='mt-5'>
         <div className='w-full flex flex-col items-center gap-5'>
           <Input isRequired type='password' label='Old Password' className='max-w-xs' {...register('oldPassword', { required: true })} />
           <Input isRequired type='password' label='New Password' className='max-w-xs' {...register('newPassword', { required: true })} />
           <Input isRequired type='password' label='Confirm Password' className='max-w-xs' {...register('confirmPassword', { required: true })} />
-
           <Button type='submit'>Submit</Button>
           
 
