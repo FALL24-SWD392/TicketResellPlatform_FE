@@ -10,7 +10,7 @@ interface ChatBoxProps{
 export default ({user, chatId} : ChatBoxProps) => {
   return (
     <div className='flex container-2xl rounded-xl overflow-hidden my-5 shadow-2xl'>
-      <ChatSideBar user={user}/>
+      <ChatSideBar chatId={chatId} user={user}/>
       <ChatWindow chatId={chatId} user={user}/>
     </div>
   )

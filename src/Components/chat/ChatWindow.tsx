@@ -1,11 +1,12 @@
 import useFirestore from 'src/hooks/useFirestore'
 import { MessageBox } from '.'
 import { Message } from 'src/@types/chat.type'
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import { User } from 'src/@types/users.type'
-import { addDocument } from 'src/utils/chatapp.service'
+import { addDocument, updateDocument } from 'src/utils/chatapp.service'
 import { Timestamp, WhereFilterOp } from '@firebase/firestore'
+import { format } from 'date-fns'
 interface ChatWindowProps {
   chatId?: string
   user: User
@@ -28,11 +29,11 @@ export default ({ chatId, user }: ChatWindowProps) => {
   const [message, setMessage] = useState<string>('')
 
   const scrollToBottom = () => {
-    const messagesElement = document.getElementById('messages');
+    const messagesElement = document.getElementById('messages')
     if (messagesElement) {
-      messagesElement.scrollTop = messagesElement.scrollHeight;
+      messagesElement.scrollTop = messagesElement.scrollHeight
     }
-  };
+  }
 
   useEffect(() => {
     scrollToBottom()
@@ -49,22 +50,25 @@ export default ({ chatId, user }: ChatWindowProps) => {
       text: message,
       createAt: new Timestamp(new Date().getTime() / 1000, 0)
     }
-    console.log(newMessage)
     addDocument('messages', newMessage)
+    chatroom.messages = [...chatroom.messages, newMessage]
+    updateDocument('chatrooms', chatroom.docId, chatroom)
     setMessage('')
   }
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMessage(e.target.value)
   }
+  const time = chatroom?.createAt.seconds as number;
+  const createdAt = time && format(new Date(time * 1000), 'dd/MM/yyyy HH:mm')
   return (
-    <div className='w-2/3 bg-white-light h-screen p-2'>
+    <div className='w-2/3 bg-white-light h-[48rem] p-3'>
       {chatId ? (
-        <div className='border-b-1 border-white-dark flex  flex-row justify-between items-center'>
+        <div className='border-b-1 border-white-dark flex  flex-row justify-between items-centerp pb-3'>
           <div className='flex flex-row justify-center items-center'>
             <img src='https://placehold.co/400' alt='' className='w-10 h-10 rounded-full' />
             <div className='flex flex-col ml-2'>
-              <h1 className='text-lg'>{chatroom && chatroom.displayName}</h1>
-              <p className='text-sm text-black-lightActive'>Active</p>
+              <h1 className='text-lg'>{chatroom?.displayName}</h1>
+              <p className='text-sm text-black-lightActive'>{createdAt}</p>
             </div>
           </div>
           {chatroom && chatroom.sellerId === user.id && (
@@ -83,7 +87,7 @@ export default ({ chatId, user }: ChatWindowProps) => {
         <div id='messages' className='chat-message overflow-y-scroll scrollbar-hide'>
           {chatId ? (
             messages.map((message: Message) => {
-              return <MessageBox key={message.id} message={message} />
+              return <MessageBox key={message.id} message={message} user={user}/>
             })
           ) : (
             <p className='text-center'>Select a chat to start messaging</p>
@@ -93,7 +97,7 @@ export default ({ chatId, user }: ChatWindowProps) => {
           <form onSubmit={formSubmit} className='mt-5'>
             <div className='flex'>
               <input
-                className='w-3/4 mt-3 border-1 p-1 rounded-l-lg border-white-normalActive border-r-0'
+                className='w-3/4 mt-3 border-1 p-1 rounded-l-lg border-white-normalActive border-r-0 focus:outline-none'
                 placeholder='Chat with opponent...'
                 onChange={handleChange}
                 value={message}

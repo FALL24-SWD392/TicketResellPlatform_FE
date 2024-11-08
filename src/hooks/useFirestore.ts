@@ -18,7 +18,10 @@ const useFirestore = (collectionPath: string, condition?: Condition) => {
       collectionRef = query(collectionRef, where(condition.field, condition.operator, condition.value))
     }
     const unsubscribe = onSnapshot(collectionRef, (snapshot) => {
-      const data = snapshot.docs.map((doc) => doc.data())
+      const data : any[] = []
+      snapshot.docs.forEach((doc) => {
+        data.push({ ...doc.data(), docId: doc.id })
+      })
       setDocument(data)
     })
 
