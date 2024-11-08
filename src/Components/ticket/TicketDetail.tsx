@@ -76,8 +76,10 @@ const TicketDetail = ({ ticket }: Props) => {
   const dateSplit = date.split('/')
   const [dayStr, monthStr, yearStr] = dateSplit.map((item) => item.trim())
   const dateObj = new Date(`${yearStr}-${monthStr}-${dayStr}`)
-  return (
-    <div className='max-w-3xl mx-auto bg-white shadow-2xl rounded-lg p-6'>
+  console.log(ticket.avatar)
+    return (
+      
+        <div className="max-w-3xl mx-auto bg-white shadow-2xl rounded-lg p-6">
       {/* Product Images */}
       <div className='flex flex-col sm:flex-row gap-6'>
         <div className='w-full sm:w-1/2'>
@@ -93,18 +95,20 @@ const TicketDetail = ({ ticket }: Props) => {
         <div className='w-full sm:w-1/2'>
           <h1 className='text-2xl font-bold'>{ticket.title}</h1>
           <p></p>
-          <p className='text-gray-500 mt-1'>{date}</p>
-          <p className='text-gray-500 mt-1'>{time}</p>
-          <p className='text-red-600 text-xl font-semibold mt-2'>{ticket.unitPrice}</p>
-          <p className='text-sm text-gray-500 mt-1'>{ticket.updatedAt}</p>
-          <button className='mt-4 px-6 py-2 bg-green-600 text-white rounded-lg shadow-md hover:bg-green-700' onClick={contactSeller}>
+          <p className="text-gray-500 mt-1">{date}</p>
+          <p className="text-gray-500 mt-1">{time}</p>
+          <p className="text-red-600 text-xl font-semibold mt-2">{ticket.unitPrice}</p>
+          <p className="text-sm text-gray-500 mt-1">{ticket.updatedAt}</p>
+          <button className="mt-4 px-6 py-2 bg-green-600 text-white rounded-lg shadow-md hover:bg-green-700">
             Lien he
           </button>
-          <button className='mt-4 ml-2 px-6 py-2 bg-gray-300 text-gray-700 rounded-lg shadow-md hover:bg-gray-400'>Mua ngay</button>
-          <div className='mt-4 flex items-center gap-1'>
-            <span className='font-semibold'>Banafoods</span>
-            <span className='text-yellow-500'>&#9733; 5</span>
-            <span className='text-gray-500'>(1 đánh giá)</span>
+          <button className="mt-4 ml-2 px-6 py-2 bg-gray-300 text-gray-700 rounded-lg shadow-md hover:bg-gray-400">
+            Mua ngay
+          </button>
+          <div className="mt-4 flex items-center gap-1">
+            <span className="font-semibold">Banafoods</span>
+            <span className="text-yellow-500">&#9733; 5</span>
+            <span className="text-gray-500">({ticket.rating})</span>
           </div>
         </div>
       </div>

@@ -11,12 +11,13 @@ const ProfileUser = () => {
     queryKey: ['get-profile'],
     queryFn: () => userAPI.getMe()
   })
+  console.log(data)
   const updateProfileMutation = useMutation({
     mutationFn: (body: { avatar: string }) => userAPI.updateProfile(body)
   })
 
   const [isImageModalOpen, setIsImageModalOpen] = useState(false)
-  const [avatars, setAvatars] = useState(`${data?.data.data?.avatar}` || 'https://i.pravatar.cc/300')
+  const [avatars, setAvatars] = useState(`${data?.data.data.avatar}`)
   console.log(avatars)
   useEffect(() => {
     const storedAvatar = localStorage.getItem('avatar')
@@ -68,31 +69,8 @@ const ProfileUser = () => {
                   <label htmlFor='first_name' className='block mb-2 text-sm font-medium text-indigo-900'>
                     User Name
                   </label>
-                  <p className='text-black-darkHover'>{data?.data.data?.username}</p>
-                  {/* <input
-                      type='text'
-                      id='first_name'
-                      className='bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5'
-                      placeholder='Your first name'
-                      value={data?.data.data.user.username}
-                      
-                      required
-                    /> */}
+                  <p className='text-black-darkHover'>{data?.data.data.username}</p>
                 </div>
-                {/* <div className='w-full'>
-                    <label htmlFor='last_name' className='block mb-2 text-sm font-medium text-indigo-900'>
-                      Your last name
-                    </label>
-                    <input
-                      type='text'
-                      id='last_name'
-                      className='bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5'
-                      placeholder='Your last name'
-                      value={lastName}
-                      onChange={(e) => setLastName(e.target.value)}
-                      required
-                    />
-                  </div> */}
               </div>
 
               <div className='mb-2 sm:mb-6'>
@@ -134,12 +112,7 @@ const ProfileUser = () => {
                   {data?.data.data.rating}
                 </p>
               </div>
-
-              <div className='flex justify-end'>
-                {/* <Button radius='md' size='md' color='success' onClick={handleSave}>
-                    Save
-                  </Button> */}
-              </div>
+              <div className='flex justify-end'></div>
             </div>
           </div>
         </div>
