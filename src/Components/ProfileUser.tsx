@@ -15,7 +15,6 @@ const ProfileUser = () => {
     mutationFn: (body: { avatar: string }) => userAPI.updateProfile(body)
   })
 
-  const [email, setEmail] = useState(`${data?.data.data.email}` || 'your.email@mail.com')
   const [isImageModalOpen, setIsImageModalOpen] = useState(false)
   const [avatars, setAvatars] = useState(`${data?.data.data?.avatar}` || 'https://i.pravatar.cc/300')
   console.log(avatars)
@@ -105,7 +104,7 @@ const ProfileUser = () => {
                   id='email'
                   className='bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5'
                   placeholder='your.email@mail.com'
-                  value={email}
+                  value={data?.data.data.email}
                   required
                 />
               </div>

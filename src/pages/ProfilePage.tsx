@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { Button } from '@nextui-org/react'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import userAPI from 'src/apis/user.api'
 import { imageDB } from 'src/firebase'
@@ -93,7 +92,7 @@ const ProfilePage: React.FC = () => {
           </NavLink>
         </div>
       </aside>
-      <main className='w-full min-h-screen py-1 md:w-2/3 lg:w-3/4'>
+      <main className='w-full min-h-[500px] py-1 md:w-2/3 lg:w-3/4'>
         <Routes>
           <Route index element={<ProfileUser />} />
           <Route path='membership' element={<MembershipPage />} />

@@ -21,6 +21,14 @@ export type ProfileUpdate = {
   avatar: string
 }
 
+export type MyMembership ={
+  id?: string,
+  subscriptionName: string,
+  saleRemain: number,
+  startDate: Date, 
+  endDate: Date,
+}
+
 export type SubList = {
   id: String
   name: string
