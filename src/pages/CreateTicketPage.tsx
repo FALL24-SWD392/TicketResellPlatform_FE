@@ -10,7 +10,8 @@ import ticketAPI from 'src/apis/ticket.api'
 import { AppContext } from 'src/context/app.context'
 import { v4 } from 'uuid'
 import demo from 'src/assets/images/demoImage.jpg'
-import { imageDB } from 'src/firebase'
+import chatapp from 'src/utils/chatapp.config'
+
 const initForm = {
   title: '',
   exp_date: dayjs(new Date(), 'DD/MM/YYYY'),
@@ -23,6 +24,7 @@ const initForm = {
 }
 
 const CreateTicketPage = () => {
+  const imageDB = chatapp.imageDB
   const { profile } = useContext(AppContext)
   const [previewImage, setPreviewImage] = useState<string | null>(null)
   const [form, setForm] = useState<typeof initForm>(initForm)
@@ -119,7 +121,7 @@ const CreateTicketPage = () => {
             }))
           }}
         />
-         <Input
+        <Input
           type='text'
           className=' outline-none border-none text-end  [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none'
           placeholder='Quantity'
@@ -145,7 +147,7 @@ const CreateTicketPage = () => {
         />
         <DatePicker label={'Birth date'} className='max-w-[284px]' labelPlacement='outside' onChange={onChangeDate} />
 
-        <Button type='submit' > Create Ticket</Button>
+        <Button type='submit'> Create Ticket</Button>
       </form>
     </div>
   )

@@ -10,8 +10,6 @@ interface TicketCardProps {
 const TicketCard: React.FC<TicketCardProps> = ({ ticket }) => {
   const date = dayjs(ticket.expDate).format('DD MMM YYYY')
   const time = dayjs(ticket.expDate).format('h:mm A')
-  console.log(date)
-  console.log(time)
   
   return (
     <Link to={`/ticket-detail/${ticket.id}`} key={ticket.id}>
@@ -29,7 +27,7 @@ const TicketCard: React.FC<TicketCardProps> = ({ ticket }) => {
         </CardHeader>
         <CardBody className='overflow-visible py-2'>
           <p className='text-tiny uppercase font-bold'>{ticket.title}</p>
-          <small className='text-green-darkHover '>{ticket.unit_price} VND</small>
+          <small className='text-green-darkHover '>{ticket.unitPrice} VND</small>
           <small className=''>{date} - {time}</small>
         </CardBody>
       </Card>
