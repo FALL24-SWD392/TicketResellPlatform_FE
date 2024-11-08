@@ -9,7 +9,7 @@ const SidebarStaff = () => {
       <nav>
         <ul className="space-y-[30px]">
           <li>
-            <Link to="/staff/dashboard">
+            <Link to="/staff">
               <Button className="w-full flex items-center gap-3 text-left text-lg text-gray-400 hover:text-white">
                 🏠 Dashboard
               </Button>
