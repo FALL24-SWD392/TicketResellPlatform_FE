@@ -18,3 +18,6 @@ export { default as ManagerTicket} from "./admin/ManagerTicket"
 export { default as blog} from "./BlogPage"
 export { default as subscriptions} from "./admin/Subscriptions"
 export { default as transactions} from "./admin/Transactions"
+
+//user
+export { default as MembershipPage } from './MembershipPage'

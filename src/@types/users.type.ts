@@ -8,17 +8,17 @@ export interface User {
   avatar?: string
   rating?: number
   username?: string
+  reputation?: number
   role?: string
   status: 'VERIFIED' | 'REMOVED' | 'UNVERIFIED'
 }
 
-export type UserList = Pick<User,'id'| 'sub' | 'email' | 'avatar' | 'rating' | 'username' | 'role' | 'rating' | 'status'>
+export type UserList = Pick<User, 'id' | 'sub' | 'email' | 'avatar' | 'rating' | 'username' | 'role' | 'rating' | 'status'>
+export type UserProfile = Pick<User, 'email' | 'username' | 'avatar' | 'status' | 'role' | 'rating' | 'reputation'>
 
 export type ProfileUpdate = {
-  user_name: string
-  email: string
-  phone_number: string
-  date_of_birth: string
+  username: string
+  avatar: string
 }
 
 export type SubList = {
