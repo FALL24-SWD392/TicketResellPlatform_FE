@@ -32,7 +32,7 @@ const TicketContainer: React.FC = () => {
   })
 
   useEffect(() => {
-    getAllTicketMutation.mutate({ page: 1, size:10 })
+    getAllTicketMutation.mutate({ page: 1, size:9 })
   }, [size, page])
   console.log(ticketData)
   return ( 

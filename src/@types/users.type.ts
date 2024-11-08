@@ -12,7 +12,7 @@ export interface User {
   status: 'VERIFIED' | 'REMOVED' | 'UNVERIFIED'
 }
 
-export type UserList = Pick<User,'id'| 'sub' | 'email' | 'avatar' | 'rating' | 'username' | 'role' | 'rating' | 'status'>
+export type UserList = Pick<User,'id'| 'sub' | 'email' | 'avatar' | 'rating' | 'username' | 'role' | 'status'>
 
 export type ProfileUpdate = {
   user_name: string
