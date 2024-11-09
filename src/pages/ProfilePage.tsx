@@ -33,16 +33,17 @@ const ProfilePage: React.FC = () => {
             Transactions
           </NavLink>
           <NavLink
-            role='tab'
-            className={({ isActive }) =>
-              isActive
-                ? 'tab tab-active flex items-center px-3 py-2.5 font-semibold hover:text-indigo-900 hover:border hover:rounded-full'
-                : 'tab flex items-center px-3 py-2.5 font-semibold hover:text-indigo-900 hover:border hover:rounded-full'
-            }
-            to=''
-          >
-            Your Tickets
-          </NavLink>
+  role='tab'
+  className={({ isActive }) =>
+    isActive
+      ? 'tab tab-active flex items-center px-3 py-2.5 font-semibold hover:text-indigo-900 hover:border hover:rounded-full'
+      : 'tab flex items-center px-3 py-2.5 font-semibold hover:text-indigo-900 hover:border hover:rounded-full'
+  }
+  to='/my-ticket'  // Updated path to the "Your Tickets" page
+>
+  Your Tickets
+</NavLink>
+
           <NavLink
             role='tab'
             className={({ isActive }) =>
