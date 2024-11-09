@@ -12,12 +12,14 @@ import { useMutation } from '@tanstack/react-query'
 import { toast } from 'react-toastify'
 import { RxAvatar } from 'react-icons/rx'
 import { BsChatLeftTextFill } from 'react-icons/bs'
+
 interface Props {
   isBlur?: boolean
   className?: string
   _id?: string
   name?: string
 }
+
 const NavBar = ({ ...props }: Props) => {
   const menuItems = [
     'Profile',
@@ -46,13 +48,13 @@ const NavBar = ({ ...props }: Props) => {
       toast.error('Logout failed')
     }
   })
+
   const handleLogout = () => {
-    console.log('logout');
     const refresh_token = getRefreshTokenFromLS()
-    console.log(refresh_token)
     logoutMutation.mutate(refresh_token)
     navigate('/')
   }
+
   return (
     <div className='bg-gradient_header w-full'>
       <Navbar isBordered isBlurred={props.isBlur || false} className='bg-transparent' maxWidth='2xl'>
@@ -89,8 +91,8 @@ const NavBar = ({ ...props }: Props) => {
             </Link>
           </NavbarItem>
           <NavbarItem>
-            <Link className='text-black text' href='/chat'>
-              Chat
+            <Link className='text-black text' href='/create-ticket'>
+              Create Ticket
             </Link>
           </NavbarItem>
           <NavbarItem>
@@ -109,6 +111,7 @@ const NavBar = ({ ...props }: Props) => {
             </Link>
           </NavbarItem>
         </NavbarContent>
+        
         <NavbarContent justify='end'>
           {!isAuthenticated ? (
             <NavbarContent as='div' justify='end'>
