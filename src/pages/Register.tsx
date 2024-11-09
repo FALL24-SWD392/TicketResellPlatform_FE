@@ -79,6 +79,13 @@ const Register = () => {
     await loginGoogleMutation.mutate(body, {
       onSuccess: (data) => {
         setIsAuthenticated(true)
+        const {accessToken, refreshToken} = data.data.data
+        console.log(accessToken, refreshToken)
+        localStorage.setItem('accessToken', accessToken)
+        localStorage.setItem('refreshToken', refreshToken)
+        const user = jwtDecode(accessToken)
+        console.log(user)
+        localStorage.setItem('profile', JSON.stringify(user))
         if (getProfileFormLS()?.scope === 'ADMIN') {
           toast.success(data.data.message)
           navigate('/admin')

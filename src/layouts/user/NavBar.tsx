@@ -52,6 +52,7 @@ const NavBar = ({ ...props }: Props) => {
   const handleLogout = () => {
     const refresh_token = getRefreshTokenFromLS()
     logoutMutation.mutate(refresh_token)
+    
     navigate('/')
   }
 
@@ -88,6 +89,11 @@ const NavBar = ({ ...props }: Props) => {
           <NavbarItem>
             <Link className='text-black text' href='/my-ticket'>
               Your Tickets
+            </Link>
+          </NavbarItem>
+          <NavbarItem>
+            <Link className='text-black text' href='/chat'>
+              Your Chats
             </Link>
           </NavbarItem>
           <NavbarItem>

@@ -65,6 +65,10 @@ export default ({ chatId, user }: ChatWindowProps) => {
       toast.error('This chat has been cancelled')
       return
     }
+    if (!message) {
+      toast.error('Message cannot be empty')
+      return
+    }
     const newMessage: Message = {
       id: uuidv4(),
       chatroomId: chatId || '',
@@ -127,6 +131,7 @@ export default ({ chatId, user }: ChatWindowProps) => {
         const res = data.data
         if (res.data.status == 'COMPLETED') {
           toast.success('Order successfully creted')
+          const orderId = res.data.id
           chatroom.status = ChatBoxStatus.DELIVERING
           await updateDocument('chatrooms', chatroom.docId, chatroom)
         }
@@ -158,7 +163,7 @@ export default ({ chatId, user }: ChatWindowProps) => {
             </div>
           </div>
           {chatroom && chatroom.sellerId === user.id && (
-            <div>
+            <div className='flex flex-row justify-center items-center'>
               {chatroom.status != 'DELIVERING' && chatroom.status != 'SUCCESS' &&(<button
                   className='bg-gradient_header text-white rounded-[2rem] border-1 p-2 px-8 border-white-normalActive hover:bg-graident_header_hover'
                   onClick={handleCancelChat}

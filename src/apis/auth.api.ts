@@ -22,7 +22,7 @@ const authAPI = {
         data: { accessToken: string; refreshToken: string }
         message: string
       }>
-    >('api/auth/login/google', { body }),
+    >('api/auth/login/google', body ),
   register: (body: Omit<RegisterSchema, 'confirmPassword'>) => http.post<ListBaseResponse<{}>>('api/auth/register', body),
   logout: (body: { token: string }) => http.post<ListBaseResponse<{ message: string }>>('api/auth/logout', body),
 

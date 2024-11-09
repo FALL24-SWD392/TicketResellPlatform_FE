@@ -60,6 +60,7 @@ const TicketDetail = ({ ticket }: Props) => {
       const existingChatroom = chatrooms.find(
         (chatroom: ChatRoom) =>
           chatroom.ticketId === newChatroom.ticketId && chatroom.buyerId === newChatroom.buyerId && chatroom.sellerId === newChatroom.sellerId
+         && (chatroom.status == ChatBoxStatus.PENDING || chatroom.status == ChatBoxStatus.PROCESSING || chatroom.status == ChatBoxStatus.DELIVERING)
       )
       if (existingChatroom) {
         navigate(`/chat/${existingChatroom.id}`)

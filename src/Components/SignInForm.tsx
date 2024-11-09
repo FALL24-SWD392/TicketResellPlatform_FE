@@ -15,6 +15,7 @@ import { toast } from 'react-toastify'
 import { getProfileFormLS } from 'src/utils/auth'
 import { isAxiosUnprocessableEntityError } from 'src/utils/utils'
 import { ErrorResponse } from 'src/@types/utils.type'
+import { jwtDecode } from 'jwt-decode'
 
 export interface LoginGoogleBody{
   email: string,
@@ -53,6 +54,13 @@ const SignInForm = ({
     await loginGoogleMutation.mutate(loginBody, {
       onSuccess: (data) => {
         console.log(data)
+        const {accessToken, refreshToken} = data.data.data
+        console.log(accessToken, refreshToken)
+        localStorage.setItem('accessToken', accessToken)
+        localStorage.setItem('refreshToken', refreshToken)
+        const user = jwtDecode(accessToken)
+        console.log(user)
+        localStorage.setItem('profile', JSON.stringify(user))
         setIsAuthenticated(true)
         if (getProfileFormLS()?.scope === 'ADMIN') {
           toast.success(data.data.message)
