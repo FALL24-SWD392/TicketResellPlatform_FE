@@ -30,7 +30,4 @@ const chatapp = {
   signInWithPopup
 }
 firestore.app.automaticDataCollectionEnabled = true
-if (window.location.hostname === 'localhost') {
-  connectFirestoreEmulator(firestore, 'localhost', 2707)
-}
 export default chatapp
