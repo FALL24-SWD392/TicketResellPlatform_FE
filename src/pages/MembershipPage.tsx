@@ -2,6 +2,7 @@ import { useMutation, useQuery } from '@tanstack/react-query'
 import dayjs from 'dayjs'
 import React from 'react'
 import userAPI from 'src/apis/user.api'
+import { Link } from 'react-router-dom';
 
 const MembershipPage = () => {
   const { data } = useQuery({
@@ -39,11 +40,13 @@ const MembershipPage = () => {
         </div>
 
         {/* Action Button */}
-        <button className='w-full py-3 px-6 bg-green-normalActive from-green-500 to-teal-500 text-white font-semibold rounded-xl 
+        <Link to='/subscriptions'>
+  <button className='w-full py-3 px-6 bg-green-normalActive from-green-500 to-teal-500 text-white font-semibold rounded-xl 
           hover:from-green-600 hover:to-teal-600 transform hover:scale-[1.02] transition-all duration-300 
           focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 shadow-lg'>
-          Upgrade or Renew
-        </button>
+    Upgrade or Renew
+  </button>
+</Link>
       </div>
     </div>
   )

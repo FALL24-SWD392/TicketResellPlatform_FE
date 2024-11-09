@@ -99,7 +99,9 @@ function Subscriptions() {
                       <div className='flex flex-col flex-grow'>
                         <h4 className='text-xl font-bold text-gray-900'>{subscription.name}</h4>
                         <div className='flex items-center gap-2'>
-                          <span className='text-2xl font-bold text-primary'>${Number(subscription.price).toFixed(2)}</span>
+                        <span className='text-2xl font-bold text-primary'>
+  {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(subscription.price)}
+</span>
                           <span className='text-gray-500'>/month</span>
                         </div>
                       </div>
@@ -146,7 +148,7 @@ function Subscriptions() {
                                 <svg className='w-5 h-5' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
                                   <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M5 13l4 4L19 7' />
                                 </svg>
-                                Purchased
+                                Not Available
                               </span>
                             </Button>
                           </>

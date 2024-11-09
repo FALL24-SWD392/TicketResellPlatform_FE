@@ -8,7 +8,7 @@ const ticketAPI = {
     http.get<ListBaseResponse<Ticket>>(
       `api/tickets?category=ALL&page=${page}&size=${size}&name`
     ),
-  getAllTicketAdmin: () => http.get<ListBaseResponse<Ticket>>("api/tickets/admin"),
+  getAllTicketAdmin: () => http.get<ListBaseResponse<Ticket>>("api/tickets/admin?page=1&size=20&direction=DESC&properties=createdAt"),
   getTicketById: (id: string) => http.get<ItemBaseResponse<Ticket>>(`api/tickets/${id}`),
   createTicket: (body: CreateTicket) => http.post<ItemBaseResponse<TicketList>>(`api/tickets`, body),
   getTicketByCateAndName: (name: string , type: string, page: number, size: number) => 
