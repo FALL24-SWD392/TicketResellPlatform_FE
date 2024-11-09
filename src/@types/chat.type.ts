@@ -1,6 +1,7 @@
 import { Timestamp } from "firebase/firestore"
 
 export interface Message {
+  docId?: string
   id: string
   chatroomId: string
   senderId: string
@@ -11,12 +12,13 @@ export interface Message {
 }
 
 export type ChatRoom = {
+  docId?: string
   id: string
   buyerId: string
   sellerId: string
   ticketId: string
   messages: Message[]
-  createAt: Date
+  createAt: Timestamp
   updateAt: Date
   status: ChatBoxStatus
   members: string[]
@@ -26,6 +28,7 @@ export type ChatRoom = {
 export enum ChatBoxStatus {
   PENDING = 'PENDING',
   PROCESSING = 'PROCESSING',
+  DELIVERING = 'DELIVERING',
   SUCCESS = 'SUCCESS',
   CANCELLED = 'CANCELLED'
 }

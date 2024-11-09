@@ -24,7 +24,7 @@ const TicketDetail = ({ ticket }: Props) => {
     sellerId: '',
     id: '',
     messages: [],
-    createAt: new Date(),
+    createAt: new Date() as any,
     updateAt: new Date(),
     status: ChatBoxStatus.PENDING,
     members: [],
@@ -39,7 +39,6 @@ const TicketDetail = ({ ticket }: Props) => {
     }
   }, [ticket])
   const chatrooms = useFirestore('chatrooms', chatroomCondition)
-
   const contactSeller = () => {
     if (!user) {
       navigate('/login')
@@ -53,7 +52,7 @@ const TicketDetail = ({ ticket }: Props) => {
         members: [user.id || '', ticket.sellerId || ''],
         status: ChatBoxStatus.PENDING,
         messages: [],
-        createAt: new Date(),
+        createAt: new Date().getTime() as any,
         updateAt: new Date(),
         displayName: ticket.title || ''
       }
@@ -90,7 +89,6 @@ const TicketDetail = ({ ticket }: Props) => {
             <img src={ticket.image} alt='Thumbnail' className='w-20 h-20 rounded-lg object-cover' />
           </div>
         </div>
-
         {/* Product Info */}
         <div className='w-full sm:w-1/2'>
           <h1 className='text-2xl font-bold'>{ticket.title}</h1>
@@ -99,7 +97,8 @@ const TicketDetail = ({ ticket }: Props) => {
           <p className="text-gray-500 mt-1">{time}</p>
           <p className="text-red-600 text-xl font-semibold mt-2">{ticket.unitPrice}</p>
           <p className="text-sm text-gray-500 mt-1">{ticket.updatedAt}</p>
-          <button className="mt-4 px-6 py-2 bg-green-600 text-white rounded-lg shadow-md hover:bg-green-700">
+          <button className="mt-4 px-6 py-2 bg-green-600 text-white rounded-lg shadow-md hover:bg-green-700"
+            onClick={contactSeller}>
             Lien he
           </button>
           <button className="mt-4 ml-2 px-6 py-2 bg-gray-300 text-gray-700 rounded-lg shadow-md hover:bg-gray-400">
