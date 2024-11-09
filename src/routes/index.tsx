@@ -9,13 +9,15 @@ import {
   CreateTicketPage,
   Home,
   LoginPage,
+  ManageMyTicketPage,
   ProfilePage,
   Register,
   ResetPassword,
   StaffPage,
   TicketApproval,
   TicketDetailPage,
-  Userlist
+  Userlist,
+  YourTicket
 } from 'src/pages'
 // import path from "path";
 import Report from 'src/pages/staff/Report'
@@ -97,6 +99,14 @@ const authenicatedRoutes: RouteType[] = [
   {
     path: '/chat',
     element: <Chat />
+  },
+  {
+    path: '/my-ticket',
+    element: <YourTicket/>
+  },
+  {
+    path: '/manage-my-ticket/:id',
+    element: <ManageMyTicketPage/>
   }
 ]
 

@@ -11,7 +11,7 @@ const AvatarButton = ({...props}: Props) => {
   return (
     <Dropdown placement='bottom-end'>
       <DropdownTrigger>
-        <Avatar isBordered as='button' className='transition-transform' color='secondary' name='Jason Hughes' size='sm' src={localStorage.getItem("avatar")} />
+        <Avatar isBordered as='button' className='transition-transform' color='secondary' name='Jason Hughes' size='sm' src={localStorage.getItem("avatar") || getProfileFormLS()?.avatar} />
       </DropdownTrigger>
       <DropdownMenu aria-label='Profile Actions' variant='flat'>
         <DropdownItem key='profile' className='h-14 gap-2'>

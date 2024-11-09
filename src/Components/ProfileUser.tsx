@@ -18,8 +18,7 @@ const ProfileUser = () => {
   })
 
   const [isImageModalOpen, setIsImageModalOpen] = useState(false)
-  const [avatars, setAvatars] = useState(`${getProfileFormLS()?.avatar}`)
-  console.log(avatars)
+  const [avatars, setAvatars] = useState(`${getProfileFormLS()?.avatar}` || `${data?.data.data.avatar}`)
   useEffect(() => {
     const storedAvatar = localStorage.getItem('avatar')
     if (storedAvatar) {

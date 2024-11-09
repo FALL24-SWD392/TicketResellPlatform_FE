@@ -3,7 +3,7 @@ import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, NavbarMenuToggle,
 import { AvatarButton, Logo } from 'src/Components'
 import { CiMenuBurger } from 'react-icons/ci'
 import { useNavigate } from 'react-router-dom'
-import { getRefreshTokenFromLS } from 'src/utils/auth'
+import { clearLocalStorage, getRefreshTokenFromLS } from 'src/utils/auth'
 import authAPI from 'src/apis/auth.api'
 import { useContext } from 'react'
 import { AppContext } from 'src/context/app.context'
@@ -40,6 +40,7 @@ const NavBar = ({ ...props }: Props) => {
       setIsAuthenticated(false)
       setProfile(null)
       toast.success(data.data.message)
+      clearLocalStorage()
     },
     onError: () => {
       toast.error('Logout failed')
@@ -81,7 +82,7 @@ const NavBar = ({ ...props }: Props) => {
             </Link>
           </NavbarItem>
           <NavbarItem>
-            <Link className='text-black text' href='#'>
+            <Link className='text-black text' href='/my-ticket'>
               Your Tickets
             </Link>
           </NavbarItem>
