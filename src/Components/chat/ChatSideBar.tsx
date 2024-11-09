@@ -2,6 +2,7 @@ import useFirestore from 'src/hooks/useFirestore'
 import { ChatRoom } from '.'
 import { User } from 'src/@types/users.type'
 import { useMemo } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 interface ChatRoomProps {
   user: User
@@ -9,6 +10,7 @@ interface ChatRoomProps {
 }
 
 export default ({ user, chatId }: ChatRoomProps) => {
+  const navigate = useNavigate()
   const roomCondition = useMemo(() => {
     return {
       field: 'members',
@@ -17,6 +19,7 @@ export default ({ user, chatId }: ChatRoomProps) => {
     }
   }, [user])
   const rooms = useFirestore('chatrooms', roomCondition)
+  if(rooms.length === 0) navigate('/chat')
   return (
     <div className='w-1/3 p-6 overflow-y-scroll scrollbar-hide h-[48rem] border-r-1'>
       <p className='text-3xl text-left pl-10 font-bold mb-2'>Chat Rooms</p>

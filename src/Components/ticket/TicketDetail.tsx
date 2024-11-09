@@ -24,7 +24,7 @@ const TicketDetail = ({ ticket }: Props) => {
     sellerId: '',
     id: '',
     messages: [],
-    createAt: new Date(),
+    createAt: new Date() as any,
     updateAt: new Date(),
     status: ChatBoxStatus.PENDING,
     members: [],
@@ -39,7 +39,6 @@ const TicketDetail = ({ ticket }: Props) => {
     }
   }, [ticket])
   const chatrooms = useFirestore('chatrooms', chatroomCondition)
-
   const contactSeller = () => {
     if (!user) {
       navigate('/login')
@@ -53,7 +52,7 @@ const TicketDetail = ({ ticket }: Props) => {
         members: [user.id || '', ticket.sellerId || ''],
         status: ChatBoxStatus.PENDING,
         messages: [],
-        createAt: new Date(),
+        createAt: new Date().getTime() as any,
         updateAt: new Date(),
         displayName: ticket.title || ''
       }

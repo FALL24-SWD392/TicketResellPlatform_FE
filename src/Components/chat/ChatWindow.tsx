@@ -1,12 +1,13 @@
 import useFirestore from 'src/hooks/useFirestore'
 import { MessageBox } from '.'
-import { Message } from 'src/@types/chat.type'
+import { ChatBoxStatus, Message } from 'src/@types/chat.type'
 import { useEffect, useMemo, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import { User } from 'src/@types/users.type'
 import { addDocument, updateDocument } from 'src/utils/chatapp.service'
 import { Timestamp, WhereFilterOp } from '@firebase/firestore'
 import { format } from 'date-fns'
+import { toast } from 'react-toastify'
 interface ChatWindowProps {
   chatId?: string
   user: User
@@ -41,6 +42,10 @@ export default ({ chatId, user }: ChatWindowProps) => {
 
   const formSubmit = (e: React.FormEvent) => {
     e.preventDefault()
+    if (chatroom.status != 'PROCESSING') {
+      toast.error('You can not send message to this chat')
+      return
+    }
     const newMessage: Message = {
       id: uuidv4(),
       chatroomId: chatId || '',
@@ -58,8 +63,18 @@ export default ({ chatId, user }: ChatWindowProps) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMessage(e.target.value)
   }
-  const time = chatroom?.createAt.seconds as number;
+  const time = chatroom?.createAt.seconds as number
   const createdAt = time && format(new Date(time * 1000), 'dd/MM/yyyy HH:mm')
+
+  const handleAcceptChat = () => {
+    if (chatroom) {
+      chatroom.status = ChatBoxStatus.PROCESSING
+      updateDocument('chatrooms', chatroom.docId, chatroom)
+    }
+  }
+
+  const handleSold = () => {}
+
   return (
     <div className='w-2/3 bg-white-light h-[48rem] p-3'>
       {chatId ? (
@@ -72,9 +87,24 @@ export default ({ chatId, user }: ChatWindowProps) => {
             </div>
           </div>
           {chatroom && chatroom.sellerId === user.id && (
-            <button className='bg-gradient_header text-white rounded-[2rem] border-1 p-2 px-8 border-white-normalActive hover:bg-graident_header_hover'>
-              Create order
-            </button>
+            <div>
+              {chatroom.status == 'PENDING' && (
+                <button
+                  className='bg-gradient_header text-white rounded-[2rem] border-1 p-2 px-8 border-white-normalActive hover:bg-graident_header_hover'
+                  onClick={handleAcceptChat}
+                >
+                  Accept chat
+                </button>
+              )}
+              {chatroom.status == 'PROCESSING' && (
+                <button
+                  className='bg-gradient_header text-white rounded-[2rem] border-1 p-2 px-8 border-white-normalActive hover:bg-graident_header_hover'
+                  onClick={handleSold}
+                >
+                  Sold
+                </button>
+              )}
+            </div>
           )}
         </div>
       ) : (
@@ -87,7 +117,7 @@ export default ({ chatId, user }: ChatWindowProps) => {
         <div id='messages' className='chat-message overflow-y-scroll scrollbar-hide'>
           {chatId ? (
             messages.map((message: Message) => {
-              return <MessageBox key={message.id} message={message} user={user}/>
+              return <MessageBox key={message.id} message={message} user={user} />
             })
           ) : (
             <p className='text-center'>Select a chat to start messaging</p>
