@@ -7,7 +7,7 @@ const useLayout = () => {
   useEffect(() => {
     if (path.startsWith("/admin")) {
       setLayout(["admin"]);
-    } else if (["/login", "/register", "/404"].includes(path)) {
+    } else if (["/login", "/register","/forgot-page", "/404"].includes(path)) {
       setLayout(["none"]);
     } else {
       setLayout(["navbar", "footer", "chat"]);

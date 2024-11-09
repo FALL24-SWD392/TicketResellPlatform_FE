@@ -81,9 +81,14 @@ module.exports = {
         darker: '#090c0e'
       }
     },
+  
     fontFamily: {
       sans: ['Archivo SemiExpanded', 'sans-serif'],
       serif: ['Archivo SemiExpanded', 'serif']
+    },
+    backgroundImage: {
+      gradient_header: 'linear-gradient(rgba(115, 69, 214, 0.2) 0%, rgba(0, 93, 233, 0.1) 52.58%, rgba(106, 147, 207, 0) 100%)',
+      graident_header_hover: 'linear-gradient(rgba(115, 69, 214, 0.3) 0%, rgba(0, 93, 233, 0.2) 52.58%, rgba(106, 147, 207, 0) 100%)'
     },
     extend: {
       spacing: {

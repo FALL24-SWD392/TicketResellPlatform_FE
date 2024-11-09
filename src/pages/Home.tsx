@@ -1,8 +1,9 @@
 
-import { SearchBar } from 'src/Components'
+import { Button, Image, Link } from '@nextui-org/react'
 import { HiCalendarDays, HiCheck, HiChevronDown, HiMapPin } from 'react-icons/hi2'
 import { UserList } from 'src/@types/users.type'
 import TicketContainer from 'src/Components/ticket/TicketContainer'
+import banner from 'src/assets/images/banner.jpg'
 export type QueryConfig = {
   [key in keyof UserList]: string
 } & {
@@ -11,36 +12,17 @@ export type QueryConfig = {
 }
 
 const Home = () => {
-  // const [query, setQuery] = useQueryParams({})
-  // const queryConfig: QueryConfig = {
-  //   sub: query.sub || '',
-  //   page: query.page || 1,
-  //   limit: query.limit || 10
-  // }
-  // const { data } = useQuery({
-  //   queryKey: ['tickets', queryConfig],
-  //   queryFn: () => ticketAPI.getAllTicket(queryConfig)
-  //   // placeholderData: keepPreviousData
-  // })
   return (
     <>
-      {/* Banner */}
-      <div className='h-full w-full'>
-        <div className='banner'>
-          <div className='container-xl flex justify-center items-center'>
-            <div className='flex-row items-center sm:px-6'>
-              <div className='!text-white-light h1 text-center '>The safest way to buy and sell ticket</div>
-              <SearchBar />
-            </div>
-          </div>
-        </div>
-        <div className='container-xs my-5'>
-          <div className='mx-auto'>
+      <div className='container-2xl'>
+        <div className='my-5'>
+        <div className='banner w-full h-[500px] rounded-xl shadow-2xl'/>
+          <div className='mt-[10px]'>
             <div className='flex justify-center gap-5 mb-2'>
               <HiCheck className='text-green-normal text-[20px]' />
               <span>The safest way to buy and sell tickets with over 10 million fan</span>
             </div>
-            <div className='flex  justify-center gap-5 mb-2'>
+            <div className='flex justify-center gap-5 mb-2'>
               <HiCheck className='text-green-normal text-[20px]' />
               <span>Prices are capped at 20% above face value</span>
             </div>
@@ -60,27 +42,37 @@ const Home = () => {
           </div>
         </div>
         <div className='container-xl my-10'>
-          <h2>Find ticket for your next event</h2>
+          <h2>Find ticket with</h2>
           <ul className='mt-10 grid-cols-2 gap-5  md:grid  xl:grid-cols-4'>
             <li className='w-full h-[64px] cursor-pointer flex justify-between items-center border-white-normalActive border bg-white-lightHover shadow-md border-opacity-70 rounded-xl p-4 hover:bg-black-lightActive'>
-              <p>Today</p>
+              <p>Music</p>
               <HiCalendarDays color='red' size='30px' />
             </li>
             <li className='w-full h-[64px] cursor-pointer flex justify-between items-center border-white-normalActive border bg-white-lightHover shadow-md border-opacity-70 rounded-xl p-4 hover:bg-black-lightActive'>
-              <p>Tomorow</p>
+              <p>Voucher</p>
               <HiCalendarDays color='orange' size='30px' />
             </li>
             <li className='w-full h-[64px] cursor-pointer flex justify-between items-center border-white-normalActive border bg-white-lightHover shadow-md border-opacity-70 rounded-xl p-4 hover:bg-black-lightActive'>
-              <p>This Weekend</p>
+              <p>Workshop</p>
               <HiCalendarDays color='green' size='30px' />
             </li>
             <li className='w-full h-[64px] cursor-pointer flex justify-between items-center border-white-normalActive border bg-white-lightHover shadow-md border-opacity-70 rounded-xl p-4 hover:bg-black-lightActive'>
-              <p>Explore all</p>
+              <p>Cinema</p>
               <HiCalendarDays color='red' size='30px' />
             </li>
           </ul>
         </div>
         <TicketContainer/>
+        <div className="flex justify-center w-full my-10">
+        <Link href="/view-all-ticket" className="flex justify-center w-full my-10">
+  <Button 
+    className="w-[80%] h-[50px] bg-secondary text-white font-semibold 
+    hover:bg-green-darkHover transition-all duration-300 rounded-xl text-lg"
+  >
+    SEE MORE
+  </Button>
+</Link>
+  </div>
       </div>
     </>
   )

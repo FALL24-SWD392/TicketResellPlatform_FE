@@ -5,6 +5,7 @@ import { jwtDecode } from 'jwt-decode'
 import { toast } from 'react-toastify'
 import { ErrorResponse, SuccessResponse } from 'src/@types/utils.type'
 import { isAxiosErrorJWTExpired, isUnAuthorized } from './utils'
+import { User } from 'src/@types/users.type'
 //
 //https://ticketresellplatform-nodered.onrender.com/
 class Http {
@@ -17,7 +18,7 @@ class Http {
     this.refreshTokenRequest = null
     this.refreshToken = getRefreshTokenFromLS()
     ;(this.instance = axios.create({
-      baseURL: import.meta.env.VITE_MOCK_API_URL,
+      baseURL: import.meta.env.VITE_API_URL,
       timeout: 10000,
       headers: {
         'Content-Type': 'application/json'
@@ -43,7 +44,12 @@ class Http {
           this.accessToken = response.data.data.accessToken
           this.refreshToken = response.data.data.refreshToken
           setTokenToLS(this.accessToken, this.refreshToken)
-          setProfileToLS(jwtDecode(this.accessToken))
+          const user: User = jwtDecode(this.accessToken)
+          if (user && user.id && user.email) { // Check if User has necessary data
+            setProfileToLS(user)
+          } else {
+            console.error('Invalid user data:', user)
+          }
         } else if (endPoint === 'logout') {
           this.accessToken = ''
           clearLocalStorage()
@@ -60,7 +66,7 @@ class Http {
 
         if (isUnAuthorized<ErrorResponse<{}>>(error)) {
           const config = error.response?.config || { headers: {}, url: '' }
-          if (isAxiosErrorJWTExpired(error) && config.url != '/users/refresh-token') {
+          if (isAxiosErrorJWTExpired(error) && config.url != '/auth/access-token') {
             this.refreshTokenRequest = this.refreshTokenRequest
               ? this.refreshTokenRequest
               : this.handleRefreshToken().finally(() => {
@@ -80,7 +86,7 @@ class Http {
           clearLocalStorage()
           this.accessToken = ''
           this.refreshToken = ''
-          window.location.reload()
+          // window.location.reload()
         }
 
         return Promise.reject(error)
@@ -90,8 +96,8 @@ class Http {
 
   private handleRefreshToken() {
     return this.instance
-      .post<SuccessResponse<{ access_token: string; refresh_token: string }>>('/users/refresh-token', {
-        refresh_token: this.refreshToken
+      .post<SuccessResponse<{ access_token: string; refresh_token: string }>>('/auth/access-token', {
+        token: this.refreshToken
       })
       .then((res) => {
         const { access_token, refresh_token } = res.data.data

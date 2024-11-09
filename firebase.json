@@ -2,12 +2,33 @@
   "hosting": {
     "predeploy": "npm run build",
     "public": "dist",
-    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
     "rewrites": [
       {
         "source": "**",
         "destination": "/index.html"
       }
     ]
+  },
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
+  "emulators": {
+    "firestore": {
+      "port": 2707
+    },
+    "hosting": {
+      "port": 1105
+    },
+    "ui": {
+      "enabled": true,
+      "port": 1106
+    },
+    "singleProjectMode": true
   }
 }

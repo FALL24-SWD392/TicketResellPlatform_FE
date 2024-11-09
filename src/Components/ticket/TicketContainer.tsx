@@ -4,6 +4,7 @@ import { ListBaseResponse } from 'src/@types/response'
 import { Ticket } from 'src/@types/ticket.type'
 import ticketAPI from 'src/apis/ticket.api'
 import TicketCard from './TicketCard'
+import { Select } from '@nextui-org/react'
 
 const TicketContainer: React.FC = () => {
   const [page, setPage] = useState<number>(1)
@@ -31,7 +32,7 @@ const TicketContainer: React.FC = () => {
   })
 
   useEffect(() => {
-    getAllTicketMutation.mutate({ page: 1, size })
+    getAllTicketMutation.mutate({ page: 1, size:9 })
   }, [size, page])
   console.log(ticketData)
   return ( 
@@ -50,7 +51,7 @@ const TicketContainer: React.FC = () => {
           </select>
         </div>
       </div>
-      <div className='w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-6 p-2'>
+      <div className='w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-2'>
         {ticketData?.data.map((ticket: Ticket) => (
           <TicketCard key={ticket.id} ticket={ticket}/>
         ))}

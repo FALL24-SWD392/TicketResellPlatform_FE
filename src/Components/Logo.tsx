@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom"
 import {memo} from 'react'
-import logo from 'src/assets/images/logo.svg'
+import logo from 'src/assets/images/logo-black.png'
 
 const Logo = ({
     imgClass,
@@ -11,7 +11,7 @@ const Logo = ({
 }) => {
     return (
         <NavLink to="/" className="flex items-center">
-            <span className={`relative w-[150px] ${imgClass || ""}`}>
+            <span className={`relative w-[100px] ${imgClass || ""}`}>
                 <img src={logo} alt="TicketResel" />
             </span>
         </NavLink>
