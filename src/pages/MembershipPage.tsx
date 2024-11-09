@@ -10,22 +10,38 @@ const MembershipPage = () => {
   })
   const membership = data?.data.data
   return (
-    <div className='flex justify-center items-center bg-gray-100'>
-      <div className='bg-white p-6 rounded-lg shadow-lg w-80 text-center'>
-        <h2 className='text-2xl font-semibold text-gray-800 mb-4'>Your Membership</h2>
-        <h3 className='text-xl text-green-normal'>{membership?.subscriptionName}</h3>
-        <div className='bg-teal-50 p-2 rounded-md text-teal-700 font-bold mb-4'>
-          <p>
-            <strong>Sale Reman:</strong> {membership?.saleRemain}
-          </p>
-          <p>
-            <strong>Start Date:</strong> {dayjs(membership?.startDate).format('MM/DD/YYYY HH:mm')}
-          </p>
-          <p>
-            <strong>End Date:</strong> {dayjs(membership?.endDate).format('MM/DD/YYYY HH:mm')}
-          </p>
+    <div className='min-h-[300px] flex justify-center items-center bg-gradient-to-br from-gray-50 to-gray-100 p-4'>
+      <div className='bg-white p-8 rounded-2xl shadow-xl w-full max-w-md'>
+        {/* Header Section */}
+        <div className='text-center mb-8'>
+          <h2 className='text-3xl font-bold text-gray-800 mb-2'>Your Membership</h2>
+          <h3 className='text-2xl font-semibold text-green-600'>{membership?.subscriptionName}</h3>
         </div>
-        <button className='mt-4 px-4 py-2 bg-green-normalActive text-white font-medium rounded-md hover:bg-teal-700 transition duration-300'>
+
+        {/* Membership Details Card */}
+        <div className='bg-gradient-to-r from-teal-50 to-green-50 p-6 rounded-xl border border-teal-100 mb-6'>
+          <div className='space-y-4'>
+            <div className='flex justify-between items-center'>
+              <span className='text-gray-600 font-medium'>Sale Remain</span>
+              <span className='text-teal-700 font-bold'>{membership?.saleRemain}</span>
+            </div>
+            
+            <div className='flex justify-between items-center'>
+              <span className='text-gray-600 font-medium'>Start Date</span>
+              <span className='text-teal-700 font-bold'>{dayjs(membership?.startDate).format('MM/DD/YYYY HH:mm')}</span>
+            </div>
+            
+            <div className='flex justify-between items-center'>
+              <span className='text-gray-600 font-medium'>End Date</span>
+              <span className='text-teal-700 font-bold'>{dayjs(membership?.endDate).format('MM/DD/YYYY HH:mm')}</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Action Button */}
+        <button className='w-full py-3 px-6 bg-green-normalActive from-green-500 to-teal-500 text-white font-semibold rounded-xl 
+          hover:from-green-600 hover:to-teal-600 transform hover:scale-[1.02] transition-all duration-300 
+          focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 shadow-lg'>
           Upgrade or Renew
         </button>
       </div>

@@ -16,9 +16,6 @@ const SidebarAdmin: React.FC = () => {
         <Link to='/manager-users'>
           <Button className='w-full text-left text-lg text-gray-500 mb-4'>Manager Users</Button>
         </Link>
-        <Link to='/subscriptions'>
-          <Button className='w-full text-left text-lg text-gray-500 mb-4'>Subscriptions</Button>
-        </Link>
         <Link to='/manager-tickets'>
           <Button className='w-full text-left text-lg text-gray-500 mb-4'>Manager Tickets</Button>
         </Link>

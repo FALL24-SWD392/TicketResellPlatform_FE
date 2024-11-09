@@ -16,7 +16,7 @@ export { default as Chat} from "./Chat"
 export { default as ManagerUsers} from "./admin/ManagerUser"
 export { default as ManagerTicket} from "./admin/ManagerTicket"
 export { default as blog} from "./BlogPage"
-export { default as subscriptions} from "./admin/Subscriptions"
+export { default as subscriptions} from "./Subscriptions"
 export { default as transactions} from "./admin/Transactions"
 
 //user

@@ -74,72 +74,95 @@ const CreateTicketPage = () => {
   }
 
   return (
-    <div className='flex justify-center mt-[100px]'>
-      <h1>Create Ticket</h1>
-      <form className='flex flex-col justify-center' onSubmit={handleSubmit} noValidate>
-        <div className='relative flex h-[300px] w-[300px] rounded-[30px] items-center justify-center border border-solid'>
+    <div className='container mx-auto max-w-2xl px-4 py-8'>
+      <h1 className='text-3xl font-bold text-center mb-8'>Create Ticket</h1>
+      <form className='space-y-6 bg-white p-8 rounded-lg shadow-lg' onSubmit={handleSubmit} noValidate>
+        {/* Image upload section */}
+        <div className='relative flex h-[300px] w-full rounded-lg items-center justify-center border-2 border-dashed border-gray-300 hover:border-gray-400 transition-colors'>
           {previewImage ? (
-            <img src={previewImage} alt='Name Image' className='h-[280px] w-[350px] rounded-[20px] object-cover mb-[40px]' />
+            <img src={previewImage} alt='Ticket Image' className='h-full w-full rounded-lg object-cover' />
           ) : (
-            <img src={demo} alt='thumnal_event' className='h-[286px] w-[375px] rounded-[30px] object-cover mb-[40px]' />
+            <div className='text-center'>
+              <img src={demo} alt='Upload preview' className='h-[200px] w-[200px] mx-auto object-cover opacity-50' />
+              <p className='mt-2 text-sm text-gray-500'>Click or drag image to upload</p>
+            </div>
           )}
-          <input type='file' className='absolute opacity-0 top-0 left-0 w-full h-full cursor-pointer' onChange={handleChangeImage} />
+          <Input  type='file' className='absolute opacity-0 top-0 left-0 w-full h-full cursor-pointer' onChange={handleChangeImage} />
         </div>
-        <Input
-          size='lg'
-          type='text'
-          label='Title Ticket'
-          placeholder='Enter your ticket'
-          onChange={(e) => {
-            setForm((prevForm) => ({ ...prevForm, title: e.target.value }))
-          }}
-        />
-        <Input
-          type='text'
-          className=' outline-none border-none text-end  [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none'
-          placeholder='Free'
-          value={form.unitPrice}
-          onChange={(event) => {
-            setForm((prev) => ({
-              ...prev,
-              unitPrice: event.target.value
-            }))
-          }}
-        />
-        <Input
-          type='text'
-          className=' outline-none border-none text-end  [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none'
-          placeholder='Quantity'
-          value={form.quantity}
-          onChange={(event) => {
-            setForm((prev) => ({
-              ...prev,
-              quantity: event.target.value
-            }))
-          }}
-        />
-        <Input
-          type='text'
-          className=' outline-none border-none text-end  [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none'
-          placeholder='Description'
-          value={form.description}
-          onChange={(event) => {
-            setForm((prev) => ({
-              ...prev,
-              description: event.target.value
-            }))
-          }}
-        />
-        <DatePicker
-        label="Ticket Date"
-        variant="bordered"
-        showMonthAndYearPickers
-        value={selectedDate}
-        onChange={setSelectedDate}
-        
-      />
 
-        <Button type='submit'> Create Ticket</Button>
+        {/* Form inputs with consistent spacing */}
+        <div className='space-y-4'>
+          <Input
+            size='lg'
+            type='text'
+            label='Title Ticket'
+            placeholder='Enter your ticket title'
+            className='w-full'
+            onChange={(e) => {
+              setForm((prevForm) => ({ ...prevForm, title: e.target.value }))
+            }}
+          />
+
+          <div className='grid grid-cols-2 gap-4'>
+            <Input
+              type='text'
+              label='Price'
+              placeholder='Enter price'
+              className='w-full'
+              value={form.unitPrice}
+              onChange={(event) => {
+                setForm((prev) => ({
+                  ...prev,
+                  unitPrice: event.target.value
+                }))
+              }}
+            />
+            
+            <Input
+              type='text'
+              label='Quantity'
+              placeholder='Enter quantity'
+              className='w-full'
+              value={form.quantity}
+              onChange={(event) => {
+                setForm((prev) => ({
+                  ...prev,
+                  quantity: event.target.value
+                }))
+              }}
+            />
+          </div>
+
+          <Input
+            type='text'
+            label='Description'
+            placeholder='Enter ticket description'
+            className='w-full'
+            value={form.description}
+            onChange={(event) => {
+              setForm((prev) => ({
+                ...prev,
+                description: event.target.value
+              }))
+            }}
+          />
+
+          <DatePicker
+            label="Expiration Date"
+            variant="bordered"
+            className='w-full'
+            showMonthAndYearPickers
+            value={selectedDate}
+            onChange={setSelectedDate}
+          />
+
+          <Button 
+            type='submit'
+            className='w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 rounded-lg transition-colors'
+          > 
+            Create Ticket
+          </Button>
+        </div>
       </form>
     </div>
   )

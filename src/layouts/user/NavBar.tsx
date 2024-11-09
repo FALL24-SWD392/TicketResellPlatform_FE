@@ -96,8 +96,8 @@ const NavBar = ({ ...props }: Props) => {
             </Link>
           </NavbarItem>
           <NavbarItem>
-            <Link className='text-black' href='#'>
-              Overview
+            <Link className='text-black' href='/subscriptions'>
+              Pricing
             </Link>
           </NavbarItem>
           <NavbarItem>
@@ -106,8 +106,6 @@ const NavBar = ({ ...props }: Props) => {
             </Link>
           </NavbarItem>
         </NavbarContent>
-        
-
         <NavbarContent justify='end'>
           {!isAuthenticated ? (
             <NavbarContent as='div' justify='end'>
