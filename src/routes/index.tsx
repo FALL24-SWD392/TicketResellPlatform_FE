@@ -25,9 +25,11 @@ import ForgotPasswordPage from 'src/pages/ForgotPasswordPage'
 import BlogPage from 'src/pages/BlogPage'
 import ManagerUsers from 'src/pages/admin/ManagerUser'
 import ManagerTicket from 'src/pages/admin/ManagerTicket'
-import Subscriptions from 'src/pages/Subscriptions' 
+import Subscriptions from 'src/pages/Subscriptions'
 import Transactions from 'src/pages/admin/Transactions'
 import ViewAllTicketPage from 'src/pages/ViewAllTicketPage'
+import SuccessPage from 'src/pages/error/SuccessPage'
+import FailPage from 'src/pages/error/FailPage'
 
 type RouteType = {
   path: string
@@ -39,15 +41,14 @@ const publicRoutes: RouteType[] = [
     path: '/',
     element: <Home />
   },
-  
-  
+
   {
     path: '/profile',
     element: <ProfilePage />
   },
   {
-    path: "/staff",
-    element: <StaffPage/>
+    path: '/staff',
+    element: <StaffPage />
   },
   {
     path: '/report',
@@ -85,12 +86,20 @@ const publicRoutes: RouteType[] = [
     path: '/subscriptions',
     element: <Subscriptions />
   },
+  {
+    path: '/success',
+    element: <SuccessPage />
+  },
+  {
+    path: '/failed',
+    element: <FailPage />
+  }
 ]
 
 const authenicatedRoutes: RouteType[] = [
   {
     path: '/me/*',
-    element: <ProfilePage/> //Profile
+    element: <ProfilePage /> //Profile
   },
   {
     path: '/create-ticket',
@@ -106,11 +115,11 @@ const authenicatedRoutes: RouteType[] = [
   },
   {
     path: '/my-ticket',
-    element: <YourTicket/>
+    element: <YourTicket />
   },
   {
     path: '/manage-my-ticket/:id',
-    element: <ManageMyTicketPage/>
+    element: <ManageMyTicketPage />
   }
 ]
 
@@ -132,11 +141,11 @@ const adminRoutes: RouteType[] = [
     element: <Transactions />
   }
 ]
-const staffRoutes: RouteType[]=[
+const staffRoutes: RouteType[] = [
   {
-    path: "/staff",
-    element: <StaffPage/>
-  },
+    path: '/staff',
+    element: <StaffPage />
+  }
 ]
 const unAuthenticatedRoute: RouteType[] = [
   {
@@ -160,7 +169,7 @@ const Router = () => {
     ...publicRoutes,
     ...(isAuthenticated ? authenicatedRoutes : unAuthenticatedRoute),
     ...(['ADMIN'].includes(user.scope) ? adminRoutes : []),
-    ...(['STAFF'].includes(user.scope) ? staffRoutes: []),
+    ...(['STAFF'].includes(user.scope) ? staffRoutes : []),
 
     {
       path: '*',
