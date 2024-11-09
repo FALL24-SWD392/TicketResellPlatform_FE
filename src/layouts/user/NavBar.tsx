@@ -91,6 +91,11 @@ const NavBar = ({ ...props }: Props) => {
             </Link>
           </NavbarItem>
           <NavbarItem>
+            <Link className='text-black text' href='/chat'>
+              Your Chats
+            </Link>
+          </NavbarItem>
+          <NavbarItem>
             <Link className='text-black text' href='/create-ticket'>
               Create Ticket
             </Link>
