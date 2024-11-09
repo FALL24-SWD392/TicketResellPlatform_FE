@@ -87,7 +87,7 @@ const YourOrderPage = () => {
                   </div>
                 </div>
               </div>
-            </>
+            </div>
           )): <p className='text-center h-screen text-[100px]'>No order ticket</p>}
       </div>
     </div>
