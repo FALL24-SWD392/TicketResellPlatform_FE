@@ -24,6 +24,14 @@ jobs:
           echo "VITE_FIREBASE_MESSAGING_SENDER_ID=${{ secrets.VITE_FIREBASE_MESSAGING_SENDER_ID }}" >> .env
           echo "VITE_FIREBASE_APP_ID=${{ secrets.VITE_FIREBASE_APP_ID }}" >> .env
           echo "VITE_FIREBASE_MEASUREMENT_ID=${{ secrets.VITE_FIREBASE_MEASUREMENT_ID }}" >> .env
+
+          echo "VITE_CHAT_APP_API_KEY=${{ secrets.VITE_CHAT_APP_API_KEY }}" >> .env
+          echo "VITE_CHAT_APP_AUTH_DOMAIN=${{ secrets.VITE_CHAT_APP_AUTH_DOMAIN }}" >> .env
+          echo "VITE_CHAT_APP_PROJECT_ID=${{ secrets.VITE_CHAT_APP_PROJECT_ID }}" >> .env
+          echo "VITE_CHAT_APP_STORAGE_BUCKET=${{ secrets.VITE_CHAT_APP_STORAGE_BUCKET }}" >> .env
+          echo "VITE_CHAT_APP_MESSAGING_SENDER_ID=${{ secrets.VITE_CHAT_APP_MESSAGING_SENDER_ID }}" >> .env
+          echo "VITE_CHAT_APP_APP_ID=${{ secrets.VITE_CHAT_APP_APP_ID }}" >> .env
+          echo "VITE_CHAT_APP_MEASUREMENT_ID=${{ secrets.VITE_CHAT_APP_MEASUREMENT_ID }}" >> .env
         shell: bash
 
       - name: Compose down
