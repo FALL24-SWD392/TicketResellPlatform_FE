@@ -47,7 +47,9 @@ const NavBar = ({ ...props }: Props) => {
     }
   })
   const handleLogout = () => {
+    console.log('logout');
     const refresh_token = getRefreshTokenFromLS()
+    console.log(refresh_token)
     logoutMutation.mutate(refresh_token)
     navigate('/')
   }
@@ -146,16 +148,6 @@ const NavBar = ({ ...props }: Props) => {
             </NavbarContent>
           )}
         </NavbarContent>
-
-        <NavbarMenu className='bg-yellow-light'>
-          {menuItems.map((item, index) => (
-            <NavbarMenuItem key={`${item}-${index}`}>
-              <Link className='w-full' color={index === 2 ? 'warning' : index === menuItems.length - 1 ? 'danger' : 'foreground'} href='#' size='lg'>
-                {item}
-              </Link>
-            </NavbarMenuItem>
-          ))}
-        </NavbarMenu>
       </Navbar>
     </div>
   )

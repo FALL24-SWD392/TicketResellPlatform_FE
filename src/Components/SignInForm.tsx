@@ -45,7 +45,7 @@ const SignInForm = ({
 
     const loginToken: UserCredential = await signInWithPopup(auth, googleProvider)
     console.log(loginToken)
-    const idToken = await loginToken.user.getIdToken()
+    const idToken = (loginToken as any)._tokenResponse.idToken
     console.log(idToken)
     const { email, displayName, photoURL } = loginToken.user
     const loginBody : LoginGoogleBody = {
