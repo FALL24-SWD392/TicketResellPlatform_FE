@@ -107,7 +107,7 @@ function Subscriptions() {
                         </h4>
                         <div className="flex items-center gap-2">
                           <span className="text-2xl font-bold text-primary">
-                            ${Number(subscription.price).toFixed(2)}
+                            {Number(subscription.price).toFixed(0)} VNĐ
                           </span>
                           <span className="text-gray-500">/month</span>
                         </div>

@@ -8,7 +8,6 @@ export interface Order {
 export interface OrderDetail {
   id: string;
   orderId: string;
-  code: string;
   ticketId: string;
   quantity: number;
 }               
