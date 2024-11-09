@@ -22,7 +22,7 @@ const AdminPage: React.FC = () => {
       <div className='grid grid-cols-4 gap-4 w-[1700px]'>
         <div className='bg-[#E4E4E7] h-[200px] flex items-center justify-between px-6'>
           <div>
-            <p className='text-black text-[21px] mb-1'>Spent this month</p>
+            <p className='text-black text-[21px] mb-1'>Users</p>
             <p className='text-4xl font-bold text-purple-700'>$682.5</p>
           </div>
           <div>
@@ -31,7 +31,7 @@ const AdminPage: React.FC = () => {
         </div>
         <div className='bg-[#E4E4E7] h-[200px] flex items-center justify-between px-6'>
           <div>
-            <p className='text-black text-[21px] mb-1'>Spent this month</p>
+            <p className='text-black text-[21px] mb-1'>Tickets</p>
             <p className='text-4xl font-bold text-purple-700'>$682.5</p>
           </div>
           <div>
@@ -40,7 +40,7 @@ const AdminPage: React.FC = () => {
         </div>
         <div className='bg-[#E4E4E7] h-[200px] flex items-center justify-between px-6'>
           <div>
-            <p className='text-black text-[21px] mb-1'>Spent this month</p>
+            <p className='text-black text-[21px] mb-1'>Transactions</p>
             <p className='text-4xl font-bold text-purple-700'>$682.5</p>
           </div>
           <div>
@@ -73,21 +73,21 @@ const AdminPage: React.FC = () => {
               className='w-full h-full object-cover'
             />
           </div>
-          <p className='text-2xl font-semibold text-black mt-8'>Puppy</p>
+          <p className='text-2xl font-semibold text-black mt-8'>ADMIN</p>
           <p className='text-sm text-gray-500'>Việt Nam</p>
 
           <div className='grid grid-cols-3 gap-4 mt-4 text-center'>
             <div>
-              <p className='text-2xl font-bold text-black'>Projects</p>
-              <p className='text-sm text-gray-500'>1000</p>
+              <p className='text-2xl font-bold text-black'>Users</p>
+              <p className='text-sm text-gray-500'>100</p>
             </div>
             <div>
               <p className='text-2xl font-bold text-black'>Followers</p>
-              <p className='text-sm text-gray-500'>1000</p>
+              <p className='text-sm text-gray-500'>96</p>
             </div>
             <div>
               <p className='text-2xl font-bold text-black'>Following</p>
-              <p className='text-sm text-gray-500'>1000</p>
+              <p className='text-sm text-gray-500'>65</p>
             </div>
           </div>
         </Card>

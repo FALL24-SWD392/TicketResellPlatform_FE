@@ -12,7 +12,9 @@ const SidebarAdmin: React.FC = () => {
       </div>
 
       <div>
-        <Button className='w-full text-left text-lg text-gray-500 mb-4'>Dashboard</Button>
+        <Link to='/admin' >
+        <Button className='w-full text-left text-lg text-gray-500 mb-4'>Dashboard </Button>
+        </Link>
         <Link to='/manager-users'>
           <Button className='w-full text-left text-lg text-gray-500 mb-4'>Manager Users</Button>
         </Link>
@@ -22,10 +24,6 @@ const SidebarAdmin: React.FC = () => {
         <Link to='/transactions'>
           <Button className='w-full text-left text-lg text-gray-500 mb-4'>Transactions</Button>
         </Link>
-      </div>
-
-      <div className='mt-[350px]'>
-        <Button className='w-full mt-10 text-left text-red-500'>Log Out</Button>
       </div>
     </div>
   )
