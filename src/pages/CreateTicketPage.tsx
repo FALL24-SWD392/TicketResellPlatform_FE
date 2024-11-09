@@ -1,16 +1,17 @@
-import { Button, DatePicker, Input } from '@nextui-org/react'
+import { Button, DateInputProps, DatePicker, DatePickerProps, Input } from '@nextui-org/react'
 import { useMutation } from '@tanstack/react-query'
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
 import { useContext, useState } from 'react'
 import { toast } from 'react-toastify'
 import { CreateTicket } from 'src/@types/ticket.type'
 import ticketAPI from 'src/apis/ticket.api'
-import { parseZonedDateTime } from '@internationalized/date'
+import { parseZonedDateTime, ZonedDateTime } from '@internationalized/date'
 import { AppContext } from 'src/context/app.context'
 import { v4 } from 'uuid'
 import demo from 'src/assets/images/demoImage.jpg'
 import chatapp from 'src/utils/chatapp.config'
 import { useNavigate } from 'react-router-dom'
+import dayjs from 'dayjs'
 
 const initForm = {
   sellerId: '',
@@ -29,7 +30,7 @@ const CreateTicketPage = () => {
   const { profile } = useContext(AppContext)
   const [previewImage, setPreviewImage] = useState<string | null>(null)
   const [form, setForm] = useState<typeof initForm>(initForm)
-  const [selectedDate, setSelectedDate] = useState(parseZonedDateTime('2024-11-07T00:45[Asia/Saigon]'))
+  const [selectedDate, setSelectedDate] = useState(parseZonedDateTime('2024-11-09T00:45[Asia/Saigon]'))
   const createTicketMutation = useMutation({
     mutationFn: (body: CreateTicket) => ticketAPI.createTicket(body)
   })
@@ -41,6 +42,21 @@ const CreateTicketPage = () => {
       })
     }
   }
+  // const today = dayjs(new Date()).format('YYYY-MM-DDTHH:mm:ss[Asia/Saigon]')
+  // console.log(selectedDate)
+  // const handleDateChange = (date: ZonedDateTime) => {
+  //  const dates =  parseZonedDateTime(date.toString())
+  //  const dateChange = date.toString()
+  //  console.log('time',dates)
+  //   const today = dayjs(new Date()).format('YYYY-MM-DDTHH:mm[Asia/Saigon]')
+  //   if (date < parseZonedDateTime(today)) {
+  //     toast.error('Please select a future date')
+  //     setSelectedDate(parseZonedDateTime(today)) // Reset to today's date if a past date is chosen
+  //   } else {
+  //     setSelectedDate(parseZonedDateTime(dateChange))
+  //   }
+  // }
+
   const handleDescriptionChange = (content: string) => {
     setForm((prevForm) => ({ ...prevForm, description: content }))
   }
@@ -55,10 +71,10 @@ const CreateTicketPage = () => {
     }
     createTicketMutation.mutate(bodyCreateTicket as any, {
       onSuccess: (data) => {
-        toast.success(data.data.message)
+        toast.success('Create ticket successfully')
         console.log(data)
         // navigate('/')
-        // window.location.href = `http://localhost:3000/event-operator/manage/${data.data.data.event._id}/overview`
+        window.location.href = `http://localhost:3000/manage-my-ticket/${data.data.data.id}`
       }
       //   onError: (error) => {
       //     if (isAxiosUnprocessableEntityError<ErrorResponse<typeof errorForm>>(error)) {
@@ -112,9 +128,8 @@ const CreateTicketPage = () => {
               className='w-full'
               value={form.unitPrice.toString()}
               onChange={(event) => {
-
                 const value = parseInt(event.target.value, 10) || 1
-                if (value < 0){
+                if (value < 0) {
                   toast.error('Invalid unit price')
                 }
                 setForm((prev) => ({
@@ -132,13 +147,23 @@ const CreateTicketPage = () => {
               value={form.quantity.toString()}
               onChange={(event) => {
                 const value = parseInt(event.target.value, 10) || 1
-                if (value < 0){
+                if (value < 0) {
                   toast.error('Invalid quantity')
                 }
                 setForm((prev) => ({
                   ...prev,
                   quantity: value
                 }))
+              }}
+            />
+            <Input
+              type='text'
+              label='Type Ticket'
+              placeholder='Enter type ticket'
+              className='w-full'
+              value={form.type}
+              onChange={(e) => {
+                setForm((prevForm) => ({ ...prevForm, type: e.target.value }))
               }}
             />
           </div>

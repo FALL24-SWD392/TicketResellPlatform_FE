@@ -16,8 +16,7 @@ const YourOrderPage = () => {
   const getMyOrderMutation = useMutation({
     mutationFn: (userId: string) => userAPI.getMyOrder(userId),
     onSuccess: (data) => {
-      console.log(data.data.data)
-      setOrders(data?.data.data)
+      setOrders(data?.data.data || [])
     },
     onError: () => {
       console.log('Error')
@@ -28,15 +27,11 @@ const YourOrderPage = () => {
     getMyOrderMutation.mutate(`${getProfileFormLS()?.id}`)
   }, [])
 
-  console.log(
-    'ticket',
-    orders.filter((order) => order.status === 'COMPLETED').map((order) => order.ticket.quantity)
-  )
   return (
     <div className='container-xl justify-start w-[500px] bg-gray-100 py-4 px-4'>
       <h1 className='text-3xl font-bold text-gray-800 text-center mb-8'>Your Order Tickets</h1>
       <div className='flex-row justify-start'>
-        {orders
+        {(orders.length > 0) ? orders
           .filter((order) => order.status === 'COMPLETED')
           .map((order) => (
             <>
@@ -53,7 +48,7 @@ const YourOrderPage = () => {
                 </div>
               </div>
             </>
-          ))}
+          )): <p className='text-center h-screen text-[100px]'>No order ticket</p>}
       </div>
     </div>
   )

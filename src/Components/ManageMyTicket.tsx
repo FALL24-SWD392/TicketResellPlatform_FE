@@ -160,6 +160,16 @@ const ManageMyTicket = ({ ticket }: Props) => {
                 }))
               }}
             />
+            <Input
+              type='text'
+              label='Type Ticket'
+              placeholder='Enter type ticket'
+              className='w-full'
+              value={form.type}
+              onChange={(e) => {
+                setForm((prevForm) => ({ ...prevForm, type: e.target.value }))
+              }}
+            />
           </div>
 
           <Input
