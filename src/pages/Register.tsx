@@ -70,11 +70,8 @@ const Register = () => {
   const handleLoginGoogle = async () => {
     const { auth, signInWithPopup, googleProvider } = { ...chatapp }
     const loginToken: UserCredential = await signInWithPopup(auth, googleProvider)
-    const idToken = await loginToken.user.getIdToken()
     const { displayName, photoURL, email } = { ...loginToken.user }
-    console.log(idToken)
     const body: LoginGoogleBody = {
-      googleToken: idToken,
       username: displayName || '',
       avatar: photoURL || '',
       email: email || ''

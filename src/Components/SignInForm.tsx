@@ -20,7 +20,6 @@ export interface LoginGoogleBody{
   email: string,
   username: string,
   avatar: string,
-  googleToken: string
 }
 
 const SignInForm = ({
@@ -44,31 +43,27 @@ const SignInForm = ({
     const { auth, signInWithPopup, googleProvider } = { ...chatapp }
 
     const loginToken: UserCredential = await signInWithPopup(auth, googleProvider)
-    console.log(loginToken)
-    const idToken = (loginToken as any)._tokenResponse.idToken
-    console.log(idToken)
     const { email, displayName, photoURL } = loginToken.user
     const loginBody : LoginGoogleBody = {
       email: email || '',
       username: displayName || '',
-      avatar: photoURL || '',
-      googleToken: idToken
+      avatar: photoURL || ''
     }
     console.log(loginBody)
     await loginGoogleMutation.mutate(loginBody, {
       onSuccess: (data) => {
         console.log(data)
-        // setIsAuthenticated(true)
-        // if (getProfileFormLS()?.scope === 'ADMIN') {
-        //   toast.success(data.data.message)
-        //   navigate('/admin')
-        // } else if (getProfileFormLS()?.scope === 'STAFF') {
-        //   toast.success(data.data.message)
-        //   navigate('/staff')
-        // } else {
-        //   toast.success(data.data.message)
-        // }
-        // toast.success(data.data.message)
+        setIsAuthenticated(true)
+        if (getProfileFormLS()?.scope === 'ADMIN') {
+          toast.success(data.data.message)
+          navigate('/admin')
+        } else if (getProfileFormLS()?.scope === 'STAFF') {
+          toast.success(data.data.message)
+          navigate('/staff')
+        } else {
+          toast.success(data.data.message)
+        }
+        toast.success(data.data.message)
       },
       onError: (error) => {
         console.log(error)
