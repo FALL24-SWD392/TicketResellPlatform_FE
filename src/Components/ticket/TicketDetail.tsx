@@ -65,7 +65,7 @@ const TicketDetail = ({ ticket }: Props) => {
         navigate(`/chat/${existingChatroom.id}`)
       } else {
         addDocument('chatrooms', newChatroom)
-        navigate(`/chat/${newChatroom.id}`)
+        navigate(`/chat/${currentChatroom.id}`)
       }
     }
   }
@@ -125,15 +125,9 @@ const TicketDetail = ({ ticket }: Props) => {
               className='flex-1 px-6 py-3 bg-green-600 text-white rounded-lg 
     shadow-lg hover:shadow-green-500/50 hover:translate-y-[-2px] 
     hover:bg-green-700 transition-all duration-300 font-semibold'
+              onClick={contactSeller}
             >
               Liên hệ
-            </button>
-            <button
-              className='flex-1 px-6 py-3 bg-gray-100 text-gray-800 rounded-lg 
-    shadow-lg hover:shadow-gray-400/50 hover:translate-y-[-2px] 
-    hover:bg-gray-200 transition-all duration-300 font-semibold'
-            >
-              Mua ngay
             </button>
           </div>
 
@@ -166,7 +160,10 @@ const TicketDetail = ({ ticket }: Props) => {
 
       {/* Similar Product CTA */}
       <div className='mt-12 text-center'>
-        <button className='inline-flex items-center px-8 py-3 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition-colors font-semibold'>
+        <button className='inline-flex items-center px-8 py-3 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition-colors font-semibold'
+        onClick={() => {
+          navigate('/create-ticket')
+        }}>
           <svg className='w-5 h-5 mr-2' fill='none' stroke='currentColor' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
             <path strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' d='M12 6v6m0 0v6m0-6h6m-6 0H6'></path>
           </svg>

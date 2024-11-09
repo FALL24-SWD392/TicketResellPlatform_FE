@@ -120,3 +120,6 @@ export const CreateStaffSchemaYup = yup.object().shape({
 })
 export type CreateStaffSchema = yup.InferType<typeof CreateStaffSchemaYup>
 
+export const CreateTicketSchemaYup = yup.object().shape({
+  
+})

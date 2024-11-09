@@ -5,29 +5,31 @@ import { useContext, useState } from 'react'
 import { toast } from 'react-toastify'
 import { CreateTicket } from 'src/@types/ticket.type'
 import ticketAPI from 'src/apis/ticket.api'
-import {parseZonedDateTime} from "@internationalized/date";
+import { parseZonedDateTime } from '@internationalized/date'
 import { AppContext } from 'src/context/app.context'
 import { v4 } from 'uuid'
 import demo from 'src/assets/images/demoImage.jpg'
 import chatapp from 'src/utils/chatapp.config'
+import { useNavigate } from 'react-router-dom'
 
 const initForm = {
   sellerId: '',
   title: '',
   expDate: '',
   type: 'VOUCHER',
-  unitPrice: "",
-  quantity: "",
+  unitPrice: 0,
+  quantity: 0,
   description: '',
   image: ''
 }
 
 const CreateTicketPage = () => {
+  const navigate = useNavigate()
   const imageDB = chatapp.imageDB
   const { profile } = useContext(AppContext)
   const [previewImage, setPreviewImage] = useState<string | null>(null)
   const [form, setForm] = useState<typeof initForm>(initForm)
-  const [selectedDate, setSelectedDate] = useState(parseZonedDateTime("2024-11-07T00:45[Asia/Saigon]"))
+  const [selectedDate, setSelectedDate] = useState(parseZonedDateTime('2024-11-07T00:45[Asia/Saigon]'))
   const createTicketMutation = useMutation({
     mutationFn: (body: CreateTicket) => ticketAPI.createTicket(body)
   })
@@ -50,12 +52,12 @@ const CreateTicketPage = () => {
       type: form.type ? form.type : 'VOUCHER',
       image: previewImage,
       expDate: selectedDate.toString().split('[')[0]
-
     }
     createTicketMutation.mutate(bodyCreateTicket as any, {
       onSuccess: (data) => {
         toast.success(data.data.message)
         console.log(data)
+        // navigate('/')
         // window.location.href = `http://localhost:3000/event-operator/manage/${data.data.data.event._id}/overview`
       }
       //   onError: (error) => {
@@ -86,7 +88,7 @@ const CreateTicketPage = () => {
               <p className='mt-2 text-sm text-gray-500'>Click or drag image to upload</p>
             </div>
           )}
-          <Input  type='file' className='absolute opacity-0 top-0 left-0 w-full h-full cursor-pointer' onChange={handleChangeImage} />
+          <input type='file' className='absolute opacity-0 top-0 left-0 w-full h-full cursor-pointer' onChange={handleChangeImage} />
         </div>
 
         {/* Form inputs with consistent spacing */}
@@ -108,25 +110,34 @@ const CreateTicketPage = () => {
               label='Price'
               placeholder='Enter price'
               className='w-full'
-              value={form.unitPrice}
+              value={form.unitPrice.toString()}
               onChange={(event) => {
+
+                const value = parseInt(event.target.value, 10) || 1
+                if (value < 0){
+                  toast.error('Invalid unit price')
+                }
                 setForm((prev) => ({
                   ...prev,
-                  unitPrice: event.target.value
+                  unitPrice: value
                 }))
               }}
             />
-            
+
             <Input
               type='text'
               label='Quantity'
               placeholder='Enter quantity'
               className='w-full'
-              value={form.quantity}
+              value={form.quantity.toString()}
               onChange={(event) => {
+                const value = parseInt(event.target.value, 10) || 1
+                if (value < 0){
+                  toast.error('Invalid quantity')
+                }
                 setForm((prev) => ({
                   ...prev,
-                  quantity: event.target.value
+                  quantity: value
                 }))
               }}
             />
@@ -147,18 +158,15 @@ const CreateTicketPage = () => {
           />
 
           <DatePicker
-            label="Expiration Date"
-            variant="bordered"
+            label='Expiration Date'
+            variant='bordered'
             className='w-full'
             showMonthAndYearPickers
             value={selectedDate}
             onChange={setSelectedDate}
           />
 
-          <Button 
-            type='submit'
-            className='w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 rounded-lg transition-colors'
-          > 
+          <Button type='submit' className='w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 rounded-lg transition-colors'>
             Create Ticket
           </Button>
         </div>

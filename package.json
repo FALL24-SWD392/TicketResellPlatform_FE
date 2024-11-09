@@ -17,6 +17,7 @@
     "@capacitor/android": "6.1.2",
     "@capacitor/core": "6.1.2",
     "@capacitor/ios": "6.1.2",
+    "@firebase/auth": "^1.8.0",
     "@firebase/firestore": "^4.7.4",
     "@headlessui/react": "^2.1.10",
     "@heroicons/react": "^2.1.5",

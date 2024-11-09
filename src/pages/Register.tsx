@@ -10,13 +10,15 @@ import { ErrorResponse } from 'src/@types/utils.type'
 import path from 'src/constants/path'
 import authAPI from 'src/apis/auth.api'
 import banner from 'src/assets/images/banner.svg'
-import facebookIcon from 'src/assets/images/facebook.svg'
 import googleIcon from 'src/assets/images/google.svg'
-
+import chatapp from 'src/utils/chatapp.config'
 import { AppContext } from 'src/context/app.context'
 import { RegisterSchema, RegisterSchemaYup } from 'src/utils/rules'
 import { isAxiosUnprocessableEntityError } from 'src/utils/utils'
 import IconButton from 'src/Components/IconButton'
+import { UserCredential } from '@firebase/auth'
+import { getProfileFormLS } from 'src/utils/auth'
+import { LoginGoogleBody } from 'src/Components/SignInForm'
 
 export type FormData = RegisterSchema
 const Register = () => {
@@ -57,6 +59,48 @@ const Register = () => {
       }
     })
   })
+
+  const { setIsAuthenticated } = useContext(AppContext)
+  const loginGoogleMutation = useMutation({
+    mutationFn: async (body: LoginGoogleBody) => {
+      return await authAPI.loginGoogle(body)
+    }
+  })
+
+  const handleLoginGoogle = async () => {
+    const { auth, signInWithPopup, googleProvider } = { ...chatapp }
+    const loginToken: UserCredential = await signInWithPopup(auth, googleProvider)
+    const idToken = await loginToken.user.getIdToken()
+    const { displayName, photoURL, email } = { ...loginToken.user }
+    console.log(idToken)
+    const body: LoginGoogleBody = {
+      googleToken: idToken,
+      username: displayName || '',
+      avatar: photoURL || '',
+      email: email || ''
+    }
+    await loginGoogleMutation.mutate(body, {
+      onSuccess: (data) => {
+        setIsAuthenticated(true)
+        if (getProfileFormLS()?.scope === 'ADMIN') {
+          toast.success(data.data.message)
+          navigate('/admin')
+        } else if (getProfileFormLS()?.scope === 'STAFF') {
+          toast.success(data.data.message)
+          navigate('/staff')
+        } else {
+          toast.success(data.data.message)
+        }
+        toast.success(data.data.message)
+      },
+      onError: (error) => {
+        console.log(error)
+        if (isAxiosUnprocessableEntityError<ErrorResponse<FormData>>(error)) {
+          toast.error(error.message)
+        }
+      }
+    })
+  }
   return (
     <div
       className='fixed inset-0 flex items-center justify-center bg-cover bg-center'
@@ -152,8 +196,7 @@ const Register = () => {
             </div>
 
             <div className='flex gap-5'>
-              <IconButton width={10} height={10} src={facebookIcon} alt='Facebook'></IconButton>
-              <IconButton width={10} height={10} src={googleIcon} alt='Google'></IconButton>
+              <IconButton width={10} height={10} src={googleIcon} alt='Google' onClick={handleLoginGoogle}></IconButton>
             </div>
           </div>
         </form>
