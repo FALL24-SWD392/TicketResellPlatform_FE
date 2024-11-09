@@ -18,6 +18,24 @@ export interface Ticket {
   updatedBy?: string
   updatedAt?: string
 }
+export interface Tickets {
+  id: string
+  sellerId: Pick<User, 'id' | 'username' | 'avatar'>
+  username?: string
+  rating?: string
+  avatar?: string
+  title?: string
+  expDate: string
+  type: string
+  unitPrice: number
+  quantity: number
+  description?: string
+  image?: string
+  status: string
+  createdAt?: string
+  updatedBy?: string
+  updatedAt?: string
+}
 export interface Create {
   sellerId: string
   title: string

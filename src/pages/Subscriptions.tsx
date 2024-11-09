@@ -93,14 +93,24 @@ function Subscriptions() {
                   isPressable
                 >
                   {/* Card Header */}
-                  <CardHeader className='flex flex-col space-y-4 p-6'>
-                    <div className='flex items-center gap-4 w-full'>
-                      <Avatar isBordered radius='full' size='lg' alt={subscription.name} className='w-16 h-16' />
-                      <div className='flex flex-col flex-grow'>
-                        <h4 className='text-xl font-bold text-gray-900'>{subscription.name}</h4>
-                        <div className='flex items-center gap-2'>
-                          <span className='text-2xl font-bold text-primary'>${Number(subscription.price).toFixed(2)}</span>
-                          <span className='text-gray-500'>/month</span>
+                  <CardHeader className="flex flex-col space-y-4 p-6">
+                    <div className="flex items-center gap-4 w-full">
+                      <Avatar
+                        isBordered
+                        radius="full"
+                        size="lg"
+                        alt={subscription.name}
+                        className="w-16 h-16"
+                      />
+                      <div className="flex flex-col flex-grow">
+                        <h4 className="text-xl font-bold text-gray-900">
+                          {subscription.name}
+                        </h4>
+                        <div className="flex items-center gap-2">
+                          <span className="text-2xl font-bold text-primary">
+                            {Number(subscription.price).toFixed(0)} VNĐ
+                          </span>
+                          <span className="text-gray-500">/month</span>
                         </div>
                       </div>
                     </div>

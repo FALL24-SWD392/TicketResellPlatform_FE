@@ -17,6 +17,7 @@ import {
   TicketApproval,
   TicketDetailPage,
   Userlist,
+  YourOrderPage,
   YourTicket
 } from 'src/pages'
 // import path from "path";
@@ -129,7 +130,11 @@ const authenicatedRoutes: RouteType[] = [
   },
   {
     path: '/manage-my-ticket/:id',
-    element: <ManageMyTicketPage />
+    element: <ManageMyTicketPage/>
+  },
+  {
+    path: '/order',
+    element: <YourOrderPage />
   }
 ]
 
