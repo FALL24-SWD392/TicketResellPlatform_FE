@@ -68,7 +68,7 @@ function Subscriptions() {
       </div>
     )
   }
-
+  console.log(subscriptionList)
   return (
     <div className='min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-12 px-4 sm:px-6 lg:px-8'>
       {/* Header Section */}
@@ -132,25 +132,42 @@ function Subscriptions() {
                   {/* Card Footer */}
                   <CardFooter className='px-6 py-4 border-t border-gray-100'>
                     {subscription.name === 'Premium' && (
-                      <Button
-                        className='w-full'
-                        color='primary'
-                        size='lg'
-                        variant={purchasedSubscriptions[subscription.name] ? 'flat' : 'solid'}
-                        onClick={() => handlePaySubcription(subscription.id as string)}
-                        disabled={purchasedSubscriptions[subscription.name]}
-                      >
-                        {purchasedSubscriptions[subscription.name] ? (
-                          <span className='flex items-center gap-2'>
-                            <svg className='w-5 h-5' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-                              <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M5 13l4 4L19 7' />
-                            </svg>
-                            Purchased
-                          </span>
+                      <>
+                        {subscription.canPurchase == false ? (
+                          <>
+                            <Button
+                              className='w-full'
+                              color='primary'
+                              size='lg'
+                              isDisabled
+                              variant={purchasedSubscriptions[subscription.name] ? 'flat' : 'solid'}
+                            >
+                              <span className='flex items-center gap-2'>
+                                <svg className='w-5 h-5' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                                  <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M5 13l4 4L19 7' />
+                                </svg>
+                                Purchased
+                              </span>
+                            </Button>
+                          </>
                         ) : (
-                          'Subscribe Now'
+                          <Button
+                              className='w-full'
+                              color='primary'
+                              size='lg'
+                              variant={purchasedSubscriptions[subscription.name] ? 'flat' : 'solid'}
+                              onClick={() => handlePaySubcription(subscription.id as string)}
+                              disabled={purchasedSubscriptions[subscription.name]}
+                            >
+                              <span className='flex items-center gap-2'>
+                                <svg className='w-5 h-5' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                                  <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M5 13l4 4L19 7' />
+                                </svg>
+                                Subscribe Now
+                              </span>
+                            </Button>
                         )}
-                      </Button>
+                      </>
                     )}
                     {subscription.name === 'Free' && (
                       <Button className='w-full' color='success' variant='flat' size='lg' disabled>
