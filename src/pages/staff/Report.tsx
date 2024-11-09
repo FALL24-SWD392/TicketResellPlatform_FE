@@ -23,15 +23,15 @@ import SidebarStaff from 'src/layouts/staff/SidebarStaff'
 import reportAPI from 'src/apis/report.api'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { ListBaseResponse } from 'src/@types/response'
-import { Report as ReportType, CreateReport } from 'src/@types/report.type'
+import { Report as ReportType } from 'src/@types/report.type'
 import { toast } from 'react-toastify'
 import dayjs from 'dayjs'
 
 // Define the status color map for Chip component
-const statusColorMap: Record<string, ChipProps["color"]> = {
-  APPROVED: "success",
-  REJECTED: "danger",
-  PENDING: "warning",
+const statusColorMap: Record<string, ChipProps['color']> = {
+  APPROVED: 'success',
+  REJECTED: 'danger',
+  PENDING: 'warning'
 }
 
 const Report = () => {
@@ -42,7 +42,7 @@ const Report = () => {
     page: 1,
     totalSize: 0,
     totalPage: 0,
-    data: []
+    data: [] // Ensure `data` is initialized as an empty array
   })
   const { isOpen, onOpen, onOpenChange } = useDisclosure()
   const [isLoading, setIsLoading] = useState(true)
@@ -61,9 +61,10 @@ const Report = () => {
       setIsLoading(false)
     }
   })
+
   // Mutation for updating report status
   const updateReportMutation = useMutation({
-    mutationFn: (data: CreateReport) => reportAPI.updateReport(data),
+    mutationFn: (data: { id: string; status: 'APPROVED' | 'REJECTED' }) => reportAPI.updateReport(data),
     onSuccess: () => {
       toast.success('Status updated successfully')
       getAllReportMutation.mutate()
@@ -78,7 +79,7 @@ const Report = () => {
   }, [])
 
   // Handle report status update
-  const handleUpdateReport = (status: string) => {
+  const handleUpdateReport = (status: 'APPROVED' | 'REJECTED') => {
     if (!selectedReport) return
     updateReportMutation.mutate({
       id: selectedReport.id,
@@ -126,34 +127,49 @@ const Report = () => {
               <TableColumn>ACTIONS</TableColumn>
             </TableHeader>
             <TableBody>
-              {reports.data.map((report) => (
-                <TableRow key={report.id}>
-                  <TableCell>{report.reporterName}</TableCell>
-                  <TableCell>{report.reportedName}</TableCell>
-                  <TableCell>
-                    <Link href={`/ticket-detail/${report.ticketId}`}>
-                      <a className='text-blue-500 hover:underline'>{report.ticketName}</a>
-                    </Link>
-                  </TableCell>
-                  <TableCell>{report.description}</TableCell>
+              {(reports.data || []).map(
+                (
+                  report // Ensure `reports.data` is always an array
+                ) => (
+                  <TableRow key={report.id}>
+                    <TableCell>{report.reporterName}</TableCell>
+                    <TableCell>{report.reportedName}</TableCell>
+                    <TableCell>
+                      <Link href={`/ticket-detail/${report.ticketId}`}>
+                        <a className='text-blue-500 hover:underline'>{report.ticketName}</a>
+                      </Link>
+                    </TableCell>
+                    <TableCell>{report.description}</TableCell>
 
-                  <TableCell>{renderStatus(report.status)}</TableCell>
-                  <TableCell>{dayjs(report.createdAt).format('DD/MM/YYYY HH:mm')}</TableCell>
-                  <TableCell>
-                    {report.status === 'PENDING' && (
-                      <Button
-                        onClick={() => {
-                          setSelectedReport(report)
-                        }}
-                        onPress={onOpen}
-                        className='text-blue-500 flex items-center hover:text-blue-700'
-                      >
-                        <AiOutlineEye className='mr-2' /> View
-                      </Button>
-                    )}
-                  </TableCell>
-                </TableRow>
-              ))}
+                    <TableCell>{renderStatus(report.status)}</TableCell>
+                    <TableCell>{dayjs(report.createdAt).format('DD/MM/YYYY HH:mm')}</TableCell>
+                    <TableCell>
+                      {report.status === 'PENDING' && (
+                        <>
+                          <Button
+                            onClick={() => {
+                              setSelectedReport(report)
+                              handleUpdateReport('APPROVED')
+                            }}
+                            className='text-green-500 flex items-center hover:text-green-700'
+                          >
+                            Approve
+                          </Button>
+                          <Button
+                            onClick={() => {
+                              setSelectedReport(report)
+                              handleUpdateReport('REJECTED')
+                            }}
+                            className='text-red-500 flex items-center hover:text-red-700'
+                          >
+                            Reject
+                          </Button>
+                        </>
+                      )}
+                    </TableCell>
+                  </TableRow>
+                )
+              )}
             </TableBody>
           </Table>
         </div>

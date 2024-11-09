@@ -1,10 +1,10 @@
-import { Button, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from '@nextui-org/react';
-import { FaTrashAlt, FaEdit } from 'react-icons/fa';
-import { UserList } from 'src/@types/users.type';
+import { Button, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from '@nextui-org/react'
+import { FaTrashAlt, FaEdit } from 'react-icons/fa'
+import { UserList } from 'src/@types/users.type'
 
 interface UserListsProps {
-  users: UserList[];
-  onDeleteUser: (username: string) => void;
+  users: UserList[]
+  onDeleteUser: (username: string) => void
 }
 
 const UserLists: React.FC<UserListsProps> = ({ users, onDeleteUser }) => {
@@ -12,13 +12,13 @@ const UserLists: React.FC<UserListsProps> = ({ users, onDeleteUser }) => {
   const getStatusBadgeClass = (status: string) => {
     switch (status) {
       case 'VERIFIED':
-        return 'status-verified';
+        return 'status-verified'
       case 'REMOVED':
-        return 'status-removed';
+        return 'status-removed'
       default:
-        return 'status-default';
+        return 'status-default'
     }
-  };
+  }
 
   return (
     <Table aria-label='User List Table'>
@@ -44,12 +44,7 @@ const UserLists: React.FC<UserListsProps> = ({ users, onDeleteUser }) => {
               <Button isIconOnly className='text-green-500 bg-green-100' title='Edit'>
                 <FaEdit />
               </Button>
-              <Button
-                isIconOnly
-                className='text-red-500 bg-red-100 ml-2'
-                title='Delete'
-                onClick={() => user.username && onDeleteUser(user.username)}
-              >
+              <Button isIconOnly className='text-red-500 bg-red-100 ml-2' title='Delete' onClick={() => user.username && onDeleteUser(user.username)}>
                 <FaTrashAlt />
               </Button>
             </TableCell>
@@ -57,7 +52,7 @@ const UserLists: React.FC<UserListsProps> = ({ users, onDeleteUser }) => {
         ))}
       </TableBody>
     </Table>
-  );
-};
+  )
+}
 
-export default UserLists;
+export default UserLists

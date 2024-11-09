@@ -1,10 +1,12 @@
 import React from 'react'
-import ManagerUsers from '../admin/ManagerUser'
+import ManagerUsersForStaff from './ManagerUserForStaff'
 
-function Userlist() {
+function UserListForStaff() {
   return (
-    <div><ManagerUsers/></div>
+    <div>
+      <ManagerUsersForStaff />
+    </div>
   )
 }
 
-export default Userlist
+export default UserListForStaff
