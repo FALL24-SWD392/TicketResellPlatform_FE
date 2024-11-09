@@ -8,9 +8,20 @@ import { addDocument, updateDocument } from 'src/utils/chatapp.service'
 import { Timestamp, WhereFilterOp } from '@firebase/firestore'
 import { format } from 'date-fns'
 import { toast } from 'react-toastify'
+import { input } from '@nextui-org/theme'
+import { useMutation } from '@tanstack/react-query'
+import OrderAPI from 'src/apis/order.api'
 interface ChatWindowProps {
   chatId?: string
   user: User
+}
+
+export interface CreateOrderBody {
+  chatBoxId: string
+  senderId: string
+  recipientId: string
+  ticketId: string
+  quantity: number
 }
 
 export default ({ chatId, user }: ChatWindowProps) => {
@@ -42,8 +53,16 @@ export default ({ chatId, user }: ChatWindowProps) => {
 
   const formSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    if (chatroom.status != 'PROCESSING') {
-      toast.error('You can not send message to this chat')
+    if (chatroom.status == 'PENDING') {
+      toast.error('You have to wait for seller to accept chat')
+      return
+    }
+    if (chatroom.status == 'SUCCESS') {
+      toast.error('This chat has been closed')
+      return
+    }
+    if (chatroom.status == 'CANCELLED') {
+      toast.error('This chat has been cancelled')
       return
     }
     const newMessage: Message = {
@@ -72,8 +91,60 @@ export default ({ chatId, user }: ChatWindowProps) => {
       updateDocument('chatrooms', chatroom.docId, chatroom)
     }
   }
+  const handleCompleteChat = () => {
+    if (chatroom) {
+      chatroom.status = ChatBoxStatus.SUCCESS
+      updateDocument('chatrooms', chatroom.docId, chatroom)
+    }
+  }
+  const handleCancelChat = () => {
+    if (chatroom) {
+      chatroom.status = ChatBoxStatus.CANCELLED
+      updateDocument('chatrooms', chatroom.docId, chatroom)
+    }
+  }
+  const addOrderMutation = useMutation({
+    mutationFn: async (body: CreateOrderBody) => {
+      return await OrderAPI.createOrder(body)
+    }
+  })
+  const [quantity, setQuantity] = useState<number>(0)
+  const handleSold = () => {
+    if (!chatroom && !quantity) {
+      toast.error('Invalid input')
+      return
+    }
 
-  const handleSold = () => {}
+    const body: CreateOrderBody = {
+      chatBoxId: chatId || '',
+      senderId: chatroom.buyerId,
+      recipientId: chatroom.sellerId,
+      ticketId: chatroom.ticketId,
+      quantity: quantity
+    }
+    addOrderMutation.mutate(body, {
+      onSuccess: async (data) => {
+        const res = data.data
+        if (res.data.status == 'COMPLETED') {
+          toast.success('Order successfully creted')
+          chatroom.status = ChatBoxStatus.DELIVERING
+          await updateDocument('chatrooms', chatroom.docId, chatroom)
+        }
+      },
+      onError: (error) => {
+        console.log(error)
+      }
+    })
+  }
+  const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = parseInt(e.target.value, 10)
+    if (quantity < 0) {
+      toast.error('Quantity must be valid positive number')
+      setQuantity(0)
+      return
+    }
+    setQuantity(value)
+  }
 
   return (
     <div className='w-2/3 bg-white-light h-[48rem] p-3'>
@@ -88,6 +159,12 @@ export default ({ chatId, user }: ChatWindowProps) => {
           </div>
           {chatroom && chatroom.sellerId === user.id && (
             <div>
+              {chatroom.status != 'DELIVERING' && chatroom.status != 'SUCCESS' &&(<button
+                  className='bg-gradient_header text-white rounded-[2rem] border-1 p-2 px-8 border-white-normalActive hover:bg-graident_header_hover'
+                  onClick={handleCancelChat}
+                >
+                  Cancel
+                </button>)}
               {chatroom.status == 'PENDING' && (
                 <button
                   className='bg-gradient_header text-white rounded-[2rem] border-1 p-2 px-8 border-white-normalActive hover:bg-graident_header_hover'
@@ -97,11 +174,27 @@ export default ({ chatId, user }: ChatWindowProps) => {
                 </button>
               )}
               {chatroom.status == 'PROCESSING' && (
+                <div>
+                  <input
+                    type='number'
+                    className='border-1 w-28 rounded-l-lg border-white-normalActive border-r-0 focus:outline-none p-2'
+                    onChange={handleQuantityChange}
+                    value={quantity}
+                  />
+                  <button
+                    className='bg-gradient_header text-white rounded-r-lg border-1 p-2 px-8 border-white-normalActive hover:bg-graident_header_hover'
+                    onClick={handleSold}
+                  >
+                    Sold
+                  </button>
+                </div>
+              )}
+              {chatroom.status == 'DELIVERING' && (
                 <button
                   className='bg-gradient_header text-white rounded-[2rem] border-1 p-2 px-8 border-white-normalActive hover:bg-graident_header_hover'
-                  onClick={handleSold}
+                  onClick={handleCompleteChat}
                 >
-                  Sold
+                  Complete Order
                 </button>
               )}
             </div>

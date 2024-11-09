@@ -11,7 +11,7 @@ const TicketDetailPage = () => {
   })
   console.log(data);
     return (
-        <div className="mt-[100px]">
+        <div className="">
             {data?.data.data && <TicketDetail ticket={data.data.data}/>}
         </div>
     )

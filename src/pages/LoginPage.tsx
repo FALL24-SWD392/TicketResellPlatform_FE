@@ -76,7 +76,7 @@ const LoginPage = () => {
         if (isAxiosUnprocessableEntityError<ErrorResponse<FormData>>(error)) {
           const errors = error.response?.data.errors
           setLoginError(errors?.username as string)
-          toast.success(error.message)
+          toast.error(error.message)
         }
       }
     })

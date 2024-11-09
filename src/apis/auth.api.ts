@@ -7,14 +7,22 @@ import { CreateStaffSchema, RegisterSchema } from 'src/utils/rules'
 import { FormDataForgot } from 'src/pages/ForgotPasswordPage'
 import { SubList, UserList } from 'src/@types/users.type'
 import { FormResetPassword } from 'src/pages/ResetPassword'
+import { LoginGoogleBody } from 'src/Components/SignInForm'
 const authAPI = {
   login: (body: FormData) =>
     http.post<
-      ListBaseResponse<{
+      ItemBaseResponse<{
         data: { accessToken: string; refreshToken: string }
         message: string
       }>
     >('api/auth/login', body),
+  loginGoogle: (body: LoginGoogleBody) =>
+    http.post<
+      ItemBaseResponse<{
+        data: { accessToken: string; refreshToken: string }
+        message: string
+      }>
+    >('api/auth/login/google', { body }),
   register: (body: Omit<RegisterSchema, 'confirmPassword'>) => http.post<ListBaseResponse<{}>>('api/auth/register', body),
   logout: (body: { token: string }) => http.post<ListBaseResponse<{ message: string }>>('api/auth/logout', body),
 

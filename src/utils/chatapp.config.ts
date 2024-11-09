@@ -2,6 +2,7 @@ import { initializeApp } from 'firebase/app'
 import { getFirestore, connectFirestoreEmulator } from 'firebase/firestore'
 import { getAnalytics } from 'firebase/analytics'
 import { getStorage } from 'firebase/storage'
+import { getAuth, GoogleAuthProvider , signInWithPopup} from 'firebase/auth'
 
 const chatappConfig = {
   apiKey: import.meta.env.VITE_CHAT_APP_API_KEY,
@@ -13,17 +14,23 @@ const chatappConfig = {
   measurementId: import.meta.env.VITE_CHAT_APP_MEASUREMENT_ID
 }
 const app = initializeApp(chatappConfig)
+const auth = getAuth(app)
 const firestore = getFirestore(app)
 const analytics = getAnalytics(app)
 const imageDB = getStorage(app)
+const googleProvider = new GoogleAuthProvider()
+googleProvider.addScope('https://www.googleapis.com/auth/contacts.readonly')
 const chatapp = {
   app,
   firestore,
   analytics,
-  imageDB
+  imageDB,
+  auth,
+  googleProvider,
+  signInWithPopup
 }
 firestore.app.automaticDataCollectionEnabled = true
-if (window.location.hostname === 'localhost'){
-    connectFirestoreEmulator(firestore, 'localhost', 2707)
+if (window.location.hostname === 'localhost') {
+  connectFirestoreEmulator(firestore, 'localhost', 2707)
 }
 export default chatapp

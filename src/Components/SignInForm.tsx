@@ -1,11 +1,27 @@
 import { Button, Input, Link } from '@nextui-org/react'
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import { UseFormRegister } from 'react-hook-form'
 import path from 'src/constants/path'
 import banner from 'src/assets/images/banner.svg'
-import facebookIcon from 'src/assets/images/facebook.svg'
 import googleIcon from 'src/assets/images/google.svg'
 import IconButton from './IconButton'
+import chatapp from 'src/utils/chatapp.config'
+import { useMutation } from '@tanstack/react-query'
+import authAPI from 'src/apis/auth.api'
+import { UserCredential } from '@firebase/auth'
+import { useNavigate } from 'react-router-dom'
+import { AppContext } from 'src/context/app.context'
+import { toast } from 'react-toastify'
+import { getProfileFormLS } from 'src/utils/auth'
+import { isAxiosUnprocessableEntityError } from 'src/utils/utils'
+import { ErrorResponse } from 'src/@types/utils.type'
+
+export interface LoginGoogleBody{
+  email: string,
+  username: string,
+  avatar: string,
+  googleToken: string
+}
 
 const SignInForm = ({
   onSubmit,
@@ -16,6 +32,53 @@ const SignInForm = ({
   register: UseFormRegister<any>
   loginError?: string
 }) => {
+  const navigate = useNavigate()
+  const { setIsAuthenticated } = useContext(AppContext)
+  const loginGoogleMutation = useMutation({
+    mutationFn: async (body: LoginGoogleBody) => {
+      return await authAPI.loginGoogle(body)
+    }
+  })
+
+  const handleLoginGoogle = async () => {
+    const { auth, signInWithPopup, googleProvider } = { ...chatapp }
+
+    const loginToken: UserCredential = await signInWithPopup(auth, googleProvider)
+    console.log(loginToken)
+    const idToken = await loginToken.user.getIdToken()
+    console.log(idToken)
+    const { email, displayName, photoURL } = loginToken.user
+    const loginBody : LoginGoogleBody = {
+      email: email || '',
+      username: displayName || '',
+      avatar: photoURL || '',
+      googleToken: idToken
+    }
+    console.log(loginBody)
+    await loginGoogleMutation.mutate(loginBody, {
+      onSuccess: (data) => {
+        console.log(data)
+        // setIsAuthenticated(true)
+        // if (getProfileFormLS()?.scope === 'ADMIN') {
+        //   toast.success(data.data.message)
+        //   navigate('/admin')
+        // } else if (getProfileFormLS()?.scope === 'STAFF') {
+        //   toast.success(data.data.message)
+        //   navigate('/staff')
+        // } else {
+        //   toast.success(data.data.message)
+        // }
+        // toast.success(data.data.message)
+      },
+      onError: (error) => {
+        console.log(error)
+        if (isAxiosUnprocessableEntityError<ErrorResponse<FormData>>(error)) {
+          toast.error(error.message)
+        }
+      }
+    })
+  }
+
   return (
     <div
       className='fixed inset-0 flex items-center justify-center bg-cover bg-center'
@@ -95,8 +158,7 @@ const SignInForm = ({
             </div>
 
             <div className='flex gap-5'>
-              <IconButton width={10} height={10} src={facebookIcon} alt='Facebook'></IconButton>
-              <IconButton width={10} height={10} src={googleIcon} alt='Google'></IconButton>
+              <IconButton width={10} height={10} src={googleIcon} alt='Google' onClick={handleLoginGoogle}></IconButton>
             </div>
           </div>
         </form>
