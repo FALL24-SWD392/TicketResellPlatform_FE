@@ -1,6 +1,6 @@
 import { MyMembership, MyTransactions, UserProfile } from "src/@types/users.type";
 import { ItemBaseResponse, ListBaseResponse } from "src/@types/response";
-import { TicketList, UpdateTicket } from './../@types/ticket.type';
+import { TicketList, UpdateTicket, Tickets} from './../@types/ticket.type';
 import http from "src/utils/http";
 import { Order, OrderDetail } from "src/@types/order.type";
 

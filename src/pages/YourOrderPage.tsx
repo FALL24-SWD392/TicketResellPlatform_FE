@@ -2,7 +2,6 @@ import { useMutation } from '@tanstack/react-query'
 import React, { useContext, useEffect, useState } from 'react'
 import { Order, OrderDetail } from 'src/@types/order.type'
 import userAPI from 'src/apis/user.api'
-import { AppContext } from 'src/context/app.context'
 import { getProfileFormLS } from 'src/utils/auth'
 
 const YourOrderPage = () => {
@@ -13,20 +12,12 @@ const YourOrderPage = () => {
     { id: 4, name: 'Event Pass', status: 'CANCELLED' }
   ]
   const [orders, setOrders] = useState<Order[]>([])
-  const [orderDetails, setOrderDetails] = useState<OrderDetail>({} as OrderDetail)
+  const [orderDetails, setOrderDetails] = useState<OrderDetail[]>([])
   const getMyOrderMutation = useMutation({
     mutationFn: (userId: string) => userAPI.getMyOrder(userId),
     onSuccess: (data) => {
-      setOrders(data.data.data)
-    },
-    onError: () => {
-      console.log('Error')
-    }
-  })
-  const getOrderDetailMutation = useMutation({
-    mutationFn: (orderId: string) => userAPI.getOrderDetail(orderId),
-    onSuccess: (data) => {
-      setOrderDetails(data.data.data)
+      console.log(data.data.data)
+      setOrders(data?.data.data)
     },
     onError: () => {
       console.log('Error')
@@ -36,18 +27,32 @@ const YourOrderPage = () => {
   React.useEffect(() => {
     getMyOrderMutation.mutate(`${getProfileFormLS()?.id}`)
   }, [])
-  console.log(orderDetails)
+
+  console.log(
+    'ticket',
+    orders.filter((order) => order.status === 'COMPLETED').map((order) => order.ticket.quantity)
+  )
   return (
-    <div className='container-xl flex-col justify-start w-[500px] bg-gray-100 py-4 px-4'>
+    <div className='container-xl justify-start w-[500px] bg-gray-100 py-4 px-4'>
       <h1 className='text-3xl font-bold text-gray-800 text-center mb-8'>Your Order Tickets</h1>
-      <div className=''>
+      <div className='flex-row justify-start'>
         {orders
           .filter((order) => order.status === 'COMPLETED')
           .map((order) => (
-            <div key={order.id} className='bg-white p-4 rounded-lg shadow-lg text-center transform transition duration-300 hover:scale-105'>
-              <h2 className='text-xl font-semibold text-gray-800 mb-2'>{order.chatBoxId}</h2>
-              <p className='text-green-600 font-bold'>Status: {order.status}</p>
-            </div>
+            <>
+              <div className='flex justify-center border p-3 '>
+                <div className='w-1/3'>
+                  <img src={order.ticket.image} alt='' />
+                </div>
+                <div className="w-2/3 p-5">
+                  <div className="flex-col justify-center">
+                    <h4>Ticket Name: {order.ticket.title}</h4>
+                    <p>Price: {order.ticket.unitPrice} VNĐ</p>
+                    <p>Status : {order.status}</p>
+                  </div>
+                </div>
+              </div>
+            </>
           ))}
       </div>
     </div>
