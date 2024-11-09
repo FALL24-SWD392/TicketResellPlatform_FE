@@ -81,7 +81,7 @@ const NavBar = ({ ...props }: Props) => {
             </Link>
           </NavbarItem>
           <NavbarItem>
-            <Link href='#' aria-current='page' className='text-black-darker'>
+            <Link href='/order' aria-current='page' className='text-black-darker'>
               Your Order
             </Link>
           </NavbarItem>
