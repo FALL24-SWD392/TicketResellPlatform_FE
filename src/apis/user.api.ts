@@ -8,7 +8,8 @@ const userAPI ={
     updateProfile: (body: {avatar: string}) => http.put<ItemBaseResponse<UserProfile>>('api/users/myInfo', body),
     getMembership: () => http.get<ItemBaseResponse<MyMembership>>('api/tickets/user-membership'),
     getMyTickets: (userId:string, page: number, size: number) => http.get<ListBaseResponse<TicketList>>(`api/tickets/user?userId=${userId}&size=${size}&page=${page}&direction=DESC&properties=createdAt`),
-    updateMyTicket: (ticketId: string, body: UpdateTicket) => http.put<ItemBaseResponse<TicketList>>(`api/tickets/${ticketId}`, body)
+    updateMyTicket: (ticketId: string, body: UpdateTicket) => http.put<ItemBaseResponse<TicketList>>(`api/tickets?id=${ticketId}`, body),
     getTransaction: () => http.get<ListBaseResponse<MyTransactions>>('api/transactions/user'),
+    deleteMyTicket: (ticketId: string) => http.delete<ItemBaseResponse<TicketList>>(`api/tickets?id=${ticketId}`),
 }
 export default userAPI;
