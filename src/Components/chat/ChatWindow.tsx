@@ -131,6 +131,7 @@ export default ({ chatId, user }: ChatWindowProps) => {
         const res = data.data
         if (res.data.status == 'COMPLETED') {
           toast.success('Order successfully creted')
+          const orderId = res.data.id
           chatroom.status = ChatBoxStatus.DELIVERING
           await updateDocument('chatrooms', chatroom.docId, chatroom)
         }

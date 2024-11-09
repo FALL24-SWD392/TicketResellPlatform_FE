@@ -23,6 +23,7 @@ export type ChatRoom = {
   status: ChatBoxStatus
   members: string[]
   displayName: string
+  orderId?: string
 }
 
 export enum ChatBoxStatus {

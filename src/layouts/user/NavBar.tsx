@@ -52,6 +52,7 @@ const NavBar = ({ ...props }: Props) => {
   const handleLogout = () => {
     const refresh_token = getRefreshTokenFromLS()
     logoutMutation.mutate(refresh_token)
+    
     navigate('/')
   }
 
