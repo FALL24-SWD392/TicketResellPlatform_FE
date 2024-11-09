@@ -33,7 +33,7 @@ export type TicketList = Pick<
   'id' | 'sellerId' | 'title' | 'expDate' | 'type' | 'description' | 'createdAt' | 'image' | 'quantity' | 'status' | 'unitPrice'
 >
 export type CreateTicket = Pick<Create, 'sellerId' | 'description' | 'expDate' | 'image' | 'quantity' | 'title' | 'type' | 'unitPrice'>
-export type UpdateTicket = Pick<Ticket,  'description' | 'type' | "title"| "image" | "quantity" | "unitPrice">
+export type UpdateTicket = Pick<Ticket,  'sellerId' |'description' | 'type' | "title"| "image" | "quantity" | "unitPrice">
 export interface TicketListConfig {
   size?: number | string
   page?: number | string

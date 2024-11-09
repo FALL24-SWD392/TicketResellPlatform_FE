@@ -1,12 +1,11 @@
-import { Button, DateInputField, DatePicker, DatePickerProps, Input, TimeInputProps } from '@nextui-org/react'
+import { Button, DatePicker, Input } from '@nextui-org/react'
 import { useMutation } from '@tanstack/react-query'
-import dayjs from 'dayjs'
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
 import { useContext, useState } from 'react'
 import { toast } from 'react-toastify'
 import { CreateTicket } from 'src/@types/ticket.type'
 import ticketAPI from 'src/apis/ticket.api'
-import {now, getLocalTimeZone, parseAbsoluteToLocal,parseZonedDateTime} from "@internationalized/date";
+import {parseZonedDateTime} from "@internationalized/date";
 import { AppContext } from 'src/context/app.context'
 import { v4 } from 'uuid'
 import demo from 'src/assets/images/demoImage.jpg'

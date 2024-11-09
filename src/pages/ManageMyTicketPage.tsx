@@ -2,7 +2,6 @@ import { useQuery } from "@tanstack/react-query"
 import { useParams } from "react-router-dom"
 import ticketAPI from "src/apis/ticket.api"
 import { ManageMyTicket } from "src/Components"
-import TicketDetail from "src/Components/ticket/TicketDetail"
 
 
 const ManageMyTicketPage = () => {
