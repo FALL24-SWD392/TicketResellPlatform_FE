@@ -30,6 +30,8 @@ import Transactions from 'src/pages/admin/Transactions'
 import ViewAllTicketPage from 'src/pages/ViewAllTicketPage'
 import FailPage from 'src/pages/error/FailPage'
 import SuccessPage from 'src/pages/error/SuccessPage'
+import UserListForStaff from 'src/pages/staff/Userlist'
+import TransactionsForStaff from 'src/pages/staff/TransactionForStaff'
 
 type RouteType = {
   path: string
@@ -57,6 +59,14 @@ const publicRoutes: RouteType[] = [
   {
     path: '/user-list',
     element: <Userlist />
+  },
+  {
+    path: '/user-list-staff',
+    element: <UserListForStaff />
+  },
+  {
+    path: '/staff/transaction',
+    element: <TransactionsForStaff />
   },
   {
     path: '/ticketApproval',
