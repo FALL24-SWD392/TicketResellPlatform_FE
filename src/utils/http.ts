@@ -86,7 +86,7 @@ class Http {
           clearLocalStorage()
           this.accessToken = ''
           this.refreshToken = ''
-          window.location.reload()
+          // window.location.reload()
         }
 
         return Promise.reject(error)
