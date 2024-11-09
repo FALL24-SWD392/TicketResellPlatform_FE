@@ -28,6 +28,8 @@ import ManagerTicket from 'src/pages/admin/ManagerTicket'
 import Subscriptions from 'src/pages/Subscriptions' 
 import Transactions from 'src/pages/admin/Transactions'
 import ViewAllTicketPage from 'src/pages/ViewAllTicketPage'
+import FailPage from 'src/pages/error/FailPage'
+import SuccessPage from 'src/pages/error/SuccessPage'
 
 type RouteType = {
   path: string
@@ -84,6 +86,14 @@ const publicRoutes: RouteType[] = [
   {
     path: '/subscriptions',
     element: <Subscriptions />
+  },
+  {
+    path: '/fail',
+    element: <FailPage />
+  },
+  {
+    path: '/success',
+    element: <SuccessPage />
   },
 ]
 
