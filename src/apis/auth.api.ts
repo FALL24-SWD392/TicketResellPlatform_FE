@@ -27,7 +27,7 @@ const authAPI = {
   GetUserByName: (username: string) => http.get<ListBaseResponse<UserList>>(`api/users?search=${username}`),
   CreateUser: (body: CreateStaffSchema) => http.post<ListBaseResponse<{}>>(`api/users`, body),
   GetAllSubscription: () => http.get<ListBaseResponse<SubList>>("api/subscriptions?page&size"),
-  PaySubscription : ({subscriptionId}:{subscriptionId: string }) => http.get<ItemBaseResponse<{}>>(`api/subscriptions/purchase-subscription?subscriptionId=${subscriptionId}`),
+  PaySubscription : ({subscriptionId}:{subscriptionId: string }) => http.post<ItemBaseResponse<{}>>(`api/subscriptions/purchase-subscription?subscriptionId=${subscriptionId}`),
   GetAllTicketByStatus: (status: string) => http.get<ListBaseResponse<SubList>>(`api/tickets/admin?status=${status}`),
   Gettransaction: () => http.get<ListBaseResponse<{}>>(`api/transactions`),
   }

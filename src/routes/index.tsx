@@ -23,7 +23,7 @@ import ForgotPasswordPage from 'src/pages/ForgotPasswordPage'
 import BlogPage from 'src/pages/BlogPage'
 import ManagerUsers from 'src/pages/admin/ManagerUser'
 import ManagerTicket from 'src/pages/admin/ManagerTicket'
-import Subscriptions from 'src/pages/admin/Subscriptions'
+import Subscriptions from 'src/pages/Subscriptions' 
 import Transactions from 'src/pages/admin/Transactions'
 import ViewAllTicketPage from 'src/pages/ViewAllTicketPage'
 
@@ -79,6 +79,10 @@ const publicRoutes: RouteType[] = [
     path: '/view-all-ticket',
     element: <ViewAllTicketPage />
   },
+  {
+    path: '/subscriptions',
+    element: <Subscriptions />
+  },
 ]
 
 const authenicatedRoutes: RouteType[] = [
@@ -109,11 +113,6 @@ const adminRoutes: RouteType[] = [
     path: '/manager-users',
     element: <ManagerUsers />
   },
-  {
-    path: '/subscriptions',
-    element: <Subscriptions />
-  },
-
   {
     path: '/manager-tickets',
     element: <ManagerTicket />

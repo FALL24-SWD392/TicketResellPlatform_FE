@@ -37,3 +37,12 @@ export type SubList = {
   pointRequired: String
   price: String
 }
+
+export type MyTransactions ={
+  orderCode: string,
+  status : string ,
+  createdAt: string,
+  updatedAt: string,
+  userName: string,
+  description: string
+}

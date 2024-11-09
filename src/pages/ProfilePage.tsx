@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { ProfileUser } from 'src/Components'
 import { NavLink, Route, Routes } from 'react-router-dom'
 import MembershipPage from './MembershipPage'
+import TransactionsPage from './TransactionsPage'
 
 const ProfilePage: React.FC = () => {
   return (
@@ -27,9 +28,9 @@ const ProfilePage: React.FC = () => {
                 ? 'tab tab-active flex items-center px-3 py-2.5 font-semibold hover:text-indigo-900 hover:border hover:rounded-full'
                 : 'tab flex items-center px-3 py-2.5 font-semibold hover:text-indigo-900 hover:border hover:rounded-full'
             }
-            to=''
+            to='transaction'
           >
-            Account Setting
+            Transactions
           </NavLink>
           <NavLink
             role='tab'
@@ -40,7 +41,7 @@ const ProfilePage: React.FC = () => {
             }
             to=''
           >
-            Notification
+            Your Tickets
           </NavLink>
           <NavLink
             role='tab'
@@ -59,6 +60,7 @@ const ProfilePage: React.FC = () => {
         <Routes>
           <Route index element={<ProfileUser />} />
           <Route path='membership' element={<MembershipPage />} />
+          <Route path='transaction' element={<TransactionsPage/>}/>
         </Routes>
       </main>
 
